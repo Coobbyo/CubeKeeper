@@ -10,8 +10,33 @@ public class NPCStats : CharacterStats
 
     private void Start()
     {
-        Friendliness.baseValue = Random.Range(1, 5);
+        Friendliness.baseValue = Random.Range(0, 5);
 		Loyalty.baseValue = Random.Range(-10, 10);
 		Aggression.baseValue = Random.Range(-2, 2);
     }
+
+    public void ClampStats()
+	{
+		int friendlinessCap = 10;
+		int loyaltyCap = 15;
+		int agressionCap = 10;
+
+		if(Friendliness.GetValue() > friendlinessCap ||
+			Friendliness.GetValue() < -friendlinessCap)
+		{
+			Friendliness.ClearModifiers();
+		}
+
+		if(Loyalty.GetValue() > loyaltyCap ||
+			Loyalty.GetValue() < -loyaltyCap)
+		{
+			Loyalty.ClearModifiers();
+		}
+
+		if(Aggression.GetValue() > agressionCap ||
+			Aggression.GetValue() < -agressionCap)
+		{
+			Aggression.ClearModifiers();
+		}
+	}
 }

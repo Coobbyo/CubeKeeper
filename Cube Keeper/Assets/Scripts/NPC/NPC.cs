@@ -4,48 +4,73 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
-    public enum State
-    {
-        Move,
-        Combat
-    }
+	public enum State
+	{
+		Roam,
+		Combat
+	}
+	public State state;
 
-    public State state;
+	
+	public MeshRenderer colorDisplay;
+	[SerializeField] private float interactRange = 1f;
+	[SerializeField] private Material Clanless;
 
-    public MeshRenderer colorDisplay;
-    [SerializeField] private float interactRange = 1f;
+	private string id;
+	private NPCClan clan;
 
-    [HideInInspector] public NPCMovement movement;
-    [HideInInspector] public NPCSocialBehaviour social;
-    [HideInInspector] public NPCCombat combat;
-    [HideInInspector] public NPCStats stats;
+	[HideInInspector] public NPCMovement movement;
+	[HideInInspector] public NPCSocialBehaviour social;
+	[HideInInspector] public NPCCombat combat;
+	[HideInInspector] public NPCStats stats;
 
-    private void Awake()
-    {
-        movement = GetComponent<NPCMovement>();
-        social = GetComponent<NPCSocialBehaviour>();
-        combat = GetComponent<NPCCombat>();
-        stats = GetComponent<NPCStats>();
-    }
+	private void Awake()
+	{
+		movement = GetComponent<NPCMovement>();
+		social = GetComponent<NPCSocialBehaviour>();
+		combat = GetComponent<NPCCombat>();
+		stats = GetComponent<NPCStats>();
+	}
 
-    private void Start()
-    {
-        stats.OnHealthReachedZero += Die;
-    }
+	private void Start()
+	{
+		id = "NPC " + Random.Range(0, 10000);
+		stats.OnHealthReachedZero += Die;
+	}
 
-    public NPC FindNearbyNPC()
-    {
-        var nearbyNPCs = FindNearbyNPCs();
+	public NPCClan GetClan()
+	{
+		return clan;
+	}
+
+	public void JoinClan(NPCClan clan)
+	{
+		this.clan = clan;
+		colorDisplay.material.color = clan.GetColor();
+		clan.AddMember(this);
+	}
+
+	public void LeaveClan()
+	{
+		colorDisplay.material = Clanless;
+		if(clan != null)
+			clan.RemoveMember(this);
+		clan = null;
+	}
+
+	public NPC FindNearbyNPC()
+	{
+		var nearbyNPCs = FindNearbyNPCs();
 
 		if(nearbyNPCs.Count <= 0)
 			return null;
-        else
-            return nearbyNPCs[Random.Range(0, nearbyNPCs.Count)];
-    }
+		else
+			return nearbyNPCs[Random.Range(0, nearbyNPCs.Count)];
+	}
 
-    public List<NPC> FindNearbyNPCs()
-    {
-        var nearbyNPCs = new List<NPC>();
+	public List<NPC> FindNearbyNPCs()
+	{
+		var nearbyNPCs = new List<NPC>();
 		Collider[] colliderArray = Physics.OverlapSphere(transform.position, interactRange);
 		foreach(Collider collider in colliderArray)
 		{
@@ -55,11 +80,16 @@ public class NPC : MonoBehaviour
 			}
 		}
 
-        return nearbyNPCs;
-    }
+		return nearbyNPCs;
+	}
 
-    private void Die()
-    {
-        Destroy(this.gameObject);
-    }
+	private void Die()
+	{
+		Destroy(this.gameObject);
+	}
+
+	override public string ToString()
+	{
+		return id;
+	}
 }

@@ -4,15 +4,35 @@ using UnityEngine;
 
 public class NPCSocialBehaviour : MonoBehaviour
 {
-	public Stat friendliness { get; private set; }
-	public Stat loyalty { get; private set; }
-	public Stat aggression { get; private set; }
-
-	[SerializeField] private Material Clanless;
-	
-
 	private NPC npc;
-	private NPCClan clan;
+	private NPCClan clan
+	{
+		get { return npc.GetClan(); }
+		set
+		{
+			if(value == null)
+				npc.LeaveClan();
+			else
+				npc.JoinClan(value);
+		}
+	}
+
+	private Stat friendliness
+	{
+		get { return npc.stats.Friendliness; }
+		set { npc.stats.Friendliness = value; }
+	}
+	private Stat loyalty
+	{
+		get { return npc.stats.Loyalty; }
+		set { npc.stats.Loyalty = value; }
+	}
+	private Stat aggression
+	{
+		get { return npc.stats.Loyalty; }
+		set { npc.stats.Loyalty = value; }
+	}
+
 	private Timer socialDelay = new Timer();
 
 	private void Awake()
@@ -37,50 +57,61 @@ public class NPCSocialBehaviour : MonoBehaviour
 	{
 		NPCClan otherClan = otherNPC.GetClan();
 
-		if(clan != null && clan.IsEnemy(otherClan))
-		{
-			npc.state = NPC.State.Combat;
-			return;
-		}
-
 		if(loyalty.GetValue() < -10)
-		{
 			LeaveClan();
-			
-			if(friendliness.GetValue() > 0)
-				JoinClan(new NPCClan(this));
+
+		if(clan == null)
+		{
+			if(otherClan == null && friendliness.GetValue() > 0)
+			{
+				JoinClan(new NPCClan());
+				otherNPC.SwapClan(clan);
+			}
+			else if(otherClan != null)
+			{
+				if(!SwapClan(otherClan) && friendliness.GetValue() > 3)
+					JoinClan(new NPCClan());
+			}
 		}
+		else //clan != null
+		{
+			if(otherClan == null)
+			{
+				otherNPC.SwapClan(clan);
+			}
+			else //otherClan != null
+			{
+				if(clan != otherClan) //Checking if we should notify our clan about theirs
+				{
+					//I should probably build a seperate function for this
+					if(Mathf.Abs(friendliness.GetValue() - otherNPC.friendliness.GetValue()) < 2 ||
+						Mathf.Abs(loyalty.GetValue() - otherNPC.loyalty.GetValue()) < 2 ||
+						Mathf.Abs(aggression.GetValue() - otherNPC.aggression.GetValue()) < 2)
+					{
+						clan.Notify(otherClan, 1);
+					}
+					else if(Mathf.Abs(friendliness.GetValue() - otherNPC.friendliness.GetValue()) > 5 ||
+						Mathf.Abs(loyalty.GetValue() - otherNPC.loyalty.GetValue()) > 5 ||
+						Mathf.Abs(aggression.GetValue() - otherNPC.aggression.GetValue()) > 5)
+					{
+						clan.Notify(otherClan, -1);
+					}
+				}
 
-		if(clan == null && otherClan == null && friendliness.GetValue() > 0)
-			JoinClan(new NPCClan(this));
-
-		if(clan == null && otherClan != null)
-			SwapClan(otherClan);
-		else if(clan != null && otherClan == null)
-			otherNPC.SwapClan(clan);
+				if(clan.IsEnemy(otherClan))
+				{
+					npc.state = NPC.State.Combat;
+					return;
+				}
+			}
+		}
 
 		friendliness.AddModifier(Random.Range(-1, 2));
 		if(clan != null)
 			loyalty.AddModifier(Random.Range(-1, 2));
 		aggression.AddModifier(Random.Range(-1, 2));
 
-		if(clan != otherClan && clan != null && otherClan != null)
-		{
-			if(Mathf.Abs(friendliness.GetValue() - otherNPC.friendliness.GetValue()) < 2 ||
-				Mathf.Abs(loyalty.GetValue() - otherNPC.loyalty.GetValue()) < 2 ||
-				Mathf.Abs(aggression.GetValue() - otherNPC.aggression.GetValue()) < 2)
-			{
-				clan.Notify(otherClan, 1);
-			}
-			else if(Mathf.Abs(friendliness.GetValue() - otherNPC.friendliness.GetValue()) > 5 ||
-				Mathf.Abs(loyalty.GetValue() - otherNPC.loyalty.GetValue()) > 5 ||
-				Mathf.Abs(aggression.GetValue() - otherNPC.aggression.GetValue()) > 5)
-			{
-				clan.Notify(otherClan, -1);
-			}
-		}
-
-		ClampStats();
+		npc.stats.ClampStats();
 	}
 
 	private void Socialize()
@@ -100,9 +131,29 @@ public class NPCSocialBehaviour : MonoBehaviour
 		socialDelay.Restart(Random.Range(5f, 10f - friendliness.GetValue()));
 	}
 
+	public NPCClan GetClan()
+	{
+		return npc.GetClan();
+	}
+
+	private void JoinClan(NPCClan newClan)
+	{
+		loyalty.ClearModifiers();
+		loyalty.AddModifier(5);
+		npc.JoinClan(newClan);
+	}
+
+	private void LeaveClan()
+	{
+		npc.LeaveClan();
+	}
+
 	private bool SwapClan(NPCClan newClan)
 	{
-		float swapValue = Random.Range(clan == null? 1 + friendliness.GetValue() : -loyalty.GetValue(), friendliness.GetValue());
+		float minSwap = clan == null? 1 + friendliness.GetValue() : -loyalty.GetValue();
+		float maxSwap = friendliness.GetValue();
+		float swapValue = Random.Range(minSwap, maxSwap);
+		
 		if(swapValue > 0f)
 		{
 			LeaveClan();
@@ -112,54 +163,6 @@ public class NPCSocialBehaviour : MonoBehaviour
 		{
 			loyalty.AddModifier(1);
 			return false;
-		}
-	}
-
-	public NPCClan GetClan()
-	{
-		return clan;
-	}
-
-	private void JoinClan(NPCClan newClan)
-	{
-		loyalty.ClearModifiers();
-		loyalty.AddModifier(5);
-		npc.colorDisplay.material.color = newClan.GetColor();
-		newClan.AddMember(this);
-		clan = newClan;
-	}
-
-	private void LeaveClan()
-	{
-		npc.colorDisplay.material = Clanless;
-		if(clan != null)
-			clan.RemoveMember(this);
-		
-		clan = null;
-	}
-
-	private void ClampStats()
-	{
-		int friendlinessCap = 10;
-		int loyaltyCap = 15;
-		int agressionCap = 10;
-
-		if(friendliness.GetValue() > friendlinessCap ||
-			friendliness.GetValue() < -friendlinessCap)
-		{
-			friendliness.ClearModifiers();
-		}
-
-		if(loyalty.GetValue() > loyaltyCap ||
-			loyalty.GetValue() < -loyaltyCap)
-		{
-			loyalty.ClearModifiers();
-		}
-
-		if(aggression.GetValue() > agressionCap ||
-			aggression.GetValue() < -agressionCap)
-		{
-			aggression.ClearModifiers();
 		}
 	}
 }

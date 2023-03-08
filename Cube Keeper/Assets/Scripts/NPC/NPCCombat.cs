@@ -41,6 +41,6 @@ public class NPCCombat : CharacterCombat
             }
         }
 
-        npc.state = NPC.State.Move;
+        npc.state = NPC.State.Roam;
     }
 }
