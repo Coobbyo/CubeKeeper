@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3531052352593939225
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 348603894353260092}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &348603894353260092
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3531052352593939225}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0.65}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5585640779920925515}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5585640779920925517
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,9 +41,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5585640779920925515}
   - component: {fileID: 5585640779920925516}
+  - component: {fileID: 2477352643687439516}
   - component: {fileID: 5692720495987105540}
   - component: {fileID: 7019833092766921508}
-  - component: {fileID: 2477352643687439516}
   - component: {fileID: 1404220258517565752}
   - component: {fileID: 1413255008460258471}
   - component: {fileID: 4334676748163699349}
@@ -36,6 +67,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5585640780058522596}
+  - {fileID: 348603894353260092}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -52,37 +84,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &5692720495987105540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5585640779920925517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cc6c05027f847c40a52d2647f9154a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: 0
-  colorDisplay: {fileID: 5585640780744785250}
-  interactRange: 1
-  movement: {fileID: 0}
-  social: {fileID: 0}
-  combat: {fileID: 0}
-  stats: {fileID: 0}
---- !u!114 &7019833092766921508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5585640779920925517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 022eaab017020684283f3782862409e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!195 &2477352643687439516
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -105,6 +106,38 @@ NavMeshAgent:
   m_BaseOffset: -0.25
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &5692720495987105540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5585640779920925517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cc6c05027f847c40a52d2647f9154a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  colorDisplay: {fileID: 5585640780744785250}
+  interactRange: 1
+  Clanless: {fileID: 2100000, guid: b9a471b9830027d48a7f96b07119a328, type: 2}
+  movement: {fileID: 0}
+  social: {fileID: 0}
+  combat: {fileID: 0}
+  stats: {fileID: 0}
+--- !u!114 &7019833092766921508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5585640779920925517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 022eaab017020684283f3782862409e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1404220258517565752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,7 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bb1576398f73764c8b17e95fdd5574d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Clanless: {fileID: 2100000, guid: b9a471b9830027d48a7f96b07119a328, type: 2}
 --- !u!114 &1413255008460258471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,7 +163,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRate: 1
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 5440701019929630167, guid: 4fceb82b40034734284c863339d4f29c,
+    type: 3}
+  firePoint: {fileID: 348603894353260092}
 --- !u!114 &4334676748163699349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,9 +179,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth:
-    baseValue: 5
+    baseValue: 10
   damage:
-    baseValue: 1
+    baseValue: 0
   armor:
     baseValue: 0
   Friendliness:

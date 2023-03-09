@@ -49,6 +49,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SuperCreate",
+                    "type": "Value",
+                    "id": "809fe6b2-bfd7-4c04-97c5-47201b9d3ee2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "SpeedUpTime",
+                    "type": "Button",
+                    "id": "7c0edb5d-5393-4ee4-825e-252d95c59d14",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SlowDownTime",
+                    "type": "Button",
+                    "id": "98ef680b-1a2d-443b-831f-7f5b579fc374",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -254,10 +281,43 @@
                     "name": "",
                     "id": "f435fe36-ba2f-4184-8e8c-728b9a2ca6cd",
                     "path": "<Keyboard>/c",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "processors": "",
                     "groups": "",
                     "action": "Create",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8cf5046c-b44f-4c77-b0ec-dfc892e26917",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse & Keyboard",
+                    "action": "SuperCreate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e5d515ac-cc77-4610-9b66-7182bfbde8b3",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpeedUpTime",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d9c98301-852e-457c-9f02-4f561ee6af3e",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SlowDownTime",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

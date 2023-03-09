@@ -85,6 +85,7 @@ public class NPC : MonoBehaviour
 
 	private void Die()
 	{
+		LeaveClan();
 		Destroy(this.gameObject);
 	}
 

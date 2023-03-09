@@ -7,8 +7,9 @@ using UnityEngine;
 [System.Serializable]
 public class Stat
 {
-
 	public int baseValue;
+
+	public event System.Action OnChanged;
 
 	private List<int> modifiers = new List<int>();
 
@@ -23,16 +24,21 @@ public class Stat
 	{
 		if(modifier != 0)
 			modifiers.Add(modifier);
+
+		
 	}
 
 	public void RemoveModifier(int modifier)
 	{
 		if(modifier != 0)
 			modifiers.Remove(modifier);
+
+		OnChanged?.Invoke();
 	}
 	
 	public void ClearModifiers()
 	{
 		modifiers.Clear();
+		OnChanged?.Invoke();
 	}
 }

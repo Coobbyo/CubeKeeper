@@ -45,9 +45,17 @@ public class NPCUI : MonoBehaviour
 
 	public void OpenClanDisplay()
 	{
+		clanDisplay.gameObject.SetActive(false);
+		
 		clanList.gameObject.SetActive(false);
 		npcDisplay.gameObject.SetActive(false);
 		clanDisplay.gameObject.SetActive(true);
+
+		foreach(Transform child in clanDisplay.transform)
+		{
+			if(child.GetComponent<ClanListUI>() != null)
+				child.gameObject.SetActive(false);
+		}
 	}
 
 	public void OpenNPCDisplay()

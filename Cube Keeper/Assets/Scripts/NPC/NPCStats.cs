@@ -13,6 +13,8 @@ public class NPCStats : CharacterStats
         Friendliness.baseValue = Random.Range(0, 5);
 		Loyalty.baseValue = Random.Range(-10, 10);
 		Aggression.baseValue = Random.Range(-2, 2);
+
+		Damage.baseValue = Aggression.baseValue;
     }
 
     public void ClampStats()

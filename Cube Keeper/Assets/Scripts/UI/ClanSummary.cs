@@ -23,7 +23,6 @@ public class ClanSummary : MonoBehaviour
 
 	public void OpenClan()
 	{
-		//Debug.Log("Opening Clan");
 		ui.SetClan(clan);
 		ui.OpenClanDisplay();
 	}

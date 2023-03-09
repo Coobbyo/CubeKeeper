@@ -24,6 +24,7 @@ public class NPCManager : MonoBehaviour
 	private void Start()
 	{
 		input.CreateEvent += HandleCreate;
+		input.SuperCreateEvent += HandleCreate;
 	}
 
 	private void HandleCreate()
@@ -37,9 +38,11 @@ public class NPCManager : MonoBehaviour
 		Vector3 spawnPoint = player.position +
 			new Vector3(Random.Range(-spawnRadius, spawnRadius), 0, Random.Range(-spawnRadius, spawnRadius));
 		Transform npcGO = Instantiate(npcPrefab, spawnPoint, Quaternion.identity, this.transform);
+		
 		NPC newNPC = npcGO.GetComponent<NPC>();
-		unclaimedNPCs.Add(newNPC);
+		//newNPC.combat.bulletPrefab = bulletPrefab;
 
+		unclaimedNPCs.Add(newNPC);
 		return newNPC;
 	}
 

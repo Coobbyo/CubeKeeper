@@ -4,42 +4,41 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
-	public Stat maxHealth;
-	public int currentHealth { get; protected set; }
+	public Stat MaxHealth;
+	public int CurrentHealth { get; protected set; }
 
-	public Stat damage;
-	public Stat armor;
+	public Stat Damage;
+	public Stat Armor;
 
 	public event System.Action OnHealthReachedZero;
+	public event System.Action OnHealthChanged;
 
 	public virtual void Awake()
     {
-		currentHealth = maxHealth.GetValue();
+		CurrentHealth = MaxHealth.GetValue();
 	}
 
 	public void TakeDamage(int damage)
 	{
-		// Subtract the armor value - Make sure damage doesn't go below 0.
-		damage -= armor.GetValue();
+		damage -= Armor.GetValue();
 		damage = Mathf.Clamp(damage, 0, int.MaxValue);
 
-		// Subtract damage from health
-		currentHealth -= damage;
-		//Debug.Log(transform.name + " takes " + damage + " damage.");
+		CurrentHealth -= damage;
+		OnHealthChanged?.Invoke();
 
-		// If we hit 0. Die.
-		if(currentHealth <= 0)
+		if(CurrentHealth <= 0)
 		{
 			if(OnHealthReachedZero != null)
 			{
-				OnHealthReachedZero();
+				OnHealthReachedZero?.Invoke();
 			}
 		}
 	}
 
 	public void Heal(int amount)
 	{
-		currentHealth += amount;
-		currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth.GetValue());
+		CurrentHealth += amount;
+		CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth.GetValue());
+		OnHealthChanged();
 	}
 }

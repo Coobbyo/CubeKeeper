@@ -22,7 +22,7 @@ public class ClanListUI : MonoBehaviour
 
 	public void Clear()
 	{
-		foreach (Transform child in GridContent)
+		foreach(Transform child in GridContent)
 		{
 			Destroy(child.gameObject);
 		}

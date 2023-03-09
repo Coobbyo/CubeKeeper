@@ -71,6 +71,33 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SuperCreate"",
+                    ""type"": ""Value"",
+                    ""id"": ""809fe6b2-bfd7-4c04-97c5-47201b9d3ee2"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""SpeedUpTime"",
+                    ""type"": ""Button"",
+                    ""id"": ""7c0edb5d-5393-4ee4-825e-252d95c59d14"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SlowDownTime"",
+                    ""type"": ""Button"",
+                    ""id"": ""98ef680b-1a2d-443b-831f-7f5b579fc374"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -276,10 +303,43 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""f435fe36-ba2f-4184-8e8c-728b9a2ca6cd"",
                     ""path"": ""<Keyboard>/c"",
-                    ""interactions"": """",
+                    ""interactions"": ""Tap"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Create"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8cf5046c-b44f-4c77-b0ec-dfc892e26917"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse & Keyboard"",
+                    ""action"": ""SuperCreate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e5d515ac-cc77-4610-9b66-7182bfbde8b3"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpeedUpTime"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d9c98301-852e-457c-9f02-4f561ee6af3e"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SlowDownTime"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -362,6 +422,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Create = m_Player.FindAction("Create", throwIfNotFound: true);
+        m_Player_SuperCreate = m_Player.FindAction("SuperCreate", throwIfNotFound: true);
+        m_Player_SpeedUpTime = m_Player.FindAction("SpeedUpTime", throwIfNotFound: true);
+        m_Player_SlowDownTime = m_Player.FindAction("SlowDownTime", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Resume = m_UI.FindAction("Resume", throwIfNotFound: true);
@@ -429,6 +492,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Create;
+    private readonly InputAction m_Player_SuperCreate;
+    private readonly InputAction m_Player_SpeedUpTime;
+    private readonly InputAction m_Player_SlowDownTime;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -438,6 +504,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Create => m_Wrapper.m_Player_Create;
+        public InputAction @SuperCreate => m_Wrapper.m_Player_SuperCreate;
+        public InputAction @SpeedUpTime => m_Wrapper.m_Player_SpeedUpTime;
+        public InputAction @SlowDownTime => m_Wrapper.m_Player_SlowDownTime;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -462,6 +531,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Create.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCreate;
                 @Create.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCreate;
                 @Create.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCreate;
+                @SuperCreate.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSuperCreate;
+                @SuperCreate.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSuperCreate;
+                @SuperCreate.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSuperCreate;
+                @SpeedUpTime.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpeedUpTime;
+                @SpeedUpTime.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpeedUpTime;
+                @SpeedUpTime.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpeedUpTime;
+                @SlowDownTime.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSlowDownTime;
+                @SlowDownTime.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSlowDownTime;
+                @SlowDownTime.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSlowDownTime;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -481,6 +559,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Create.started += instance.OnCreate;
                 @Create.performed += instance.OnCreate;
                 @Create.canceled += instance.OnCreate;
+                @SuperCreate.started += instance.OnSuperCreate;
+                @SuperCreate.performed += instance.OnSuperCreate;
+                @SuperCreate.canceled += instance.OnSuperCreate;
+                @SpeedUpTime.started += instance.OnSpeedUpTime;
+                @SpeedUpTime.performed += instance.OnSpeedUpTime;
+                @SpeedUpTime.canceled += instance.OnSpeedUpTime;
+                @SlowDownTime.started += instance.OnSlowDownTime;
+                @SlowDownTime.performed += instance.OnSlowDownTime;
+                @SlowDownTime.canceled += instance.OnSlowDownTime;
             }
         }
     }
@@ -543,6 +630,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnPause(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnCreate(InputAction.CallbackContext context);
+        void OnSuperCreate(InputAction.CallbackContext context);
+        void OnSpeedUpTime(InputAction.CallbackContext context);
+        void OnSlowDownTime(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

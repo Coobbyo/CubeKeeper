@@ -10,13 +10,12 @@ public class CharacterCombat : MonoBehaviour
 	public float attackRate = 1f;
 	private float attackCountdown = 0f;
 
-	public event System.Action OnAttack;
+	private CharacterStats myStats;
+	protected CharacterStats enemyStats;
 
-	CharacterStats myStats;
-	CharacterStats enemyStats;
+	public event System.Action DoAttack;
 
-
-	private void Start()
+	private void Awake()
 	{
 		myStats = GetComponent<CharacterStats>();
 	}
@@ -26,26 +25,27 @@ public class CharacterCombat : MonoBehaviour
 		attackCountdown -= Time.deltaTime;
 	}
 
-	public void Attack (CharacterStats enemyStats)
+	public void Attack(CharacterStats enemyStats)
 	{
 		if(attackCountdown <= 0f)
 		{
 			this.enemyStats = enemyStats;
+
+			DoAttack();
+
 			attackCountdown = 1f / attackRate;
 
-			StartCoroutine(DoDamage(enemyStats,.6f));
-
-			if(OnAttack != null)
-				OnAttack ();
+			//StartCoroutine(DoDamage(enemyStats, 0.6f));
 		}
 	}
 
+	//This will be the meelee damage if that gets implemented
 	IEnumerator DoDamage(CharacterStats stats, float delay)
     {
 		print ("Start");
 		yield return new WaitForSeconds (delay);
 
-		Debug.Log (transform.name + " swings for " + myStats.damage.GetValue () + " damage");
-		enemyStats.TakeDamage (myStats.damage.GetValue ());
+		Debug.Log (transform.name + " swings for " + myStats.Damage.GetValue () + " damage");
+		enemyStats.TakeDamage (myStats.Damage.GetValue ());
 	}
 }

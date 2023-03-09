@@ -125,7 +125,7 @@ public class NPCClan
 
 	public bool IsEnemy(NPCClan otherClan)
 	{
-		foreach(NPCClan clan in friends)
+		foreach(NPCClan clan in enemies)
 		{
 			if(clan == otherClan)
 				return true;
@@ -136,48 +136,44 @@ public class NPCClan
 
 	public void Notify(NPCClan clan, int socialPoints)
 	{
+		int friendThreshold = 1;
+		int enemyThreshold = 0;
 		if(clan == null)
 		{
 			Debug.Log("clan should not be null here");
 			return;
 		}
+
 		if(socialIndex.ContainsKey(clan))	
 		{
 			socialIndex.TryGetValue(clan, out int socialValue);
 			socialValue += socialPoints;
 
-			if(socialValue >= 5)
+			if(socialValue >= friendThreshold && !IsFriend(clan))
 			{
-				if(IsFriend(clan))
-					return;
-
+				//Debug.Log(id + " is now friends with " + clan.ToString());
 				friends.Add(clan);
 			}
-			else if(socialValue < 5)
+			else if(socialValue < friendThreshold && IsFriend(clan))
 			{
-				if(!IsFriend(clan))
-					return;
-
+				//Debug.Log(id + " had a falling out with " + clan.ToString());
 				friends.Remove(clan);
 			}
 
-			if(socialValue <= -5)
+			if(socialValue <= enemyThreshold && !IsEnemy(clan))
 			{
-				if(IsEnemy(clan))
-					return;
-
-				friends.Add(clan);
+				//Debug.Log(id + " went to war with " + clan.ToString());
+				enemies.Add(clan);
 			}
-			else if(socialValue > -5)
+			else if(socialValue > enemyThreshold && IsEnemy(clan))
 			{
-				if(!IsEnemy(clan))
-					return;
-
-				friends.Remove(clan);
+				//Debug.Log(id + " came to peace with " + clan.ToString());
+				enemies.Remove(clan);
 			}
 		}
 		else
 		{
+			//Debug.Log(id + " is now tracking " + clan.ToString());
 			socialIndex.TryAdd(clan, socialPoints);
 		}
 	}
