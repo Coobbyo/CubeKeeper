@@ -9,21 +9,21 @@ public class Inventory
 
 	public event System.Action OnItemChanged;
 
-	public Inventory() {}
+	public Inventory()
+	{
+		items = new List<Item>();
+		dataToItem = new Dictionary<ItemData, Item>();
+	}
 	public Inventory(ItemData referenceData, int amount = 0)
 	{
+		items = new List<Item>();
+		dataToItem = new Dictionary<ItemData, Item>();
 		Add(referenceData, amount);
 	}
 	public Inventory(Inventory inventory)
 	{
 		dataToItem = inventory.dataToItem;
 		items = inventory.items;
-	}
-
-	private void Awake()
-	{
-		items = new List<Item>();
-		dataToItem = new Dictionary<ItemData, Item>();
 	}
 
 	public void Add(ItemData referenceData, int amount)
@@ -36,6 +36,8 @@ public class Inventory
 
 	public void Add(ItemData referenceData)
 	{
+		if(dataToItem == null)
+			Debug.Log("null data");
 		if(dataToItem.TryGetValue(referenceData, out Item value))
 		{
 			value.AddToStack();

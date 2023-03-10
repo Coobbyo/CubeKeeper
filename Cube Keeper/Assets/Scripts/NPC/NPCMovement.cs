@@ -35,8 +35,24 @@ public class NPCMovement : MonoBehaviour
 
 	private void Update()
 	{
-		modeDelay.Decrement();
-		moveDelay.Decrement();
+		switch(npc.state)
+		{
+			case NPC.State.Roam:
+				modeDelay.Decrement();
+				moveDelay.Decrement();
+				break;
+			case NPC.State.Combat:
+			case NPC.State.Work:
+			MoveTowardsTarget();
+				break;
+		}
+	}
+
+	private void MoveTowardsTarget()
+	{
+		Vector3 target = npc.target.transform.position;
+		if(Vector3.Distance(transform.position, target) >= npc.interactRange * 0.9f)
+			agent.SetDestination(target);
 	}
 
 	private void ChangeState()

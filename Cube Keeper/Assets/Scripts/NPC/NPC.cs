@@ -13,11 +13,12 @@ public class NPC : MonoBehaviour
 	public State state;
 
 
+	public float interactRange { get; private set; }
 	public NPCClan clan { get; private set; }
 	public Transform target { get; private set; }
 	public Inventory inventory { get; private set; }
 	public MeshRenderer colorDisplay;
-	[SerializeField] private float interactRange = 1f;
+	
 	[SerializeField] private Material Clanless;
 
 	private string id;
@@ -90,7 +91,7 @@ public class NPC : MonoBehaviour
 
 		return nearbyNPCs;
 	}
-
+	
 	private void Die()
 	{
 		LeaveClan();
