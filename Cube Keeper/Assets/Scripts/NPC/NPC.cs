@@ -18,11 +18,13 @@ public class NPC : MonoBehaviour
 
 	private string id;
 	private NPCClan clan;
+	private Transform target;
 
 	[HideInInspector] public NPCMovement movement;
 	[HideInInspector] public NPCSocialBehaviour social;
 	[HideInInspector] public NPCCombat combat;
 	[HideInInspector] public NPCStats stats;
+	[HideInInspector] public NPCWorker work;
 
 	private void Awake()
 	{
@@ -30,6 +32,7 @@ public class NPC : MonoBehaviour
 		social = GetComponent<NPCSocialBehaviour>();
 		combat = GetComponent<NPCCombat>();
 		stats = GetComponent<NPCStats>();
+		work = GetComponent<NPCWorker>();
 	}
 
 	private void Start()
@@ -56,6 +59,11 @@ public class NPC : MonoBehaviour
 		if(clan != null)
 			clan.RemoveMember(this);
 		clan = null;
+	}
+
+	public void SetTarget(Transform t)
+	{
+		target = t;
 	}
 
 	public NPC FindNearbyNPC()
