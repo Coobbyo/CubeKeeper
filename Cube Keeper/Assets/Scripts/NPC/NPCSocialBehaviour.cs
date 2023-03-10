@@ -5,10 +5,10 @@ using UnityEngine;
 public class NPCSocialBehaviour : MonoBehaviour
 {
 	private NPC npc;
-	private NPCClan clan
+	public NPCClan clan
 	{
-		get { return npc.GetClan(); }
-		set
+		get { return npc.clan; }
+		private set
 		{
 			if(value == null)
 				npc.LeaveClan();
@@ -55,7 +55,7 @@ public class NPCSocialBehaviour : MonoBehaviour
 
 	public void Interact(NPCSocialBehaviour otherNPC)
 	{
-		NPCClan otherClan = otherNPC.GetClan();
+		NPCClan otherClan = otherNPC.clan;
 
 		if(loyalty.GetValue() < -10)
 			LeaveClan();
@@ -129,11 +129,6 @@ public class NPCSocialBehaviour : MonoBehaviour
 			otherNPC.social.Interact(this);
 
 		socialDelay.Restart(Random.Range(5f, 10f - friendliness.GetValue()));
-	}
-
-	public NPCClan GetClan()
-	{
-		return npc.GetClan();
 	}
 
 	private void JoinClan(NPCClan newClan)

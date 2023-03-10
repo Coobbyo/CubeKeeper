@@ -45,7 +45,7 @@ public class NPCClan
 	{
 		foreach (NPC npc in members)
 		{
-			if(npc.GetClan() != this)
+			if(npc.clan != this)
 			{
 				//Eventually I need to send them to he proper clan...
 				members.Remove(npc);

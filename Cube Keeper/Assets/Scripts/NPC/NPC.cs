@@ -7,24 +7,28 @@ public class NPC : MonoBehaviour
 	public enum State
 	{
 		Roam,
-		Combat
+		Combat,
+		Work
 	}
 	public State state;
 
-	
+
+	public NPCClan clan { get; private set; }
+	public Transform target { get; private set; }
+	public Inventory inventory { get; private set; }
 	public MeshRenderer colorDisplay;
 	[SerializeField] private float interactRange = 1f;
 	[SerializeField] private Material Clanless;
 
 	private string id;
-	private NPCClan clan;
-	private Transform target;
+	
 
 	[HideInInspector] public NPCMovement movement;
 	[HideInInspector] public NPCSocialBehaviour social;
 	[HideInInspector] public NPCCombat combat;
 	[HideInInspector] public NPCStats stats;
 	[HideInInspector] public NPCWorker work;
+
 
 	private void Awake()
 	{
@@ -38,12 +42,8 @@ public class NPC : MonoBehaviour
 	private void Start()
 	{
 		id = "NPC " + Random.Range(0, 10000);
+		inventory = new Inventory();
 		stats.OnHealthReachedZero += Die;
-	}
-
-	public NPCClan GetClan()
-	{
-		return clan;
 	}
 
 	public void JoinClan(NPCClan clan)

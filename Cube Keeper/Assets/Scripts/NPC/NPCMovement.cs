@@ -51,7 +51,7 @@ public class NPCMovement : MonoBehaviour
 	private void FindNewDestination()
 	{
 		Vector3 newDestination = transform.position;
-		NPCClan clan = npc.social.GetClan();
+		NPCClan clan = npc.clan;
 		if(clan != null)
 			newDestination = clan.GetCenterPoint();
 

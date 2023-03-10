@@ -16,10 +16,10 @@ public class NPCSummary : MonoBehaviour
 	{
 		this.npc = npc;
 
-		if(npc.GetClan() == null)
+		if(npc.clan == null)
 			Debug.Log(ui + " does not have a clan");
 		else
-			clanColor.color = npc.GetClan().GetColor();
+			clanColor.color = npc.clan.GetColor();
 		
 		npcName.text = npc.ToString();
 	}
