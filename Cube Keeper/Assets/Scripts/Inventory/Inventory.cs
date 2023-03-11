@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Inventory
 {
+	//public int Total;
 	private Dictionary<ItemData, Item> dataToItem;
-	public List<Item> items { get; private set; }
+	public List<Item> items;// { get; private set; }
 
 	public event System.Action OnItemChanged;
 
@@ -49,6 +51,7 @@ public class Inventory
 			dataToItem.Add(referenceData, newItem);
 		}
 
+		//Total++;
 		OnItemChanged?.Invoke();
 	}
 
@@ -81,6 +84,7 @@ public class Inventory
 				dataToItem.Remove(referenceData);
 			}
 
+			//Total--;
 			OnItemChanged?.Invoke();
 		}
 	}

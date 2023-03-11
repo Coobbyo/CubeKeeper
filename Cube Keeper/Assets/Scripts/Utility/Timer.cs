@@ -38,14 +38,14 @@ public class Timer
 		Stop();
 	}
 
-	public void Restart()
-	{
-		time += delay;
-	}
-
 	public void Restart(float delay)
 	{
 		this.delay = delay;
+		time += delay;
+	}
+
+	public void Restart()
+	{
 		time += delay;
 	}
 

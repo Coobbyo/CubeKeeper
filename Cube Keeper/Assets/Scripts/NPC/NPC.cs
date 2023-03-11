@@ -22,7 +22,6 @@ public class NPC : MonoBehaviour
 	[SerializeField] private Material Clanless;
 
 	private string id;
-	
 
 	[HideInInspector] public NPCMovement movement;
 	[HideInInspector] public NPCSocialBehaviour social;
@@ -43,6 +42,7 @@ public class NPC : MonoBehaviour
 	private void Start()
 	{
 		id = "NPC " + Random.Range(0, 10000);
+		interactRange = 1f;
 		inventory = new Inventory();
 		stats.OnHealthReachedZero += Die;
 	}

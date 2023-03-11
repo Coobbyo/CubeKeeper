@@ -5,7 +5,9 @@ using UnityEngine;
 public class NPCCombat : CharacterCombat
 {
 	private NPC npc;
-	private NPC target
+
+	private NPC target;
+	public NPC Target
 	{
 		get { return target; }
 		set { target = value; npc.SetTarget(value.transform); }
@@ -31,13 +33,13 @@ public class NPCCombat : CharacterCombat
 		if(npc.state != NPC.State.Combat)
 			return;
 
-		if(target == null)
+		if(Target == null)
 			FindTarget();
 
-		if(target == null)
+		if(Target == null)
 			return;
 
-		Attack(target.stats);
+		Attack(Target.stats);
 	}
 
 	private void FindTarget()
@@ -51,7 +53,7 @@ public class NPCCombat : CharacterCombat
 				(npc.clan == otherNPC.clan || npc.clan.IsFriend(otherNPC.clan)) && //Check if friend or clan mate
 				otherNPC.stats.CurrentHealth <= otherNPC.stats.MaxHealth.GetValue())) //Check if less than max health
 			{
-				target = otherNPC;
+				Target = otherNPC;
 				return;
 			}
 		}

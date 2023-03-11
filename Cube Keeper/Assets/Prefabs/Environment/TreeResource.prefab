@@ -209,6 +209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 909839422449428694}
   - component: {fileID: 6879471459332659059}
+  - component: {fileID: 6668028479533838052}
   m_Layer: 0
   m_Name: TreeResource
   m_TagString: Untagged
@@ -247,3 +248,17 @@ MonoBehaviour:
   resourceType: {fileID: 11400000, guid: d3c19d04693e36144baa484f6f4e7daa, type: 2}
   fullIndicator: {fileID: 781090850698147185}
   maxResources: 5
+--- !u!136 &6668028479533838052
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6878813452987993785}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.125
+  m_Height: 0.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.25, z: 0}

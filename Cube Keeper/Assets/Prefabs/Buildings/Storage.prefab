@@ -320,6 +320,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5188441648718012005}
   - component: {fileID: 749361093782674546}
+  - component: {fileID: 9219334429632196859}
   m_Layer: 0
   m_Name: Storage
   m_TagString: Untagged
@@ -388,6 +389,19 @@ MonoBehaviour:
   - {fileID: 1476388504989255584}
   - {fileID: 6178603203785536906}
   - {fileID: 656316247193474315}
+--- !u!65 &9219334429632196859
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6534206051994264524}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0.1, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7574383035963260974
 GameObject:
   m_ObjectHideFlags: 0

@@ -122,12 +122,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   colorDisplay: {fileID: 5585640780744785250}
-  interactRange: 1
   Clanless: {fileID: 2100000, guid: b9a471b9830027d48a7f96b07119a328, type: 2}
   movement: {fileID: 0}
   social: {fileID: 0}
   combat: {fileID: 0}
   stats: {fileID: 0}
+  work: {fileID: 0}
 --- !u!114 &7019833092766921508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,6 +164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21622b22ef175064ca79c953359ffc64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  workingRange: 5
+  carryPoint: {fileID: 4439965607711768044}
 --- !u!114 &1413255008460258471
 MonoBehaviour:
   m_ObjectHideFlags: 0

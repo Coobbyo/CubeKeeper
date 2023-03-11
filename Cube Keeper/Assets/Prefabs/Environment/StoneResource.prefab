@@ -209,6 +209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 132141880401795623}
   - component: {fileID: 2464343175733820831}
+  - component: {fileID: 2841407589000350611}
   m_Layer: 0
   m_Name: StoneResource
   m_TagString: Untagged
@@ -247,3 +248,16 @@ MonoBehaviour:
   resourceType: {fileID: 11400000, guid: a4fbd45a74282964780373dfa5100512, type: 2}
   fullIndicator: {fileID: 2474402417701748199}
   maxResources: 5
+--- !u!135 &2841407589000350611
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7122413884721471324}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.25
+  m_Center: {x: 0, y: -0.25, z: 0}

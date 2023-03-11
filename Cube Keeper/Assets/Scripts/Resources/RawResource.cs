@@ -22,7 +22,7 @@ public class RawResource : MonoBehaviour, IInventory
 	public void Remove(ItemData data)
 	{
 		Item item = inventory.Get(data);
-		if(item != null && item.stackSize < maxResources)
+		if(fullIndicator.activeSelf && item != null && item.stackSize < maxResources)
 			fullIndicator.SetActive(false);
 		
 		inventory.Remove(data);

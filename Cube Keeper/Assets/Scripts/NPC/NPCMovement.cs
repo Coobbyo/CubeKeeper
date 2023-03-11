@@ -50,6 +50,9 @@ public class NPCMovement : MonoBehaviour
 
 	private void MoveTowardsTarget()
 	{
+		if(npc.target == null)
+			return;
+		
 		Vector3 target = npc.target.transform.position;
 		if(Vector3.Distance(transform.position, target) >= npc.interactRange * 0.9f)
 			agent.SetDestination(target);

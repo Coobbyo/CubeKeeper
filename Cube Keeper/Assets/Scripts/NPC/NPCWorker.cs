@@ -9,20 +9,30 @@ public class NPCWorker : MonoBehaviour
 
 	private NPC npc;
 
-	private Transform targetTo;
 	private Transform targetFrom;
+	private Transform targetTo;
+	
 	private Transform currentTarget
 	{
-		get { return currentTarget; }
-		set { currentTarget = value; npc.SetTarget(value.transform); }
+		get { return npc.target; }
+		set { npc.SetTarget(value); }
 	}
 
 	private int loadCapacity = 1;
 	private Inventory inventory { get { return npc.inventory; } }
 
+	private Timer findDelay = new Timer();
+	private Timer workDelay = new Timer();
+
 	private void Awake()
 	{
 		npc = GetComponent<NPC>();
+	}
+
+	private void Start()
+	{
+		findDelay.Set(FindWork, Random.Range(0f, 5f));
+		workDelay.Set(DoWork, Random.Range(0f, 1f));
 	}
 
 	private void Update()
@@ -30,34 +40,35 @@ public class NPCWorker : MonoBehaviour
 		switch(npc.state)
 		{
 			case NPC.State.Roam:
-				if(targetTo == null)
-					FindResource();
-				if(targetFrom == null)
-					FindStorage();
-
-				if(targetTo != null && targetFrom != null)
-				{
-					currentTarget = targetFrom;
-					npc.state = NPC.State.Work;
-				}
+				findDelay.Decrement();
 				break;
 			case NPC.State.Work:
-				if(targetTo == null || targetFrom == null)
-					npc.state = NPC.State.Roam;
-
-				if(Vector3.Distance(transform.position, currentTarget.position) <= npc.interactRange)
-				{
-					if(currentTarget == targetTo)
-						Deposit();
-					else if(currentTarget == targetFrom)
-						Withdraw();
-				}
+				workDelay.Decrement();
 				break;
 		}
 	}
 
+	private void FindWork()
+	{
+		if(targetFrom == null)
+			FindResource();
+		if(targetTo == null)
+			FindStorage();
+	
+		if(targetFrom != null && targetTo != null)
+		{
+			VerifyTargets();
+			currentTarget = targetFrom;
+			npc.state = NPC.State.Work;
+			//Debug.Log("State Changed to work");
+		}
+
+		findDelay.Restart(Random.Range(0f, 5f));
+	}
+
 	public void FindResource()
 	{
+		//Debug.Log("Looking for resource");
 		var nearbyResources = new List<RawResource>();
 		Collider[] colliderArray = Physics.OverlapSphere(transform.position, workingRange);
 		foreach(Collider collider in colliderArray)
@@ -69,9 +80,13 @@ public class NPCWorker : MonoBehaviour
 		}
 
 		if(nearbyResources.Count <= 0)
-			targetFrom = null;
+		{
+			//Debug.Log("No Resources found");
+			//targetFrom = null;
+		}
 		else
 		{
+			//Debug.Log("Resource Found!");
 			RawResource foundResource = nearbyResources[Random.Range(0, nearbyResources.Count)];
 			targetFrom = foundResource.transform;
 		}
@@ -80,6 +95,7 @@ public class NPCWorker : MonoBehaviour
 
 	public void FindStorage()
 	{
+		//Debug.Log("Looking for Storage");
 		var nearbyStorage = new List<Storage>();
 		Collider[] colliderArray = Physics.OverlapSphere(transform.position, workingRange);
 		foreach(Collider collider in colliderArray)
@@ -91,20 +107,59 @@ public class NPCWorker : MonoBehaviour
 		}
 
 		if(nearbyStorage.Count <= 0)
-			targetTo = null;
+		{
+			//Debug.Log("No storages found");
+			//targetTo = null;
+		}
 		else
 		{
+			//Debug.Log("Storage Found!");
 			Storage foundStorage = nearbyStorage[Random.Range(0, nearbyStorage.Count)];
-			targetFrom = foundStorage.transform;
+			targetTo = foundStorage.transform;
 		}
+	}
+
+	private void DoWork()
+	{
+		if(targetFrom == null)
+		{
+			if(carryPoint.childCount > 0)
+				currentTarget = targetTo;
+			else
+			{
+				npc.state = NPC.State.Roam;
+				return;
+			}
+		}
+		
+		if(targetTo == null)
+		{
+			npc.state = NPC.State.Roam;
+			return;
+		}
+
+		//Debug.Log("Working!");
+		if(Vector3.Distance(transform.position, currentTarget.position) <= npc.interactRange)
+		{
+			//Debug.Log("close enough");
+			if(currentTarget == targetFrom)
+				Withdraw();
+			else if(currentTarget == targetTo)
+				Deposit();
+		}
+
+		workDelay.Restart(Random.Range(0.5f, 1f));
 	}
 
 	public void Withdraw()
 	{
 		if(IsFull())
-			currentTarget = targetFrom;
+		{
+			currentTarget = targetTo;
+			return;
+		}
 		
-		IInventory inv = currentTarget.GetComponent<IInventory>();
+		IInventory inv = targetFrom.GetComponent<IInventory>();
 		inv.Remove(inv.GetItem());
 		inventory.Add(inv.GetItem());
 
@@ -114,16 +169,20 @@ public class NPCWorker : MonoBehaviour
 	public void Deposit()
 	{
 		if(inventory.items.Count == 0)
-			currentTarget = targetTo;
+		{
+			currentTarget = targetFrom;
+			return;
+		}
 
-		IInventory inv = currentTarget.GetComponent<IInventory>();
+		IInventory inv = targetTo.GetComponent<IInventory>();
 
 		if(inv.IsFull())
 		{
-			targetFrom = null;
+			targetTo = null;
 			return;
 		}	
 
+		//Debug.Log("Deposit");
 		inv.Add(inv.GetItem());
 		inventory.Remove(inv.GetItem());
 
@@ -143,6 +202,39 @@ public class NPCWorker : MonoBehaviour
 				inventorySize++;
 			}
 		}
-		return inventorySize == loadCapacity ? true : false;
+		return inventorySize >= loadCapacity ? true : false;
+	}
+
+	private void VerifyTargets()
+	{
+		if(targetFrom == null || targetTo == null)
+			return;
+
+		IInventory invFrom = targetFrom.GetComponent<IInventory>();
+		IInventory invTo = targetTo.GetComponent<IInventory>();
+
+		if(invFrom.GetItem() != invTo.GetItem())
+			targetFrom = null;
+
+		if(invTo.IsFull())
+			targetTo = null;
+
+		if(carryPoint.childCount > 0) //This is checking the item we are carying
+		{
+			if(inventory.items.Count == 0)
+				Debug.LogError("Are we carrying something with an empty inventory?");
+			
+			//Is the item we have the same as where we are withdrawing?
+			if(inventory.Get(invFrom.GetItem()) == null)
+			{
+				targetFrom = null;
+			}
+
+			//Is the item we have te smae as where we are depositing?
+			if(inventory.Get(invTo.GetItem()) == null)
+			{
+				targetTo = null;
+			}
+		}
 	}
 }
