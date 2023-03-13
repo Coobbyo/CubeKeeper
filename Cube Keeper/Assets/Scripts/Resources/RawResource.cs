@@ -14,7 +14,6 @@ public class RawResource : MonoBehaviour, IInventory
 	private void Start()
 	{
 		inventory = new Inventory(resourceType, maxResources);
-		inventory.OnItemChanged += OnResourceDepleted;
 	}
 
 	public void Add(ItemData data) {}
@@ -22,10 +21,13 @@ public class RawResource : MonoBehaviour, IInventory
 	public void Remove(ItemData data)
 	{
 		Item item = inventory.Get(data);
-		if(fullIndicator.activeSelf && item != null && item.stackSize < maxResources)
-			fullIndicator.SetActive(false);
-		
 		inventory.Remove(data);
+
+		if(inventory.items.Count == 0)
+			Destroy(gameObject);
+
+		if(fullIndicator.activeSelf && item.stackSize < maxResources)
+			fullIndicator.SetActive(false);
 	}
 
 	public bool IsFull()
@@ -39,8 +41,7 @@ public class RawResource : MonoBehaviour, IInventory
 
 	private void OnResourceDepleted()
 	{
-		if(inventory.items.Count == 0)
-			Destroy(gameObject);
+		
 	}
 
 	public ItemData GetItem()

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class NPCClan
 {
+	public ClanBehaviour behaviour;
+
 	private string id;
 	private Color color;
 	
@@ -12,33 +14,28 @@ public class NPCClan
 	private List<NPCClan> friends = new List<NPCClan>();
 	private List<NPCClan> enemies = new List<NPCClan>();
 
+	private ClanBuilder builder = new ClanBuilder();
+
 	public NPCClan()
 	{
 		id = "Clan " + Random.Range(0, 10000);
 		color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
-
-		NPCManager.Instance.AddClan(this);
 	}
 	public NPCClan(Color color)
 	{
 		id = "Clan " + Random.Range(0, 10000);
 		this.color = color;
-
-		NPCManager.Instance.AddClan(this);
 	}
 	public NPCClan(string id)
 	{
 		this.id = id;
 		color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
 
-		NPCManager.Instance.AddClan(this);
 	}
 	public NPCClan(string id, Color color)
 	{
 		this.id = id;
 		this.color = color;
-
-		NPCManager.Instance.AddClan(this);
 	}
 
 	public void VerifyMembers()

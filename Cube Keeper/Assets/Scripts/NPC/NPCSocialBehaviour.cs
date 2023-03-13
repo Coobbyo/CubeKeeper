@@ -13,7 +13,12 @@ public class NPCSocialBehaviour : MonoBehaviour
 			if(value == null)
 				npc.LeaveClan();
 			else
+			{
+				npc.LeaveClan();
+				loyalty.ClearModifiers();
+				loyalty.AddModifier(5);
 				npc.JoinClan(value);
+			}
 		}
 	}
 
@@ -58,19 +63,19 @@ public class NPCSocialBehaviour : MonoBehaviour
 		NPCClan otherClan = otherNPC.clan;
 
 		if(loyalty.GetValue() < -10)
-			LeaveClan();
+			clan = null;
 
 		if(clan == null)
 		{
 			if(otherClan == null && friendliness.GetValue() > 0)
 			{
-				JoinClan(new NPCClan());
+				clan = NPCManager.Instance.CreateClan();
 				otherNPC.SwapClan(clan);
 			}
 			else if(otherClan != null)
 			{
 				if(!SwapClan(otherClan) && friendliness.GetValue() > 3)
-					JoinClan(new NPCClan());
+					clan = NPCManager.Instance.CreateClan();
 			}
 		}
 		else //clan != null
@@ -131,18 +136,6 @@ public class NPCSocialBehaviour : MonoBehaviour
 		socialDelay.Restart(Random.Range(5f, 10f - friendliness.GetValue()));
 	}
 
-	private void JoinClan(NPCClan newClan)
-	{
-		loyalty.ClearModifiers();
-		loyalty.AddModifier(5);
-		npc.JoinClan(newClan);
-	}
-
-	private void LeaveClan()
-	{
-		npc.LeaveClan();
-	}
-
 	private bool SwapClan(NPCClan newClan)
 	{
 		float minSwap = clan == null? 1 + friendliness.GetValue() : -loyalty.GetValue();
@@ -151,8 +144,7 @@ public class NPCSocialBehaviour : MonoBehaviour
 		
 		if(swapValue > 0f)
 		{
-			LeaveClan();
-			JoinClan(newClan);
+			clan = newClan;
 			return true;
 		} else
 		{

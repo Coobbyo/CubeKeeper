@@ -39,7 +39,11 @@ public class Inventory
 	public void Add(ItemData referenceData)
 	{
 		if(dataToItem == null)
-			Debug.Log("null data");
+		{
+			Debug.LogError("Null data");
+			return;
+		}
+
 		if(dataToItem.TryGetValue(referenceData, out Item value))
 		{
 			value.AddToStack();

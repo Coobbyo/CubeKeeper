@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdbdacd6dcc28b74094c7ca24728cd41, type: 3}
+  m_Name: Clan_Hall
+  m_EditorClassIdentifier: 
+  id: 2
+  displayName: Clan Hall
+  resourceList:
+  - {fileID: 11400000, guid: a4fbd45a74282964780373dfa5100512, type: 2}
+  - {fileID: 11400000, guid: d3c19d04693e36144baa484f6f4e7daa, type: 2}
+  resourceAmounts: 0500000005000000
+  prefab: {fileID: 1074166693357988758, guid: ea20c07a34120544bb4b361dca404aa8, type: 3}

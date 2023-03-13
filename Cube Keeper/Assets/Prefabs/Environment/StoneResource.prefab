@@ -247,7 +247,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceType: {fileID: 11400000, guid: a4fbd45a74282964780373dfa5100512, type: 2}
   fullIndicator: {fileID: 2474402417701748199}
-  maxResources: 5
+  maxResources: 10
 --- !u!135 &2841407589000350611
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -20,6 +20,17 @@ public class ClanListUI : MonoBehaviour
 		}
 	}
 
+	public void Propigate(List<ClanBehaviour> clanList)
+	{
+		Clear();
+		foreach(ClanBehaviour clan in clanList)
+		{
+			Transform summary = Instantiate(summaryPrefab, GridContent);
+			summary.GetComponent<ClanSummary>().SetClan(clan.Clan);
+			summary.GetComponent<ClanSummary>().ui = ui;
+		}
+	}
+
 	public void Clear()
 	{
 		foreach(Transform child in GridContent)

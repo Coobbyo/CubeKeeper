@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Storage : MonoBehaviour, IInventory
+public class MultiStorage : StructureBehaviour, IInventory
 {
-	public ItemData storageType;
-
+	//TODO: change this to be a parent object that dynamicaly creates spots at runtime
 	[SerializeField] private List<Transform> storageSpots;
 
 	private int maxStorage = 16;
@@ -15,9 +14,15 @@ public class Storage : MonoBehaviour, IInventory
 	{
 		inventory = new Inventory();
 
-		for (int i = 0; i < maxStorage; i++)
+		foreach(Transform spot in storageSpots)
 		{
-			Instantiate(storageType.prefab, storageSpots[i]);
+			if(spot.childCount > 0)
+				Destroy(spot.GetChild(0).gameObject);
+		}
+
+		for(int i = 0; i < maxStorage; i++)
+		{
+			//Instantiate(storageType.prefab, storageSpots[i]);
 			storageSpots[i].transform.localScale = 0.25f * Vector3.one;
 			storageSpots[i].gameObject.SetActive(false);
 		}
@@ -36,14 +41,17 @@ public class Storage : MonoBehaviour, IInventory
 	{
 		inventory.Remove(data);
 		UpdateStorageSpots();
+
+		if(inventory.items.Count == 0)
+			Destroy(gameObject);
 	}
 
 	public bool IsFull()
 	{
 		int inventorySize = 0;
-		foreach (Item item in inventory.items)
+		foreach(Item item in inventory.items)
 		{
-			for (int i = 0; i < item.stackSize; i++)
+			for(int i = 0; i < item.stackSize; i++)
 			{
 				inventorySize++;
 			}
@@ -53,15 +61,16 @@ public class Storage : MonoBehaviour, IInventory
 
 	private void UpdateStorageSpots()
 	{
-		foreach (Transform spot in storageSpots)
+		foreach(Transform spot in storageSpots)
 		{
 			spot.gameObject.SetActive(false);
 		}
 
-		foreach (Item item in inventory.items)
+		foreach(Item item in inventory.items)
 		{
 			for (int i = 0; i < item.stackSize; i++)
 			{
+
 				storageSpots[i].gameObject.SetActive(true);
 			}
 		}
@@ -69,6 +78,6 @@ public class Storage : MonoBehaviour, IInventory
 
 	public ItemData GetItem()
 	{
-		return storageType;
+		return null;
 	}
 }

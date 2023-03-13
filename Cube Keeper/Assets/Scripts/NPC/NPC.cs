@@ -49,17 +49,25 @@ public class NPC : MonoBehaviour
 
 	public void JoinClan(NPCClan clan)
 	{
+		//Debug.Log("Joining " + clan.ToString());
 		this.clan = clan;
 		colorDisplay.material.color = clan.GetColor();
 		clan.AddMember(this);
+		//if(NPCManager.Instance.GetClan(clan) == null)
+			//Debug.Log("it's clanGO");
+		transform.SetParent(clan.behaviour.transform);
 	}
 
 	public void LeaveClan()
 	{
 		colorDisplay.material = Clanless;
 		if(clan != null)
+		{
+			//Debug.Log("Leaving " + clan.ToString());
 			clan.RemoveMember(this);
-		clan = null;
+			clan = null;
+		}
+		transform.SetParent(NPCManager.Instance.transform, true);
 	}
 
 	public void SetTarget(Transform t)

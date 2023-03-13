@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class NPCStats : CharacterStats
 {
+	//Social Stats
     public Stat Friendliness;// { get; private set; }
 	public Stat Loyalty;// { get; private set; }
 	public Stat Aggression;// { get; private set; }
+
+	//Work Stats
+	//Idleness
 
     private void Start()
     {

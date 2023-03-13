@@ -96,11 +96,11 @@ public class NPCWorker : MonoBehaviour
 	public void FindStorage()
 	{
 		//Debug.Log("Looking for Storage");
-		var nearbyStorage = new List<Storage>();
+		var nearbyStorage = new List<SingleStorage>();
 		Collider[] colliderArray = Physics.OverlapSphere(transform.position, workingRange);
 		foreach(Collider collider in colliderArray)
 		{
-			if(collider.TryGetComponent(out Storage storage))
+			if(collider.TryGetComponent(out SingleStorage storage))
 			{
 				nearbyStorage.Add(storage);
 			}
@@ -114,7 +114,7 @@ public class NPCWorker : MonoBehaviour
 		else
 		{
 			//Debug.Log("Storage Found!");
-			Storage foundStorage = nearbyStorage[Random.Range(0, nearbyStorage.Count)];
+			SingleStorage foundStorage = nearbyStorage[Random.Range(0, nearbyStorage.Count)];
 			targetTo = foundStorage.transform;
 		}
 	}
@@ -180,10 +180,17 @@ public class NPCWorker : MonoBehaviour
 		{
 			targetTo = null;
 			return;
-		}	
+		}
 
-		//Debug.Log("Deposit");
-		inv.Add(inv.GetItem());
+		if(inv.GetItem() == null)
+		{
+			inv.Add(targetFrom.GetComponent<IInventory>().GetItem());
+		}
+		else
+		{
+			inv.Add(inv.GetItem());
+		}
+
 		inventory.Remove(inv.GetItem());
 
 		foreach (Transform child in carryPoint)
@@ -213,11 +220,8 @@ public class NPCWorker : MonoBehaviour
 		IInventory invFrom = targetFrom.GetComponent<IInventory>();
 		IInventory invTo = targetTo.GetComponent<IInventory>();
 
-		if(invFrom.GetItem() != invTo.GetItem())
-			targetFrom = null;
-
-		if(invTo.IsFull())
-			targetTo = null;
+		if(invTo.GetItem() == null)
+			return;
 
 		if(carryPoint.childCount > 0) //This is checking the item we are carying
 		{
@@ -236,5 +240,13 @@ public class NPCWorker : MonoBehaviour
 				targetTo = null;
 			}
 		}
+
+		if(invFrom.GetItem() != invTo.GetItem())
+			targetFrom = null;
+
+		if(invTo.IsFull())
+			targetTo = null;
+
+		
 	}
 }
