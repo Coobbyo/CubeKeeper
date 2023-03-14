@@ -8,6 +8,7 @@ public class NPCManager : MonoBehaviour
 	[SerializeField] private Transform player;
 	[SerializeField] private Transform npcPrefab;
 	[SerializeField] private Transform clanPrefab;
+	[SerializeField] private ClanData[] premadeClans;
 
 	private List<NPC> unclaimedNPCs = new List<NPC>();
 	private List<NPCClan> clans = new List<NPCClan>();
@@ -43,7 +44,7 @@ public class NPCManager : MonoBehaviour
 		Transform npcGO = Instantiate(npcPrefab, spawnPoint, Quaternion.identity, this.transform);
 		
 		NPC newNPC = npcGO.GetComponent<NPC>();
-		//newNPC.combat.bulletPrefab = bulletPrefab;
+		newNPC.JoinClan(CreateClan(premadeClans[Random.Range(0, premadeClans.Length)]));
 
 		unclaimedNPCs.Add(newNPC);
 		return newNPC;
@@ -59,27 +60,48 @@ public class NPCManager : MonoBehaviour
 	public NPCClan CreateClan()
 	{
 		Transform clanGO = Instantiate(clanPrefab, transform);
-		ClanBehaviour clanB = clanGO.GetComponent<ClanBehaviour>();
-		NPCClan clan = new NPCClan();
+		ClanBehaviour clan = clanGO.GetComponent<ClanBehaviour>();
+		clan.Clan = new NPCClan();
+		clan.Clan.behaviour = clan;
 
-		clanB.Clan = clan;
-		clanB.name = clan.ToString();
-		clan.behaviour = clanB;
-
-		clans.Add(clan);
-		//clanToGO.Add(clan, clanGO.gameObject);
+		//Debug.Log("Adding " + clan.Clan.ToString());
+		clans.Add(clan.Clan);
+		//clanToGO.Add(clan.Clan, clanGO.gameObject);
 		
-		return clan;
+		return clan.Clan;
+	}
+
+	public NPCClan CreateClan(ClanData referenceData)
+	{
+		Transform clanGO = Instantiate(clanPrefab, transform);
+		ClanBehaviour clan = clanGO.GetComponent<ClanBehaviour>();
+		clan.Clan = new NPCClan(referenceData);
+		clan.Clan.behaviour = clan;
+
+		//Debug.Log("Adding " + clan.Clan.ToString());
+		clans.Add(clan.Clan);
+		//clanToGO.Add(clan.Clan, clanGO.gameObject);
+		
+		return clan.Clan;
 	}
 
 	public void RemoveCLan(NPCClan clan)
 	{
-		//Debug.Log("Removing " + clan.ToString());
 		clans.Remove(clan);
-		Destroy(clan.behaviour.gameObject);
-		//if(clanToGO.TryGetValue(clan, out GameObject value))
-			//Destroy(value);
-		//clanToGO.Remove(clan);
+		ClanBehaviour clanB = clan.behaviour;
+
+		foreach (NPC npc in clan.Members)
+		{
+			npc.LeaveClan();
+		}
+
+		foreach(Structure structure in clan.builder.GetStructures())
+		{
+			structure.Clan = null;
+		}
+
+		Destroy(clanB.gameObject);
+		clan = null;
 	}
 
 	public ClanBehaviour GetClan(NPCClan clan)

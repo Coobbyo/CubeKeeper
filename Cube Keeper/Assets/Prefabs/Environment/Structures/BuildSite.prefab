@@ -681,6 +681,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f3971c1c5d904049bbe4ae459c662c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayMeshes:
+  - {fileID: 8259250067604225188}
+  - {fileID: 7150214600459131304}
+  - {fileID: 3113610802929178309}
+  - {fileID: 4447897955174022376}
+  data: {fileID: 11400000, guid: 7cfeb3972eb21814cb73b583762f0132, type: 2}
+  structureToBuild: {fileID: 0}
   stoneStorage: {fileID: 1239857648363659903}
   woodStorage: {fileID: 3242381316101641268}
 --- !u!1 &6708761170870042934
@@ -786,7 +793,7 @@ PrefabInstance:
     - target: {fileID: 5188441648718012005, guid: 83de0c0ce5f0c1148906542f3a794f93,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5188441648718012005, guid: 83de0c0ce5f0c1148906542f3a794f93,
         type: 3}
@@ -884,7 +891,7 @@ PrefabInstance:
     - target: {fileID: 5188441648718012005, guid: 83de0c0ce5f0c1148906542f3a794f93,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5188441648718012005, guid: 83de0c0ce5f0c1148906542f3a794f93,
         type: 3}

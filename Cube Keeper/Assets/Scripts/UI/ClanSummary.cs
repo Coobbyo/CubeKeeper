@@ -16,9 +16,9 @@ public class ClanSummary : MonoBehaviour
 	public void SetClan(NPCClan clan)
 	{
 		this.clan = clan;
-		clanColor.color = clan.GetColor();
+		clanColor.color = clan.Color;
 		clanName.text = clan.ToString();
-		clanSize.text = clan.GetClanSize().ToString();
+		clanSize.text = clan.Size.ToString();
 	}
 
 	public void OpenClan()

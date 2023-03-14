@@ -2,28 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Structure
+public class Structure : MonoBehaviour
 {
-    public StructureData data { get; private set; }
-    public NPCClan clan { get; private set; }
-    public Vector3 position { get; private set; }
+    private NPCClan clan;
+    public NPCClan Clan
+    {
+        get { return clan; }
+        set
+        {
+            clan = value;
+            foreach (MeshRenderer mesh in displayMeshes)
+            {
+                if(clan == null)
+                    mesh.material.color = NPC.Clanless.color;
+                else
+                    mesh.material.color = clan.Color;
+            }
+        }
+    }
 
-    public Structure(StructureData referenceData)
+    [SerializeField] private MeshRenderer[] displayMeshes;
+    [SerializeField] private StructureData data;
+
+    public StructureData GetData()
     {
-        data = referenceData;
-        clan = null;
-        position = Vector3.zero;
-    }
-    public Structure(StructureData referenceData, Vector3 location)
-    {
-        data = referenceData;
-        clan = null;
-        position = location;
-    }
-    public Structure(StructureData referenceData, NPCClan owner, Vector3 location)
-    {
-        data = referenceData;
-        clan = owner;
-        position = location;
+        return data;
     }
 }

@@ -19,7 +19,7 @@ public class NPCSummary : MonoBehaviour
 		if(npc.clan == null)
 			Debug.Log(ui + " does not have a clan");
 		else
-			clanColor.color = npc.clan.GetColor();
+			clanColor.color = npc.clan.Color;
 		
 		npcName.text = npc.ToString();
 	}

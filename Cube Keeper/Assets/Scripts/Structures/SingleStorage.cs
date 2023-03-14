@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SingleStorage : StructureBehaviour, IInventory
+public class SingleStorage : Structure, IInventory
 {
 	[SerializeField] private ItemData storageType;
 	public ItemData StorageType
@@ -35,10 +35,19 @@ public class SingleStorage : StructureBehaviour, IInventory
 	private int maxStorage = 16;
 	private Inventory inventory;
 
-	private void Start()
+	private void Awake()
 	{
 		inventory = new Inventory();
+	}
+
+	private void Start()
+	{
 		StorageType = storageType;
+	}
+
+	public void SetMaxStorage(int max)
+	{
+		maxStorage = max;
 	}
 
 	public void Add(ItemData data)
@@ -64,9 +73,14 @@ public class SingleStorage : StructureBehaviour, IInventory
 			Destroy(gameObject);
 	}
 
-	public bool IsFull()
+	public int Total()
 	{
 		int inventorySize = 0;
+		if(inventory == null)
+		{
+			Debug.Log("inventory is null");
+			return 0;
+		}
 		foreach(Item item in inventory.items)
 		{
 			for(int i = 0; i < item.stackSize; i++)
@@ -74,7 +88,12 @@ public class SingleStorage : StructureBehaviour, IInventory
 				inventorySize++;
 			}
 		}
-		return inventorySize == maxStorage ? true : false;
+		return inventorySize;
+	}
+
+	public bool IsFull()
+	{
+		return Total() == maxStorage ? true : false;
 	}
 
 	private void UpdateStorageSpots()

@@ -5,47 +5,88 @@ using UnityEngine;
 public class NPCClan
 {
 	public ClanBehaviour behaviour;
+	public string ClanName {get; private set; }
+	public Color Color { get; private set; }
+	public Vector3 CenterPoint
+	{
+		get
+		{
+			Vector3 Totalposition = Vector3.zero;
+			foreach (NPC npc in Members)
+			{
+				Totalposition += npc.transform.position;
+			}
+
+			return Totalposition / Size;
+		}
+	}
+	public int Size
+	{
+		get
+		{
+			return Members.Count;
+		}
+	}
+	
+	public List<NPC> Members { get; private set; }
+	public List<NPCClan> Friends { get; private set; }
+	public List<NPCClan> Enemies { get; private set; }
+	public ClanBuilder builder { get; private set; }
+
+	private Dictionary<NPCClan, int> socialIndex;
 
 	private string id;
-	private Color color;
-	
-	private List<NPC> members = new List<NPC>();
-	private Dictionary<NPCClan, int> socialIndex = new Dictionary<NPCClan, int>();
-	private List<NPCClan> friends = new List<NPCClan>();
-	private List<NPCClan> enemies = new List<NPCClan>();
-
-	private ClanBuilder builder = new ClanBuilder();
 
 	public NPCClan()
 	{
-		id = "Clan " + Random.Range(0, 10000);
-		color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+		Assignments();
+		
 	}
 	public NPCClan(Color color)
 	{
-		id = "Clan " + Random.Range(0, 10000);
-		this.color = color;
+		Assignments();
+		Color = color;
 	}
-	public NPCClan(string id)
+	public NPCClan(string name)
 	{
-		this.id = id;
-		color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+		Assignments();
+		ClanName = name;
 
 	}
-	public NPCClan(string id, Color color)
+	public NPCClan(string name, Color color)
 	{
-		this.id = id;
-		this.color = color;
+		Assignments();
+		ClanName = name;
+		Color = color;
+	}
+	public NPCClan(ClanData referenceData)
+	{
+		id = referenceData.id;
+		ClanName = referenceData.clanName;
+		Color = referenceData.color;
+	}
+
+	private void Assignments()
+	{
+		id = Random.Range(0, 10000).ToString();
+		ClanName = "Clan " + id;
+		Color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+
+		Members = new List<NPC>();
+		Friends = new List<NPCClan>();
+		Enemies = new List<NPCClan>();
+		socialIndex = new Dictionary<NPCClan, int>();
+		builder = new ClanBuilder();
 	}
 
 	public void VerifyMembers()
 	{
-		foreach (NPC npc in members)
+		foreach (NPC npc in Members)
 		{
 			if(npc.clan != this)
 			{
 				//Eventually I need to send them to he proper clan...
-				members.Remove(npc);
+				Members.Remove(npc);
 				//npc.social.LeaveClan();
 			}
 		}
@@ -53,65 +94,21 @@ public class NPCClan
 
 	public void AddMember(NPC npc)
 	{
-		members.Add(npc);
+		//Debug.Log(ToString() + " Adding Memeber");
+		Members.Add(npc);
 	}
 
 	public void RemoveMember(NPC npc)
 	{
-		members.Remove(npc);
-		if(members.Count <= 0)
+		//Debug.Log(ToString() + " Removeing Memeber");
+		Members.Remove(npc);
+		if(Members.Count <= 0)
 			NPCManager.Instance.RemoveCLan(this);
-	}
-
-	public Color GetColor()
-	{
-		return color;
-	}
-
-	public Vector3 GetCenterPoint()
-	{
-		Vector3 Totalposition = Vector3.zero;
-		foreach (NPC npc in members)
-		{
-			Totalposition += npc.transform.position;
-		}
-
-		return Totalposition / GetClanSize();
-	}
-
-	public int GetClanSize()
-	{
-		return members.Count;
-	}
-
-	public int GetNumFriends()
-	{
-		return friends.Count;
-	}
-
-	public int GetNumEnemies()
-	{
-		return enemies.Count;
-	}
-
-	public List<NPC> GetMembers()
-	{
-		return members;
-	}
-
-	public List<NPCClan> GetFriends()
-	{
-		return friends;
-	}
-
-	public List<NPCClan> GetEnemies()
-	{
-		return enemies;
 	}
 
 	public bool IsFriend(NPCClan otherClan)
 	{
-		foreach(NPCClan clan in friends)
+		foreach(NPCClan clan in Friends)
 		{
 			if(clan == otherClan)
 				return true;
@@ -122,13 +119,23 @@ public class NPCClan
 
 	public bool IsEnemy(NPCClan otherClan)
 	{
-		foreach(NPCClan clan in enemies)
+		foreach(NPCClan clan in Enemies)
 		{
 			if(clan == otherClan)
 				return true;
 		}
 
 		return false;
+	}
+
+	public NPC GetRandomMemeber()
+	{
+		if(Members.Count <= 0)
+		{
+			Debug.Log(ToString() + " should not exist");
+			return null;
+		}
+		return Members[Random.Range(0, Members.Count)];
 	}
 
 	public void Notify(NPCClan clan, int socialPoints)
@@ -149,23 +156,23 @@ public class NPCClan
 			if(socialValue >= friendThreshold && !IsFriend(clan))
 			{
 				//Debug.Log(id + " is now friends with " + clan.ToString());
-				friends.Add(clan);
+				Friends.Add(clan);
 			}
 			else if(socialValue < friendThreshold && IsFriend(clan))
 			{
 				//Debug.Log(id + " had a falling out with " + clan.ToString());
-				friends.Remove(clan);
+				Friends.Remove(clan);
 			}
 
 			if(socialValue <= enemyThreshold && !IsEnemy(clan))
 			{
 				//Debug.Log(id + " went to war with " + clan.ToString());
-				enemies.Add(clan);
+				Enemies.Add(clan);
 			}
 			else if(socialValue > enemyThreshold && IsEnemy(clan))
 			{
 				//Debug.Log(id + " came to peace with " + clan.ToString());
-				enemies.Remove(clan);
+				Enemies.Remove(clan);
 			}
 		}
 		else
@@ -177,6 +184,6 @@ public class NPCClan
 
 	override public string ToString()
 	{
-		return id;
+		return ClanName;
 	}
 }

@@ -588,6 +588,7 @@ MonoBehaviour:
   - {fileID: 1227397566778982233}
   - {fileID: 8074232128178270741}
   - {fileID: 1625932794216363711}
+  data: {fileID: 11400000, guid: 58d7dad12d810d346a9474d1ab86f812, type: 2}
   storageType: {fileID: 0}
   storageSpots:
   - {fileID: 2491798125640135419}

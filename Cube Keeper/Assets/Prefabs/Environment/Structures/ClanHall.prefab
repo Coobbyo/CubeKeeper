@@ -61,6 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayMeshes:
   - {fileID: 1148676450489646510}
+  data: {fileID: 11400000, guid: d5a9edb80f5c9f54f8bc55cf50d8ff07, type: 2}
 --- !u!1 &2729613232477483875
 GameObject:
   m_ObjectHideFlags: 0

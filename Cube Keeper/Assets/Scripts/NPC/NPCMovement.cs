@@ -18,8 +18,8 @@ public class NPCMovement : MonoBehaviour
 	//[SerializeField] private Transform targetPoint;
 	private NavMeshAgent agent;
 
-	private Timer modeDelay = new Timer();
-	private Timer moveDelay = new Timer();
+	private Timer modeDelay;
+	private Timer moveDelay;
 
 	private void Awake()
 	{
@@ -29,8 +29,8 @@ public class NPCMovement : MonoBehaviour
 
 	private void Start()
 	{
-		modeDelay.Set(ChangeState, Random.Range(0f, 0.1f));
-		moveDelay.Set(FindNewDestination, Random.Range(0f, 0.1f));
+		modeDelay = new Timer(ChangeState, Random.Range(0f, 0.1f));
+		moveDelay = new Timer(FindNewDestination, Random.Range(0f, 0.1f));
 	}
 
 	private void Update()
@@ -72,9 +72,9 @@ public class NPCMovement : MonoBehaviour
 		Vector3 newDestination = transform.position;
 		NPCClan clan = npc.clan;
 		if(clan != null)
-			newDestination = clan.GetCenterPoint();
+			newDestination = clan.CenterPoint;
 
-		float moveRange = clan == null ? 10f : clan.GetClanSize() / 10 + 2;
+		float moveRange = clan == null ? 10f : clan.Size / 10 + 2;
 
 		newDestination += new Vector3(Random.Range(-moveRange, moveRange), 0f, Random.Range(-moveRange, moveRange));
 		agent.SetDestination(newDestination);

@@ -19,7 +19,7 @@ public class NPC : MonoBehaviour
 	public Inventory inventory { get; private set; }
 	public MeshRenderer colorDisplay;
 	
-	[SerializeField] private Material Clanless;
+	public static Material Clanless;
 
 	private string id;
 
@@ -49,9 +49,8 @@ public class NPC : MonoBehaviour
 
 	public void JoinClan(NPCClan clan)
 	{
-		//Debug.Log("Joining " + clan.ToString());
 		this.clan = clan;
-		colorDisplay.material.color = clan.GetColor();
+		colorDisplay.material.color = clan.Color;
 		clan.AddMember(this);
 		//if(NPCManager.Instance.GetClan(clan) == null)
 			//Debug.Log("it's clanGO");

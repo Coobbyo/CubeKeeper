@@ -8,15 +8,10 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private InputReader input;
 	[SerializeField] private GameObject pauseMenu;
 
-	private NPCManager npcManager;
-
-	private void Awake()
-	{
-		npcManager =  GetComponent<NPCManager>();
-	}
-
 	private void Start()
 	{
+		//TimeTickSystem.Create();
+
 		input.SpeedUpEvent += HandleSpeedUp;
 		input.SlowDownEvent += HandleSlowDown;
 		input.PauseEvent += HandlePause;

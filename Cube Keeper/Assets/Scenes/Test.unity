@@ -477,7 +477,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 86931706}
-  m_LocalRotation: {x: -0.018117845, y: -0.000000029802326, z: 0.000000011175872,
+  m_LocalRotation: {x: -0.018117853, y: 0.000000059604645, z: -0.000000037252903,
     w: 0.9998359}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -3298,8 +3298,8 @@ MonoBehaviour:
   list: []
   prefab: {fileID: 7122413884721471324, guid: 2b1f7d7e65fd08844a30705651a4b978, type: 3}
   radius: 5
-  spawnRate: 0.1
-  maxSpawns: 100
+  spawnRate: 3
+  maxSpawns: 50
 --- !u!4 &583894088
 Transform:
   m_ObjectHideFlags: 0
@@ -3308,7 +3308,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 583894086}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.5, y: 0, z: -35.1}
+  m_LocalPosition: {x: -25, y: 0, z: -25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5795,8 +5795,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   list: []
   prefab: {fileID: 6878813452987993785, guid: 01ff939eeda492e409bb05d43d44b0f4, type: 3}
-  radius: 1
-  spawnRate: 0.05
+  radius: 3
+  spawnRate: 2
   maxSpawns: 100
 --- !u!4 &1087043921
 Transform:
@@ -5806,7 +5806,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1087043919}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -34.5, y: 0, z: -20}
+  m_LocalPosition: {x: -25, y: 0, z: -25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6751,8 +6751,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1209239756}
-  m_LocalRotation: {x: 0.04175927, y: 0.9508203, z: -0.2691298, w: 0.14753313}
-  m_LocalPosition: {x: -6.7781935, y: 5, z: -5.3821187}
+  m_LocalRotation: {x: 0.15463209, y: -0.79206985, z: 0.22419545, w: 0.54630643}
+  m_LocalPosition: {x: -18.791431, y: 5, z: -29.068342}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7850,7 +7850,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1321765169}
-  m_LocalRotation: {x: -0, y: -0.000000029802322, z: 0.000000014901161, w: 1}
+  m_LocalRotation: {x: -0.000000037252903, y: 0.000000059604645, z: -0.000000037252903,
+    w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8080,7 +8081,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 315b9b4bb8fc6aa449da16f8034d3705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Structures: []
+  Structures:
+  - {fileID: 11400000, guid: 7cfeb3972eb21814cb73b583762f0132, type: 2}
+  - {fileID: 11400000, guid: 58d7dad12d810d346a9474d1ab86f812, type: 2}
+  - {fileID: 11400000, guid: d5a9edb80f5c9f54f8bc55cf50d8ff07, type: 2}
 --- !u!1 &1379029224
 GameObject:
   m_ObjectHideFlags: 0
@@ -8701,7 +8705,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1596290173}
-  m_LocalRotation: {x: 0.0181655, y: -0.000000029802326, z: 0.000000011175872, w: 0.999835}
+  m_LocalRotation: {x: 0.018165462, y: 0.000000059604645, z: -0.000000037252903, w: 0.9998351}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11276,7 +11280,7 @@ PrefabInstance:
     - target: {fileID: 4597290050985842723, guid: 6fdc721b38f527345b077093f1147267,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.96
+      value: -24.4
       objectReference: {fileID: 0}
     - target: {fileID: 4597290050985842723, guid: 6fdc721b38f527345b077093f1147267,
         type: 3}
@@ -11286,7 +11290,7 @@ PrefabInstance:
     - target: {fileID: 4597290050985842723, guid: 6fdc721b38f527345b077093f1147267,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11.1
+      value: -31.2
       objectReference: {fileID: 0}
     - target: {fileID: 4597290050985842723, guid: 6fdc721b38f527345b077093f1147267,
         type: 3}

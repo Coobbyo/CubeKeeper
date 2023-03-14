@@ -34,6 +34,7 @@ public class InputReader : ScriptableObject, PlayerInput.IPlayerActions, PlayerI
 		playerInput.UI.Enable();
 	}
 
+	//Instead of requireing an instance of the InputReader, couldn't I make these events static?
 	public event Action<Vector2> MoveEvent;
 
 	public event Action JumpEvent;

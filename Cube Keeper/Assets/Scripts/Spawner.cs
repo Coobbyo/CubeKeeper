@@ -13,11 +13,11 @@ public class Spawner : MonoBehaviour
 
 	private float oddsToSpawn = 1f;
 
-	private Timer spawnTimer = new Timer();
+	private Timer spawnTimer;
 
 	private void Start()
 	{
-		spawnTimer.Set(Spawn, spawnRate);
+		spawnTimer = new Timer(Spawn, spawnRate);
 	}
 
 	private void Update()

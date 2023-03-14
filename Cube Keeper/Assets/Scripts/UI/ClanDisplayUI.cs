@@ -21,13 +21,13 @@ public class ClanDisplayUI : MonoBehaviour
     private void OnEnable()
     {
         clanName.text = clan.ToString();
-        clanSize.text = clan.GetClanSize().ToString();
-        numFriends.text = clan.GetNumFriends().ToString();
-        numEnemies.text = clan.GetNumEnemies().ToString();
+        clanSize.text = clan.Size.ToString();
+        numFriends.text = clan.Friends.Count.ToString();
+        numEnemies.text = clan.Enemies.Count.ToString();
 
-        memberList.Propigate(clan.GetMembers());
-        friendList.Propigate(clan.GetFriends());
-        enemyList.Propigate(clan.GetEnemies());
+        memberList.Propigate(clan.Members);
+        friendList.Propigate(clan.Friends);
+        enemyList.Propigate(clan.Enemies);
     }
 
     public void SetClan(NPCClan clan)

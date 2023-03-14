@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MultiStorage : StructureBehaviour, IInventory
+public class MultiStorage : Structure, IInventory
 {
 	//TODO: change this to be a parent object that dynamicaly creates spots at runtime
 	[SerializeField] private List<Transform> storageSpots;

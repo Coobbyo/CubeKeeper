@@ -21,8 +21,8 @@ public class NPCWorker : MonoBehaviour
 	private int loadCapacity = 1;
 	private Inventory inventory { get { return npc.inventory; } }
 
-	private Timer findDelay = new Timer();
-	private Timer workDelay = new Timer();
+	private Timer findDelay;
+	private Timer workDelay;
 
 	private void Awake()
 	{
@@ -31,8 +31,8 @@ public class NPCWorker : MonoBehaviour
 
 	private void Start()
 	{
-		findDelay.Set(FindWork, Random.Range(0f, 5f));
-		workDelay.Set(DoWork, Random.Range(0f, 1f));
+		findDelay = new Timer(FindWork, Random.Range(0f, 5f));
+		workDelay = new Timer(DoWork, Random.Range(0f, 1f));
 	}
 
 	private void Update()
@@ -184,6 +184,11 @@ public class NPCWorker : MonoBehaviour
 
 		if(inv.GetItem() == null)
 		{
+			if(targetFrom == null)
+			{
+				Debug.Log("Target From is null");
+				return;
+			}
 			inv.Add(targetFrom.GetComponent<IInventory>().GetItem());
 		}
 		else

@@ -3,39 +3,39 @@ using UnityEngine;
 
 public class Timer
 {
-	public float delay = 0f;
-	public float time;
+	private event Action OnComplete;
 
-	private event Action OnCompleteEvent;
+	private float delay;
+	private float time;
+	private bool loop; 
+
+	private bool isDestroyed;
+
+	public Timer(Action action, float timer = 1f, bool doLoop = true)
+	{
+		OnComplete = action;
+		this.delay = timer;
+		loop = doLoop;
+		isDestroyed = false;
+		Restart();
+	}
 
 	public void Decrement()
 	{
-		if(delay == 0f)
+		if(delay == 0f || isDestroyed)
 			return;
 		
 		if(time > 0f)
 			time -= Time.deltaTime;
  
 		if(time <= 0f)
-			OnComplete();
-	}
-
-	public void Set(Action onComplete, float delay = 1f)
-	{
-		OnCompleteEvent += onComplete;
-		this.delay = delay;
-		Restart();
-	}
-
-	public void Stop()
-	{
-		delay = 0;
-	}
-
-	public void Reset()
-	{
-		OnCompleteEvent = null;
-		Stop();
+		{
+			OnComplete?.Invoke();
+			if(loop)
+				Restart();
+			else
+				DestroySlef();
+		}
 	}
 
 	public void Restart(float delay)
@@ -49,9 +49,8 @@ public class Timer
 		time += delay;
 	}
 
-	private void OnComplete()
+	private void DestroySlef()
 	{
-		OnCompleteEvent?.Invoke();
-		Restart();
+		isDestroyed = true;
 	}
 }

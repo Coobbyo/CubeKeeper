@@ -38,7 +38,7 @@ public class NPCSocialBehaviour : MonoBehaviour
 		set { npc.stats.Loyalty = value; }
 	}
 
-	private Timer socialDelay = new Timer();
+	private Timer socialDelay;
 
 	private void Awake()
 	{
@@ -50,7 +50,7 @@ public class NPCSocialBehaviour : MonoBehaviour
 		friendliness = npc.stats.Friendliness;
 		loyalty = npc.stats.Loyalty;
 		aggression = npc.stats.Aggression;
-		socialDelay.Set(Socialize, Random.Range(0f, 10f - friendliness.GetValue()));
+		socialDelay = new Timer(Socialize, Random.Range(0f, 10f - friendliness.GetValue()));
 	}
 
 	private void Update()
