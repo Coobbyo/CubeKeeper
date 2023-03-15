@@ -48,4 +48,11 @@ public class RawResource : MonoBehaviour, IInventory
 	{
 		return resourceType;
 	}
+
+	public List<ItemData> GetItems()
+	{
+		var items = new List<ItemData>();
+		items.Add(resourceType);
+		return items;
+	}
 }

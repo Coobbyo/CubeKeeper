@@ -7,8 +7,8 @@ using UnityEngine;
 public class BuildSite : Structure, IInventory
 {
 	public StructureData structureToBuild;
-	[SerializeField] private SingleStorage stoneStorage;
-	[SerializeField] private SingleStorage woodStorage;
+	[SerializeField] private Storage stoneStorage;
+	[SerializeField] private Storage woodStorage;
 
 	private Inventory inventory;
 
@@ -27,6 +27,10 @@ public class BuildSite : Structure, IInventory
 
 		stoneStorage.SetMaxStorage(structureToBuild.resourceAmounts[0]);
 		woodStorage.SetMaxStorage(structureToBuild.resourceAmounts[1]);
+
+		stoneStorage.OnFull += CheckResources;
+		woodStorage.OnFull += CheckResources;
+
 		CheckResources();
 	}
 
@@ -53,11 +57,20 @@ public class BuildSite : Structure, IInventory
 	public ItemData GetItem()
 	{
 		Debug.Log("what do I do here?");
+		CheckResources();
+		return null;
+	}
+
+	public List<ItemData> GetItems()
+	{
+		Debug.Log("what do I do here?");
+		CheckResources();
 		return null;
 	}
 
 	public bool IsFull()
 	{
+		CheckResources();
 		if(stoneStorage.IsFull() && woodStorage.IsFull())
 			return true;
 
@@ -78,7 +91,4 @@ public class BuildSite : Structure, IInventory
 	{
 		Clan.builder.RemoveStructure(this);
 	}
-
-	//private void UpdateStorageSpots()
-	//{}
 }

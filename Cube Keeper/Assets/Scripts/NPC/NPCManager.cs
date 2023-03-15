@@ -44,7 +44,8 @@ public class NPCManager : MonoBehaviour
 		Transform npcGO = Instantiate(npcPrefab, spawnPoint, Quaternion.identity, this.transform);
 		
 		NPC newNPC = npcGO.GetComponent<NPC>();
-		newNPC.JoinClan(CreateClan(premadeClans[Random.Range(0, premadeClans.Length)]));
+		NPCClan newClan = CreateClan(premadeClans[Random.Range(0, premadeClans.Length)]);
+		newNPC.JoinClan(newClan);
 
 		unclaimedNPCs.Add(newNPC);
 		return newNPC;
@@ -73,6 +74,12 @@ public class NPCManager : MonoBehaviour
 
 	public NPCClan CreateClan(ClanData referenceData)
 	{
+		foreach(NPCClan npcClan in clans)
+		{
+			if(npcClan.ClanName == referenceData.clanName)
+				return npcClan;
+		}
+
 		Transform clanGO = Instantiate(clanPrefab, transform);
 		ClanBehaviour clan = clanGO.GetComponent<ClanBehaviour>();
 		clan.Clan = new NPCClan(referenceData);

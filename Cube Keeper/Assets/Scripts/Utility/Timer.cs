@@ -3,54 +3,54 @@ using UnityEngine;
 
 public class Timer
 {
+	public bool ShowLogs;
 	private event Action OnComplete;
 
 	private float delay;
 	private float time;
-	private bool loop; 
 
 	private bool isDestroyed;
 
-	public Timer(Action action, float timer = 1f, bool doLoop = true)
+	public Timer(Action action, float timer = 1f)
 	{
 		OnComplete = action;
 		this.delay = timer;
-		loop = doLoop;
 		isDestroyed = false;
 		Restart();
 	}
 
 	public void Decrement()
 	{
-		if(delay == 0f || isDestroyed)
+		if(isDestroyed)
 			return;
 		
-		if(time > 0f)
-			time -= Time.deltaTime;
+		time -= Time.deltaTime;
  
 		if(time <= 0f)
 		{
+			DestroySlef();
 			OnComplete?.Invoke();
-			if(loop)
-				Restart();
-			else
-				DestroySlef();
 		}
 	}
 
 	public void Restart(float delay)
 	{
 		this.delay = delay;
-		time += delay;
+		Restart();
 	}
 
 	public void Restart()
 	{
+		if(ShowLogs)
+			Debug.Log("Restarting Timer");
+		isDestroyed = false;
 		time += delay;
 	}
 
 	private void DestroySlef()
 	{
+		if(ShowLogs)
+			Debug.Log("Timer Destroied");
 		isDestroyed = true;
 	}
 }

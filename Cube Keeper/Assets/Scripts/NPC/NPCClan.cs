@@ -61,6 +61,7 @@ public class NPCClan
 	}
 	public NPCClan(ClanData referenceData)
 	{
+		Assignments();
 		id = referenceData.id;
 		ClanName = referenceData.clanName;
 		Color = referenceData.color;

@@ -47,7 +47,7 @@ public class ClanBehaviour : MonoBehaviour
 		List<Structure> storages = clan.builder.GetStructures(BuildManager.Build.Storage);
 		foreach (Structure storageStruct in storages)
 		{
-			SingleStorage storage = storageStruct.gameObject.GetComponent<SingleStorage>();
+			Storage storage = storageStruct.gameObject.GetComponent<Storage>();
 			if(storage == null)
 			{
 				//Only reason it should be null is if it is a build site

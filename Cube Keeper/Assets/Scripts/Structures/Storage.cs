@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SingleStorage : Structure, IInventory
+public class Storage : Structure, IInventory
 {
 	[SerializeField] private ItemData storageType;
 	public ItemData StorageType
@@ -29,6 +29,7 @@ public class SingleStorage : Structure, IInventory
 		}
 	}
 
+	public event System.Action OnFull;
 	//TODO: change this to be a parent object that dynamicaly creates spots at runtime
 	[SerializeField] private List<Transform> storageSpots;
 
@@ -62,6 +63,7 @@ public class SingleStorage : Structure, IInventory
 
 		inventory.Add(data);
 		UpdateStorageSpots();
+		IsFull();
 	}
 
 	public void Remove(ItemData data)
@@ -93,7 +95,25 @@ public class SingleStorage : Structure, IInventory
 
 	public bool IsFull()
 	{
-		return Total() == maxStorage ? true : false;
+		if(Total() == maxStorage)
+		{
+			OnFull?.Invoke();
+			return true;
+		} else
+		{
+			return false;
+		}
+	}
+
+	public bool IsHalfFull()
+	{
+		if(Total() >= maxStorage * 0.5f)
+		{
+			return true;
+		} else
+		{
+			return false;
+		}
 	}
 
 	private void UpdateStorageSpots()
@@ -114,6 +134,13 @@ public class SingleStorage : Structure, IInventory
 
 	public ItemData GetItem()
 	{
-		return StorageType;
+		return storageType;
+	}
+
+	public List<ItemData> GetItems()
+	{
+		var items = new List<ItemData>();
+		items.Add(storageType);
+		return items;
 	}
 }
