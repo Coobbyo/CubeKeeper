@@ -139,6 +139,9 @@ public class Storage : Structure, IInventory
 
 	public List<ItemData> GetItems()
 	{
+		if(storageType == null)
+			return null;
+		
 		var items = new List<ItemData>();
 		items.Add(storageType);
 		return items;

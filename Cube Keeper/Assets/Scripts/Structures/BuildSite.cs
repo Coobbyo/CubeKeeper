@@ -26,10 +26,12 @@ public class BuildSite : Structure, IInventory
 		}
 
 		stoneStorage.SetMaxStorage(structureToBuild.resourceAmounts[0]);
-		woodStorage.SetMaxStorage(structureToBuild.resourceAmounts[1]);
-
 		stoneStorage.OnFull += CheckResources;
+		stoneStorage.Clan = Clan;
+
+		woodStorage.SetMaxStorage(structureToBuild.resourceAmounts[1]);
 		woodStorage.OnFull += CheckResources;
+		woodStorage.Clan = Clan;
 
 		CheckResources();
 	}

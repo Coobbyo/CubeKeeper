@@ -63,7 +63,7 @@ public class NPCWorker : MonoBehaviour
 			currentTarget = targetFrom;
 			npc.state = NPC.State.Work;
 			workDelay.Restart(Random.Range(0, 1f));
-			Debug.Log("State Changed to work");
+			//Debug.Log("State Changed to work");
 		}
 
 		findDelay.Restart(Random.Range(0f, 5f));
@@ -71,47 +71,48 @@ public class NPCWorker : MonoBehaviour
 
 	public void FindFromTarget()
 	{
+		//Debug.Log("Finding From");
+
 		RawResource resource = FindResource();
 		if(resource != null)
 		{
 			targetFrom = resource.transform;
-			Debug.Log("TargetFrom found");
+			//Debug.Log("TargetFrom found (Resource)");
 			return;
 		}
 
-		Debug.Log("Finding From");
 		Storage storage = FindStorage();
 		if(storage != null)
 		{
-			Debug.Log("From Storage not null!");
 			if(storage.Clan == npc.clan && storage.IsHalfFull())
 			{
 				targetFrom = storage.transform;
-				Debug.Log("TargetFrom found");
+				//Debug.Log("TargetFrom found (Storage)");
 				if(targetFrom != targetTo)
 					return;
 			}
 		}
 
-		Debug.Log("No from target found");
+		//Debug.Log("No from target found");
 	}
 
 	public void FindToTarget()
 	{
-		Debug.Log("Finding To");
+		//Debug.Log("Finding To");
+
 		Storage storage = FindStorage();
 		if(storage != null)
 		{
-			Debug.Log("To Storage not null!");
+			//Debug.Log("To Storage not null!");
 			if(storage.Clan == npc.clan && !storage.IsFull())
 			{
 				targetTo = storage.transform;
-				Debug.Log("TargetTo Found");
+				//Debug.Log("TargetTo Found");
 				return;
 			}
 		}
 
-		Debug.Log("No To target found");
+		//Debug.Log("No To target found");
 	}
 
 	public RawResource FindResource()
@@ -180,7 +181,7 @@ public class NPCWorker : MonoBehaviour
 				currentTarget = targetTo;
 			else
 			{
-				Debug.Log("Roaming From");
+				//Debug.Log("Roaming From"); //This one keeps happening
 				npc.state = NPC.State.Roam;
 				return;
 			}
@@ -188,7 +189,7 @@ public class NPCWorker : MonoBehaviour
 		
 		if(targetTo == null)
 		{
-			Debug.Log("Roaming To");
+			//Debug.Log("Roaming To");
 			npc.state = NPC.State.Roam;
 			return;
 		}
@@ -248,7 +249,7 @@ public class NPCWorker : MonoBehaviour
 		{
 			if(targetFrom == null)
 			{
-				Debug.Log("Target From is null");
+				//Debug.Log("Target From is null");
 				return;
 			}
 			inv.Add(targetFrom.GetComponent<IInventory>().GetItem());
@@ -287,25 +288,26 @@ public class NPCWorker : MonoBehaviour
 
 		if(targetFrom == targetTo)
 		{
-			Debug.Log("Nulling From");
+			//Debug.Log("Nulling From");
 			targetFrom = null;
+			return;
 		}
 
 		IInventory invFrom = targetFrom.GetComponent<IInventory>();
 		IInventory invTo = targetTo.GetComponent<IInventory>();
 
-		if(invTo.GetItems() == null)
+		if(invTo.GetItem() == null)
 			return;
 
 		if(carryPoint.childCount > 0) //This is checking the item we are carying
 		{
 			if(inventory.items.Count == 0)
-				Debug.LogError("Are we carrying something with an empty inventory?");
+				//Debug.LogError("Are we carrying something with an empty inventory?");
 			
 			//Is the item we have the same as where we are withdrawing?
 			if(inventory.Get(invFrom.GetItem()) == null)
 			{
-				Debug.Log("Nulling From");
+				//Debug.Log("Nulling From");
 				targetFrom = null;
 			}
 
@@ -318,7 +320,7 @@ public class NPCWorker : MonoBehaviour
 
 		if(invFrom.GetItem() != invTo.GetItem())
 		{
-			Debug.Log("Nulling From");
+			//Debug.Log("Nulling From"); //This one keeps happening
 			targetFrom = null;
 		}
 
