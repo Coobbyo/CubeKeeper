@@ -327,7 +327,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 86931706}
-  m_LocalRotation: {x: -0.018117875, y: 0.000000007414201, z: -0.0000000043783075,
+  m_LocalRotation: {x: -0.018117875, y: -0.000000007401468, z: 0.000000004372396,
     w: 0.9998359}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -1622,8 +1622,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1087043921}
-  - {fileID: 1976792568}
   - {fileID: 583894088}
+  - {fileID: 1976792568}
   - {fileID: 1376495185}
   m_Father: {fileID: 1722484104}
   m_RootOrder: 3
@@ -2673,8 +2673,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   list: []
   prefab: {fileID: 7122413884721471324, guid: 2b1f7d7e65fd08844a30705651a4b978, type: 3}
-  radius: 5
-  spawnRate: 3
+  radius: 3
+  proximity: 0.5
+  spawnRate: 0.1
   maxSpawns: 50
 --- !u!4 &583894088
 Transform:
@@ -2689,7 +2690,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 431094629}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &645631846
 GameObject:
@@ -4271,8 +4272,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   list: []
   prefab: {fileID: 6878813452987993785, guid: 01ff939eeda492e409bb05d43d44b0f4, type: 3}
-  radius: 3
-  spawnRate: 2
+  radius: 5
+  proximity: 0.25
+  spawnRate: 0.1
   maxSpawns: 100
 --- !u!4 &1087043921
 Transform:
@@ -5992,9 +5994,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   list: []
   prefab: {fileID: 7122413884721471324, guid: 2b1f7d7e65fd08844a30705651a4b978, type: 3}
-  radius: 10
-  spawnRate: 3
-  maxSpawns: 50
+  radius: 15
+  proximity: 0.5
+  spawnRate: 15
+  maxSpawns: 100
 --- !u!1 &1379029224
 GameObject:
   m_ObjectHideFlags: 0
@@ -6517,7 +6520,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1596290173}
-  m_LocalRotation: {x: 0.018165408, y: -0.000000026961057, z: 0.00000001727585, w: 0.999835}
+  m_LocalRotation: {x: 0.01816544, y: 0.0000000098698365, z: -0.000000006324626, w: 0.9998351}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8164,7 +8167,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 431094629}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1976792569
 MonoBehaviour:
@@ -8180,8 +8183,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   list: []
   prefab: {fileID: 6878813452987993785, guid: 01ff939eeda492e409bb05d43d44b0f4, type: 3}
-  radius: 10
-  spawnRate: 2
+  radius: 15
+  proximity: 0.25
+  spawnRate: 10
   maxSpawns: 100
 --- !u!1 &1987621526
 GameObject:

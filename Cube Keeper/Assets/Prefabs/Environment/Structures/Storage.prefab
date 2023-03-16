@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3115569879114356946}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StorageSpot (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 789157503065587867}
   - component: {fileID: 3187657540504492547}
   - component: {fileID: 8074232128178270741}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BottomLeftCorner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7458752876265064650}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StorageSpot (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 665575268848380138}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StorageSpot (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +185,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6087016940643697214}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StorageSpot (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 177327684713794500}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StorageSpot (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,7 +247,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6178603203785536906}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StorageSpot (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,7 +278,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2491798125640135419}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StorageSpot (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -309,7 +309,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2486785162498669878}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StorageSpot (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -340,7 +340,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1592996665187346944}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StorageSpot (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -371,7 +371,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9214619334892639565}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StorageSpot (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -402,7 +402,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5309406884207797736}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StorageSpots
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -451,7 +451,7 @@ GameObject:
   - component: {fileID: 8797634547908904890}
   - component: {fileID: 3625226315001377020}
   - component: {fileID: 1227397566778982233}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TopRightCorner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -534,7 +534,7 @@ GameObject:
   - component: {fileID: 5188441648718012005}
   - component: {fileID: 9219334429632196859}
   - component: {fileID: 5767009896668093770}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Storage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -618,7 +618,7 @@ GameObject:
   - component: {fileID: 8030945867501270154}
   - component: {fileID: 3797219025883512174}
   - component: {fileID: 1625932794216363711}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BottomRightCorner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -699,7 +699,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 60707735655824489}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -734,7 +734,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8612091335763815913}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StorageSpot (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -765,7 +765,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3162921083046560466}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StorageSpot (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -796,7 +796,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4629248014488033037}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StorageSpot (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -829,7 +829,7 @@ GameObject:
   - component: {fileID: 8467771703219137193}
   - component: {fileID: 6605868057252457487}
   - component: {fileID: 4629867737593601262}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TopLeftCorner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -910,7 +910,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1476388504989255584}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StorageSpot (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -941,7 +941,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 656316247193474315}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StorageSpot (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -972,7 +972,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4923465577337985068}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StorageSpot (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -25,6 +25,19 @@ public class BuildManager : MonoBehaviour
 
 	public void RequestBuild(Build build, Vector3 position, NPCClan clan)
 	{
+		float radius = 3f;
+		LayerMask mask = new LayerMask();
+		mask |= (1 << LayerMask.NameToLayer("Spawnable"));
+		Collider[] colliders = Physics.OverlapSphere(position, radius, mask);
+		if(colliders.Length > 0)
+		{
+			Vector3 point = new Vector3(Random.insideUnitCircle.x, 0, Random.insideUnitCircle.y);
+			Vector3 newPoint = transform.position + point * radius * 10;
+			colliders = Physics.OverlapSphere(position, radius, mask);
+			if(colliders.Length > 0)
+				return;
+		}
+
 		GameObject buildSiteGO = Instantiate(GetStructure(0).prefab, position, Quaternion.identity, this.transform);
 		BuildSite newBuildSite = buildSiteGO.GetComponent<BuildSite>();
 

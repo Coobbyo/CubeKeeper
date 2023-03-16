@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6236111095072600889}
   - component: {fileID: 6047709852401114019}
   - component: {fileID: 8085848725425876282}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 8517222378850699155}
   - component: {fileID: 7702825468244300200}
   - component: {fileID: 4282545325472821892}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8014562895674545173}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 132141880401795623}
   - component: {fileID: 2464343175733820831}
   - component: {fileID: 2841407589000350611}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StoneResource
   m_TagString: Untagged
   m_Icon: {fileID: 0}

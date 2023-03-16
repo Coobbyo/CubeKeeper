@@ -7,7 +7,7 @@ public class Spawner : MonoBehaviour
 	public List<Transform> list = new List<Transform>();
 	[SerializeField] private GameObject prefab;
 	[SerializeField] private float radius;
-	//[SerializeField] private float proximity; //How close can things spawn to eachother
+	[SerializeField] private float proximity; //How close can things spawn to eachother
 	[SerializeField] private float spawnRate; //in seconds
 	[SerializeField] private int maxSpawns;
 
@@ -27,7 +27,7 @@ public class Spawner : MonoBehaviour
 	}
 
 	private void Spawn()
-	{
+	{	
 		//TODO: Eventually this needs to be coverted into object pooling
 
 		if(Random.value > 1 / oddsToSpawn)
@@ -39,9 +39,15 @@ public class Spawner : MonoBehaviour
 
 		//This code doesn't work right now, cause I probably need a layer mask or something?
 		//Could also make an ISpawnable interface? maybe subscribe to an OnDestroy event?
-		//Collider[] colliderArray = Physics.OverlapSphere(spawnPoint, proximity);
-		//if(colliderArray.Length > 0)
-			//return;
+		LayerMask mask = new LayerMask();
+		mask |= (1 << LayerMask.NameToLayer("Spawnable"));
+		Collider[] colliders = Physics.OverlapSphere(spawnPoint, proximity, mask);
+		if(colliders.Length > 0)
+		{
+			//Debug.Log("No spawning");
+			spawnTimer.Restart();
+			return;
+		}
 
 		Quaternion spawnRotation = Quaternion.identity;
 

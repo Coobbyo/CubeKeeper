@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3645328237278462252}
   - component: {fileID: 7866442547964643128}
   - component: {fileID: 3572485176549889320}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Leaves
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6306961864808083032}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 7639391039082729618}
   - component: {fileID: 4640668099654899677}
   - component: {fileID: 7939207932625643098}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Trunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 909839422449428694}
   - component: {fileID: 6879471459332659059}
   - component: {fileID: 6668028479533838052}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TreeResource
   m_TagString: Untagged
   m_Icon: {fileID: 0}

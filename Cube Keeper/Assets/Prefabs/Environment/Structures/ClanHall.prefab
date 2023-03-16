@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1680359756790418651}
   - component: {fileID: 8965607076358554536}
   - component: {fileID: 1469265889088690780}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ClanHall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 8752491199450481606}
   - component: {fileID: 2554831799499143002}
   - component: {fileID: 1148676450489646510}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 6838512738658498973}
   - component: {fileID: 7389729202903335687}
   - component: {fileID: 6438208091895280449}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tower (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 3317581670837836810}
   - component: {fileID: 6869322463205117493}
   - component: {fileID: 8021882263380471814}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tower (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -320,7 +320,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2181938552150985712}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -358,7 +358,7 @@ GameObject:
   - component: {fileID: 6375078191123064930}
   - component: {fileID: 8298884616545814465}
   - component: {fileID: 9210527893097660465}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -441,7 +441,7 @@ GameObject:
   - component: {fileID: 8208934824898748126}
   - component: {fileID: 967017381747150838}
   - component: {fileID: 4907501063488986820}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tower (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
