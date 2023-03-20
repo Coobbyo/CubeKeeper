@@ -5996,7 +5996,7 @@ MonoBehaviour:
   prefab: {fileID: 7122413884721471324, guid: 2b1f7d7e65fd08844a30705651a4b978, type: 3}
   radius: 15
   proximity: 0.5
-  spawnRate: 15
+  spawnRate: 7.5
   maxSpawns: 100
 --- !u!1 &1379029224
 GameObject:
@@ -8185,7 +8185,7 @@ MonoBehaviour:
   prefab: {fileID: 6878813452987993785, guid: 01ff939eeda492e409bb05d43d44b0f4, type: 3}
   radius: 15
   proximity: 0.25
-  spawnRate: 10
+  spawnRate: 5
   maxSpawns: 100
 --- !u!1 &1987621526
 GameObject:

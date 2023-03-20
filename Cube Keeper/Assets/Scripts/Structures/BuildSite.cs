@@ -19,6 +19,7 @@ public class BuildSite : Structure, IInventory
 
 	private void Start()
 	{
+		//Debug.Log("BuildSite Start() " + structureToBuild.displayName);
 		if(structureToBuild == null)
 		{
 			Debug.Log("There is nothing to build here");

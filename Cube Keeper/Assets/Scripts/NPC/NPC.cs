@@ -42,7 +42,7 @@ public class NPC : MonoBehaviour
 	private void Start()
 	{
 		id = "NPC " + Random.Range(0, 10000);
-		interactRange = 1f;
+		interactRange = 3f;
 		inventory = new Inventory();
 		stats.OnHealthReachedZero += Die;
 	}

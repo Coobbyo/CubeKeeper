@@ -167,6 +167,8 @@ public class NPCWorker : MonoBehaviour
 				//Debug.Log("Clan storage is either null or empty");
 				return null;
 			}
+
+			
 				
 			Storage foundStorage = clanStorage[Random.Range(0, clanStorage.Count)].GetComponent<Storage>();
 			return foundStorage;

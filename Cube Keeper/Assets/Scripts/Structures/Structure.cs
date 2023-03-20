@@ -22,7 +22,14 @@ public class Structure : MonoBehaviour
     }
 
     [SerializeField] private MeshRenderer[] displayMeshes;
-    [SerializeField] private StructureData data;
+    [SerializeField] protected StructureData data;
+
+    private void OnDestroy()
+	{
+		//Debug.Log("Structure Destroied from: " + Clan.ToString());
+
+        Clan.builder.RemoveStructure(this);
+	}
 
     public StructureData GetData()
     {
