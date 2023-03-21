@@ -7,7 +7,7 @@ public class Inventory
 {
 	//public int Total;
 	private Dictionary<ItemData, Item> dataToItem;
-	public List<Item> items;// { get; private set; }
+	public List<Item> items { get; private set; }
 
 	public event System.Action OnItemChanged;
 
@@ -16,18 +16,26 @@ public class Inventory
 		items = new List<Item>();
 		dataToItem = new Dictionary<ItemData, Item>();
 	}
-	public Inventory(ItemData referenceData, int amount = 0)
+	public Inventory(List<Item> items)
 	{
-		items = new List<Item>();
+		this.items = new List<Item>();
 		dataToItem = new Dictionary<ItemData, Item>();
-		Add(referenceData, amount);
+		foreach(Item item in items)
+		{
+			Add(item);
+		}
 	}
 	public Inventory(Inventory inventory)
 	{
 		dataToItem = inventory.dataToItem;
 		items = inventory.items;
 	}
-
+	
+	public void Add(Item item)
+	{
+		Add(item.Data, item.StackSize);
+	}
+	
 	public void Add(ItemData referenceData, int amount)
 	{
 		for (int i = 0; i < amount; i++)
@@ -57,6 +65,11 @@ public class Inventory
 
 		//Total++;
 		OnItemChanged?.Invoke();
+	}
+
+	public void Remove(Item item)
+	{
+		Remove(item.Data, item.StackSize);
 	}
 
 	public void Remove(ItemData referenceData, int amount)

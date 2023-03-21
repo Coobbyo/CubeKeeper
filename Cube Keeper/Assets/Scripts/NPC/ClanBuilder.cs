@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ClanBuilder
 {
+	public ClanHall hall;
 	private NPCClan clan;
 	private List<Structure> structures = new List<Structure>();
 
@@ -22,7 +23,7 @@ public class ClanBuilder
 		if(NeedClanHall())
 			return BuildManager.Instance.GetStructure(BuildManager.Build.ClanHall);
 		
-		if(NeedStorage())
+		if(NeedStorage()) //This should stay at the bottom as the last thing to be built
 			return BuildManager.Instance.GetStructure(BuildManager.Build.Storage);
 
 		return null;
@@ -69,6 +70,10 @@ public class ClanBuilder
 
 	private bool NeedStorage()
 	{
+		List<Item> resourceDeficit = clan.behaviour.ResourceDeficit();
+		if(resourceDeficit == null || resourceDeficit.Count <= 0)
+			return true;
+
 		bool storageNeeded = true;
 		List<Structure> storages = GetStructures(BuildManager.Build.Storage);
 		foreach (Structure storageStruct in storages)
@@ -91,8 +96,11 @@ public class ClanBuilder
 
 	private bool NeedClanHall()
 	{
+		if(hall != null)
+			return false;
+		
 		List<Structure> halls = GetStructures(BuildManager.Build.ClanHall);
-		foreach(Structure hall in halls)
+		foreach(Structure clanHall in halls)
 		{
 			return false;
 		}

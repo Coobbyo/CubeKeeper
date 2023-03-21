@@ -175,12 +175,12 @@ public class Storage : Structure, IInventory
 		}
 	}
 
-	public ItemData GetItem()
+	public ItemData GetResource()
 	{
 		return storageType;
 	}
 
-	public List<ItemData> GetItems()
+	public List<ItemData> GetResources()
 	{
 		if(storageType == null)
 			return null;
@@ -188,5 +188,10 @@ public class Storage : Structure, IInventory
 		var items = new List<ItemData>();
 		items.Add(storageType);
 		return items;
+	}
+
+	public List<Item> GetItems()
+	{
+		return inventory.items;
 	}
 }

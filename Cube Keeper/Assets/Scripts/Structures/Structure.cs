@@ -14,7 +14,7 @@ public class Structure : MonoBehaviour
 			foreach (MeshRenderer mesh in displayMeshes)
 			{
 				if(clan == null)
-					mesh.material.color = NPC.Clanless.color;
+					mesh.material.color = NPCManager.Instance.Clanless.color;
 				else
 					mesh.material.color = clan.Color;
 			}
@@ -24,7 +24,7 @@ public class Structure : MonoBehaviour
 	[SerializeField] private MeshRenderer[] displayMeshes;
 	[SerializeField] protected StructureData data;
 
-	private void OnDestroy()
+	virtual public void OnDestroy()
 	{
 		//Debug.Log(name + " Destroied from: " + Clan.ToString());
 		Clan.builder.RemoveStructure(this);

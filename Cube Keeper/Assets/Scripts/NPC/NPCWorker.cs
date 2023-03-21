@@ -52,6 +52,9 @@ public class NPCWorker : MonoBehaviour
 
 	private void FindWork()
 	{
+		if(npc.clan == null)
+			return;
+
 		if(targetFrom == null)
 			FindFromTarget();
 		if(targetTo == null)
@@ -218,10 +221,11 @@ public class NPCWorker : MonoBehaviour
 		}
 		
 		IInventory inv = targetFrom.GetComponent<IInventory>();
-		inv.Remove(inv.GetItems()[0]);
-		inventory.Add(inv.GetItems()[0]);
+		ItemData resource = inv.GetResource();
+		inv.Remove(resource);
+		inventory.Add(resource);
 
-		Instantiate(inv.GetItems()[0].prefab, carryPoint);
+		Instantiate(resource.prefab, carryPoint);
 	}
 
 	public void Deposit()
@@ -247,21 +251,21 @@ public class NPCWorker : MonoBehaviour
 		}
 
 		//If it doesn't have a specified item we shoud make it the same as where we are pulling from
-		if(inv.GetItem() == null)
+		if(inv.GetResource() == null)
 		{
 			if(targetFrom == null)
 			{
 				//Debug.Log("Target From is null");
 				return;
 			}
-			inv.Add(targetFrom.GetComponent<IInventory>().GetItem());
+			inv.Add(targetFrom.GetComponent<IInventory>().GetResource());
 		}
 		else
 		{
-			inv.Add(inv.GetItem());
+			inv.Add(inv.GetResource());
 		}
 
-		inventory.Remove(inv.GetItem());
+		inventory.Remove(inv.GetResource());
 
 		foreach (Transform child in carryPoint)
 		{
@@ -282,7 +286,6 @@ public class NPCWorker : MonoBehaviour
 		return inventorySize >= loadCapacity ? true : false;
 	}
 
-	//I think this code is mostly redundant, but maybe could be useful?
 	private void VerifyTargets()
 	{
 		if(targetFrom == null || targetTo == null)
@@ -298,7 +301,7 @@ public class NPCWorker : MonoBehaviour
 		IInventory invFrom = targetFrom.GetComponent<IInventory>();
 		IInventory invTo = targetTo.GetComponent<IInventory>();
 
-		if(invTo.GetItem() == null)
+		if(invTo.GetResource() == null)
 			return;
 
 		if(carryPoint.childCount > 0) //This is checking the item we are carying
@@ -307,20 +310,20 @@ public class NPCWorker : MonoBehaviour
 				//Debug.LogError("Are we carrying something with an empty inventory?");
 			
 			//Is the item we have the same as where we are withdrawing?
-			if(inventory.Get(invFrom.GetItem()) == null)
+			if(inventory.Get(invFrom.GetResource()) == null)
 			{
 				//Debug.Log("Nulling From");
 				targetFrom = null;
 			}
 
 			//Is the item we have the same as where we are depositing?
-			if(inventory.Get(invTo.GetItem()) == null)
+			if(inventory.Get(invTo.GetResource()) == null)
 			{
 				targetTo = null;
 			}
 		}
 
-		if(invFrom.GetItem() != invTo.GetItem())
+		if(invFrom.GetResource() != invTo.GetResource())
 		{
 			//Debug.Log("Nulling From"); //This one keeps happening
 			targetFrom = null;

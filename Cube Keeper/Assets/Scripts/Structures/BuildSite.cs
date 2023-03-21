@@ -48,7 +48,7 @@ public class BuildSite : Structure, IInventory
 		CheckResources();
 	}
 
-	public void OnDestroy()
+	override public void OnDestroy()
 	{
 		//Debug.Log("Destroy BuildSite");
 		for(int i = 0; i < storages.Length; i++)
@@ -57,6 +57,8 @@ public class BuildSite : Structure, IInventory
 			storages[i] = null;
 		}
 		Clan.builder.RemoveStructure(this);
+
+		base.OnDestroy();
 	}
 
 	public void Add(ItemData data)
@@ -76,23 +78,6 @@ public class BuildSite : Structure, IInventory
 			if(data == storage.StorageType)
 				storage.Remove(data);
 		}*/
-	}
-
-	public ItemData GetItem()
-	{
-		var items = GetItems();
-		var item = items[Random.Range(0, items.Count)];
-		return null;
-	}
-
-	public List<ItemData> GetItems()
-	{
-		var items = new List<ItemData>();
-		foreach (Storage storage in storages)
-		{
-			items.Add(storage.StorageType);
-		}
-		return items;
 	}
 
 	public bool IsFull()
@@ -123,4 +108,45 @@ public class BuildSite : Structure, IInventory
 			Destroy(gameObject);
 		}
 	}
+
+	public List<Item> GetNeededResources()
+	{
+		var needs = new List<Item>();
+		//Compare what we have to what we need
+		foreach(Storage storage in storages)
+		{
+			int amountNeeded = storage.MaxStorage - storage.Total();
+			Item need = new Item(storage.GetResource(), amountNeeded); //TODO this code may need to change if sotrages ever have multiple items
+			needs.Add(need);
+		}
+		return needs;
+	}
+
+    List<Item> IInventory.GetItems()
+    {
+        var items = new List<Item>();
+		foreach(Storage storage in storages)
+		{
+			items.AddRange(storage.GetItems());
+		}
+
+		return items;
+    }
+
+    public ItemData GetResource()
+    {
+        var items = GetResources();
+		var item = items[Random.Range(0, items.Count)];
+		return null;
+    }
+
+    public List<ItemData> GetResources()
+    {
+        var items = new List<ItemData>();
+		foreach (Storage storage in storages)
+		{
+			items.Add(storage.StorageType);
+		}
+		return items;
+    }
 }

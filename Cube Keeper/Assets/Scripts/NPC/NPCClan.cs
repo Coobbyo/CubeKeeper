@@ -11,6 +11,9 @@ public class NPCClan
 	{
 		get
 		{
+			if(builder.hall != null)
+				return builder.hall.transform.position;
+			
 			Vector3 Totalposition = Vector3.zero;
 			foreach (NPC npc in Members)
 			{

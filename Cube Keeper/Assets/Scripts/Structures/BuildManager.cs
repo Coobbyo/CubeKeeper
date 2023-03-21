@@ -69,6 +69,10 @@ public class BuildManager : MonoBehaviour
 		newStructure.Clan = clan;
 
 		clan.builder.AddStructure(newStructure);
+		
+		ClanHall newHall;
+		if(newHall = newStructure.GetComponent<ClanHall>())
+			clan.builder.hall = newHall;
 	}
 
 	public StructureData GetStructure(Build build)

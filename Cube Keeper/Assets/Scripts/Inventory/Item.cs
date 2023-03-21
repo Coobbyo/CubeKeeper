@@ -24,6 +24,14 @@ public class Item
 		Data = source;
 		AddToStack();
 	}
+	public Item(ItemData source, int amount)
+	{
+		Data = source;
+		for (int i = 0; i < amount; i++)
+		{
+			AddToStack();
+		}
+	}
 
 	public void AddToStack()
 	{

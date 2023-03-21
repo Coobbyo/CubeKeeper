@@ -18,8 +18,6 @@ public class NPC : MonoBehaviour
 	public Transform target { get; private set; }
 	public Inventory inventory { get; private set; }
 	public MeshRenderer colorDisplay;
-	
-	public static Material Clanless;
 
 	private string id;
 
@@ -59,7 +57,7 @@ public class NPC : MonoBehaviour
 
 	public void LeaveClan()
 	{
-		colorDisplay.material = Clanless;
+		colorDisplay.material = NPCManager.Instance.Clanless;
 		if(clan != null)
 		{
 			//Debug.Log("Leaving " + clan.ToString());
