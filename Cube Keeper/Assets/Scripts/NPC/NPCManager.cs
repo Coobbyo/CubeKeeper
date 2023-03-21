@@ -92,7 +92,7 @@ public class NPCManager : MonoBehaviour
 		return clan.Clan;
 	}
 
-	public void RemoveCLan(NPCClan clan)
+	public void RemoveClan(NPCClan clan)
 	{
 		clans.Remove(clan);
 		ClanBehaviour clanB = clan.behaviour;

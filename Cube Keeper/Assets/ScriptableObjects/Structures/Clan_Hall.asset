@@ -15,7 +15,8 @@ MonoBehaviour:
   id: 2
   displayName: Clan Hall
   resourceList:
-  - {fileID: 11400000, guid: a4fbd45a74282964780373dfa5100512, type: 2}
-  - {fileID: 11400000, guid: d3c19d04693e36144baa484f6f4e7daa, type: 2}
-  resourceAmounts: 0500000003000000
+  - data: {fileID: 11400000, guid: a4fbd45a74282964780373dfa5100512, type: 2}
+    stackSize: 5
+  - data: {fileID: 11400000, guid: d3c19d04693e36144baa484f6f4e7daa, type: 2}
+    stackSize: 3
   prefab: {fileID: 1074166693357988758, guid: ea20c07a34120544bb4b361dca404aa8, type: 3}

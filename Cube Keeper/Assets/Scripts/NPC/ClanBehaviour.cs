@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ClanBehaviour : MonoBehaviour
 {
+	public Transform memebersParent;
+	public Transform structuresParent;
 	private Timer buildTimer;
 	private NPCClan clan;
 	public NPCClan Clan
@@ -33,44 +35,9 @@ public class ClanBehaviour : MonoBehaviour
 
 	private void CheckBuildNeeds()
 	{
-		if(NeedStorage())
-			BuildManager.Instance.RequestBuild(BuildManager.Build.Storage, Clan.GetRandomMemeber().transform.position, Clan);
-		else if(NeedClanHall())
-			BuildManager.Instance.RequestBuild(BuildManager.Build.ClanHall, Clan.CenterPoint, Clan);
-		
+		StructureData nextBuild = Clan.builder.GetNextStructureToBuild();
+		if(nextBuild != null)
+			BuildManager.Instance.RequestBuild(nextBuild, Clan.GetRandomMemeber().transform.position, Clan);
 		buildTimer.Restart();
-	}
-
-	private bool NeedStorage()
-	{
-		bool storageNeeded = true;
-		List<Structure> storages = clan.builder.GetStructures(BuildManager.Build.Storage);
-		foreach (Structure storageStruct in storages)
-		{
-			Storage storage = storageStruct.gameObject.GetComponent<Storage>();
-			if(storage == null)
-			{
-				//Only reason it should be null is if it is a build site
-				storageNeeded = false;
-			}
-			else
-			{
-				if(!storage.IsFull())
-					storageNeeded = false;
-			}
-		}
-
-		return storageNeeded;
-	}
-
-	private bool NeedClanHall()
-	{
-		List<Structure> halls = clan.builder.GetStructures(BuildManager.Build.ClanHall);
-		foreach(Structure hall in halls)
-		{
-			return false;
-		}
-
-		return true;
 	}
 }

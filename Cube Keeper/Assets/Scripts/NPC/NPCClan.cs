@@ -77,7 +77,7 @@ public class NPCClan
 		Friends = new List<NPCClan>();
 		Enemies = new List<NPCClan>();
 		socialIndex = new Dictionary<NPCClan, int>();
-		builder = new ClanBuilder();
+		builder = new ClanBuilder(this);
 	}
 
 	public void VerifyMembers()
@@ -104,7 +104,7 @@ public class NPCClan
 		//Debug.Log(ToString() + " Removeing Memeber");
 		Members.Remove(npc);
 		if(Members.Count <= 0)
-			NPCManager.Instance.RemoveCLan(this);
+			NPCManager.Instance.RemoveClan(this);
 	}
 
 	public bool IsFriend(NPCClan otherClan)

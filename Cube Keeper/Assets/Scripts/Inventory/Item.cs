@@ -2,24 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Item
 {
-    public ItemData data { get; private set; }
-    public int stackSize { get; private set; }
+	[SerializeField] private ItemData data;
+	public ItemData Data
+	{
+		get { return data; }
+		private set { data = value; }
+	}
 
-    public Item(ItemData source)
-    {
-        data = source;
-        AddToStack();
-    }
+	[SerializeField] private int stackSize;
+	public int StackSize
+	{
+		get { return stackSize; }
+		private set { stackSize = value; }
+	}
 
-    public void AddToStack()
-    {
-        stackSize++;
-    }
+	public Item(ItemData source)
+	{
+		Data = source;
+		AddToStack();
+	}
 
-    public void RemoveFromStack()
-    {
-        stackSize--;
-    }
+	public void AddToStack()
+	{
+		StackSize++;
+	}
+
+	public void RemoveFromStack()
+	{
+		StackSize--;
+	}
 }

@@ -63,8 +63,8 @@ public class Inventory
 	{
 		if(dataToItem.TryGetValue(referenceData, out Item value))
 		{
-			if(value.stackSize < amount)
-				amount = value.stackSize;
+			if(value.StackSize < amount)
+				amount = value.StackSize;
 		} else
 		{
 			return;
@@ -82,7 +82,7 @@ public class Inventory
 		{
 			value.RemoveFromStack();
 
-			if(value.stackSize == 0) //This could result in an error where the stack is less than 0
+			if(value.StackSize == 0) //This could result in an error where the stack is less than 0
 			{
 				items.Remove(value);
 				dataToItem.Remove(referenceData);

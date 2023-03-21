@@ -54,7 +54,7 @@ public class NPC : MonoBehaviour
 		clan.AddMember(this);
 		//if(NPCManager.Instance.GetClan(clan) == null)
 			//Debug.Log("it's clanGO");
-		transform.SetParent(clan.behaviour.transform);
+		transform.SetParent(clan.behaviour.memebersParent, true);
 	}
 
 	public void LeaveClan()

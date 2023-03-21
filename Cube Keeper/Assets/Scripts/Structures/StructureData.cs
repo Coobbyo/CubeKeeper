@@ -7,8 +7,7 @@ public class StructureData : ScriptableObject
 {
     public string id;
     public string displayName;
-    public ItemData[] resourceList;
-    public int[] resourceAmounts;
+    public Item[] resourceList;
     //public Sprite icon;
     public GameObject prefab;
 }

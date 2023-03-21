@@ -274,7 +274,7 @@ public class NPCWorker : MonoBehaviour
 		int inventorySize = 0;
 		foreach (Item item in inventory.items)
 		{
-			for (int i = 0; i < item.stackSize; i++)
+			for (int i = 0; i < item.StackSize; i++)
 			{
 				inventorySize++;
 			}

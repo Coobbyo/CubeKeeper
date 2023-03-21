@@ -26,14 +26,14 @@ public class RawResource : MonoBehaviour, IInventory
 		if(inventory.items.Count == 0)
 			Destroy(gameObject);
 
-		if(fullIndicator.activeSelf && item.stackSize < maxResources)
+		if(fullIndicator.activeSelf && item.StackSize < maxResources)
 			fullIndicator.SetActive(false);
 	}
 
 	public bool IsFull()
 	{
 		Item item = inventory.Get(resourceType);
-		if(item != null && item.stackSize == maxResources)
+		if(item != null && item.StackSize == maxResources)
 			return true;
 
 		return false;

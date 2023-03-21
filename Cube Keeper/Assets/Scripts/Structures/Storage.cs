@@ -19,7 +19,7 @@ public class Storage : Structure, IInventory
 			if(storageType == null)
 				return;
 
-			for(int i = 0; i < maxStorage; i++)
+			for(int i = 0; i < MaxStorage; i++)
 			{
 				Instantiate(storageType.prefab, storageSpots[i]);
 				storageSpots[i].gameObject.SetActive(false);
@@ -32,23 +32,27 @@ public class Storage : Structure, IInventory
 	private List<Transform> storageSpots = new List<Transform>();
 
 	private int maxStorage = 16;
+	public int MaxStorage
+	{
+		get { return maxStorage; }
+		set
+		{
+			maxStorage = value;
+			CreateStorageSpots();
+		}
+	}
 	private Inventory inventory;
 
 	private void Awake()
 	{
 		inventory = new Inventory();
-		SetMaxStorage(maxStorage);
+		MaxStorage = maxStorage;
+		//SetMaxStorage(); in order to square? the storage		
 	}
 
 	public void SetMaxStorage()
 	{
-		maxStorage = FindLargestSquare(maxStorage);
-		CreateStorageSpots();
-	}
-
-	public void SetMaxStorage(int max)
-	{
-		maxStorage = max;
+		MaxStorage = FindLargestSquare(MaxStorage);
 		CreateStorageSpots();
 	}
 
@@ -82,7 +86,7 @@ public class Storage : Structure, IInventory
 		int inventorySize = 0;
 		foreach(Item item in inventory.items)
 		{
-			for(int i = 0; i < item.stackSize; i++)
+			for(int i = 0; i < item.StackSize; i++)
 			{
 				inventorySize++;
 			}
@@ -92,7 +96,7 @@ public class Storage : Structure, IInventory
 
 	public bool IsFull()
 	{
-		if(Total() == maxStorage)
+		if(Total() == MaxStorage)
 		{
 			OnFull?.Invoke();
 			return true;
@@ -104,7 +108,7 @@ public class Storage : Structure, IInventory
 
 	public bool IsHalfFull()
 	{
-		if(Total() >= maxStorage * 0.5f)
+		if(Total() >= MaxStorage * 0.5f)
 		{
 			return true;
 		} else
@@ -124,7 +128,7 @@ public class Storage : Structure, IInventory
 
 		float size = 1f;
 		//Vector2 startPointOffset = new Vector2(-size, -size);
-		int pointsPerSide = (int)Mathf.Sqrt(FindNextSquare(maxStorage)) + 1;
+		int pointsPerSide = (int)Mathf.Sqrt(FindNextSquare(MaxStorage)) + 1;
 		float spacing = size * 2 / pointsPerSide;
 		for (int i = 1; i < pointsPerSide; i++)
 		{
@@ -133,7 +137,8 @@ public class Storage : Structure, IInventory
 				GameObject newGameObject = new GameObject("StorageSpot (" + i + "," + j + ")");
 				newGameObject.transform.parent = storageSpotParent;
 				newGameObject.transform.localPosition = new Vector3(spacing * i, 0f , spacing * j);
-				newGameObject.transform.localScale = 4f / (float)maxStorage * Vector3.one;
+				//newGameObject.transform.localScale = 4f / (float)maxStorage * Vector3.one;
+				newGameObject.transform.localScale = 0.25f * Vector3.one;
 				storageSpots.Add(newGameObject.transform);
 			}
 		}
@@ -162,9 +167,9 @@ public class Storage : Structure, IInventory
 
 		foreach(Item item in inventory.items)
 		{
-			for (int i = 0; i < item.stackSize; i++)
+			for (int i = 0; i < item.StackSize; i++)
 			{
-				if(item.stackSize > maxStorage) { Debug.Log("there are more items than storage!"); }
+				if(item.StackSize > MaxStorage) { Debug.Log("there are more items than storage!"); }
 				storageSpots[i].gameObject.SetActive(true);
 			}
 		}
