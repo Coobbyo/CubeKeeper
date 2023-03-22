@@ -4,9 +4,19 @@ using UnityEngine;
 
 public class ClanHall : Structure
 {
-    public override void OnDestroy()
-    {
-        Clan.builder.hall = null;
-        base.OnDestroy();
-    }
+	[SerializeField] private List<Tower> towers;
+
+	private void Start()
+	{
+		foreach (Tower tower in towers)
+		{
+			tower.Clan = Clan;
+		}
+	}
+
+	public override void OnDestroy()
+	{
+		Clan.builder.hall = null;
+		base.OnDestroy();
+	}
 }

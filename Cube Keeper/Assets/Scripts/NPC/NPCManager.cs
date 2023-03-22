@@ -46,8 +46,8 @@ public class NPCManager : MonoBehaviour
 		Transform npcGO = Instantiate(npcPrefab, spawnPoint, Quaternion.identity, this.transform);
 		
 		NPC newNPC = npcGO.GetComponent<NPC>();
-		//NPCClan newClan = CreateClan(premadeClans[Random.Range(0, premadeClans.Length)]);
-		//newNPC.JoinClan(newClan);
+		NPCClan newClan = CreateClan(premadeClans[Random.Range(0, premadeClans.Length)]);
+		newNPC.JoinClan(newClan);
 
 		unclaimedNPCs.Add(newNPC);
 		return newNPC;
@@ -107,6 +107,7 @@ public class NPCManager : MonoBehaviour
 		foreach(Structure structure in clan.builder.GetStructures())
 		{
 			structure.Clan = null;
+			Destroy(structure.gameObject);
 		}
 
 		Destroy(clanB.gameObject);

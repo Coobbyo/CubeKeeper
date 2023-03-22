@@ -8,7 +8,10 @@ public class BuildManager : MonoBehaviour
 	{
 		BuildSite,
 		Storage,
-		ClanHall
+		ClanHall,
+		Farm,
+		House,
+		Tower
 	}
 	public StructureData[] Structures;
     //maybe have some effects like when built or destroied?

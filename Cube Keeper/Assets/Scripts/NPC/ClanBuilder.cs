@@ -23,6 +23,15 @@ public class ClanBuilder
 		if(NeedClanHall())
 			return BuildManager.Instance.GetStructure(BuildManager.Build.ClanHall);
 		
+		if(NeedFarm()) //This should stay at the bottom as the last thing to be built
+			return BuildManager.Instance.GetStructure(BuildManager.Build.Farm);
+
+		if(NeedHouse()) //This should stay at the bottom as the last thing to be built
+			return BuildManager.Instance.GetStructure(BuildManager.Build.House);
+
+		if(NeedTower()) //This should stay at the bottom as the last thing to be built
+			return BuildManager.Instance.GetStructure(BuildManager.Build.Tower);
+		
 		if(NeedStorage()) //This should stay at the bottom as the last thing to be built
 			return BuildManager.Instance.GetStructure(BuildManager.Build.Storage);
 
@@ -74,7 +83,6 @@ public class ClanBuilder
 		if(resourceDeficit == null || resourceDeficit.Count <= 0)
 			return true;
 
-		bool storageNeeded = true;
 		List<Structure> storages = GetStructures(BuildManager.Build.Storage);
 		foreach (Structure storageStruct in storages)
 		{
@@ -82,16 +90,16 @@ public class ClanBuilder
 			if(storage == null)
 			{
 				//Only reason it should be null is if it is a build site
-				storageNeeded = false;
+				return false;
 			}
 			else
 			{
 				if(!storage.IsFull())
-					storageNeeded = false;
+					return false;
 			}
 		}
 
-		return storageNeeded;
+		return true;
 	}
 
 	private bool NeedClanHall()
@@ -106,5 +114,34 @@ public class ClanBuilder
 		}
 
 		return true;
-	}	
+	}
+
+	private bool NeedFarm()
+	{
+		bool needFood = false;
+		List<Item> needs = clan.behaviour.ResourceDeficit();
+		foreach(Item need in needs)
+		{
+			if(need.Data.displayName == "Food")
+				needFood = true;
+		}
+
+		return needFood;
+	}
+
+	private bool NeedHouse()
+	{
+		List<Structure> houses = GetStructures(BuildManager.Build.House);
+		foreach(Structure house in houses)
+		{
+			return false;
+		}
+
+		return true;
+	}
+
+	private bool NeedTower()
+	{
+		return false;
+	}
 }

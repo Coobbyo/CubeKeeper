@@ -17,6 +17,8 @@ public class NPCMovement : MonoBehaviour
 
 	//[SerializeField] private Transform targetPoint;
 	private NavMeshAgent agent;
+	//private float stopDistance;
+	//private float followDistance;
 
 	private Timer modeDelay;
 	private Timer moveDelay;
@@ -43,7 +45,7 @@ public class NPCMovement : MonoBehaviour
 				break;
 			case NPC.State.Combat:
 			case NPC.State.Work:
-			MoveTowardsTarget();
+				MoveTowardsTarget();
 				break;
 		}
 	}

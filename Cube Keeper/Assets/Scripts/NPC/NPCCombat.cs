@@ -35,25 +35,24 @@ public class NPCCombat : CharacterCombat
 
 		if(Target == null)
 			FindTarget();
-
-		if(Target == null)
-			return;
-
-		Attack(Target.stats);
+		else
+			Attack(Target.stats);
 	}
 
 	private void FindTarget()
 	{
 		List<NPC> otherNPCs = npc.FindNearbyNPCs();
 
-		foreach (NPC otherNPC in otherNPCs)
+		foreach(NPC otherNPC in otherNPCs)
 		{
-			if(npc.stats.Aggression.GetValue() > 0f && npc.clan.IsEnemy(otherNPC.clan) || //If aggressive then attack
-				(npc.stats.Aggression.GetValue() < 0f && //If non aggessive heal
-				(npc.clan == otherNPC.clan || npc.clan.IsFriend(otherNPC.clan)) && //Check if friend or clan mate
-				otherNPC.stats.CurrentHealth <= otherNPC.stats.MaxHealth.GetValue())) //Check if less than max health
+			if(IsTarget(otherNPC)) //Check if less than max health
 			{
 				Target = otherNPC;
+				return;
+			}
+			else
+			{
+				npc.state = NPC.State.Roam;
 				return;
 			}
 		}
@@ -70,5 +69,22 @@ public class NPCCombat : CharacterCombat
 
 		if(bullet != null)
 			bullet.Seek(enemyStats.transform);
+	}
+
+	private bool IsTarget(NPC otherNPC)
+	{
+		if(npc.stats.Aggression.GetValue() > 0f && npc.clan.IsEnemy(otherNPC.clan))
+			return true;
+		if(npc.stats.Aggression.GetValue() > 5f && otherNPC.clan == null)
+			return true;
+
+		if(npc.stats.Damage.GetValue() > 0f)
+			return false;
+
+		if(npc.IsFriend(otherNPC) &&
+			otherNPC.stats.CurrentHealth <= otherNPC.stats.MaxHealth.GetValue()) //Has less than full health
+			return true;
+
+		return false;
 	}
 }

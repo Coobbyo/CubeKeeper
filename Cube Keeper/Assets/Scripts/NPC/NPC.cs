@@ -97,6 +97,11 @@ public class NPC : MonoBehaviour
 		return nearbyNPCs;
 	}
 	
+	public bool IsFriend(NPC otherNPC)
+	{
+		return clan == otherNPC.clan || clan.IsFriend(otherNPC.clan);
+	}
+
 	private void Die()
 	{
 		LeaveClan();

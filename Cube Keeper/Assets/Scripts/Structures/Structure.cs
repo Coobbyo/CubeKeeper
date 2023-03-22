@@ -27,7 +27,8 @@ public class Structure : MonoBehaviour
 	virtual public void OnDestroy()
 	{
 		//Debug.Log(name + " Destroied from: " + Clan.ToString());
-		Clan.builder.RemoveStructure(this);
+		if(Clan != null)
+			Clan.builder.RemoveStructure(this);
 	}
 
 	public StructureData GetData()

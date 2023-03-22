@@ -56,7 +56,6 @@ public class BuildSite : Structure, IInventory
 			Destroy(storages[i].gameObject);
 			storages[i] = null;
 		}
-		Clan.builder.RemoveStructure(this);
 
 		base.OnDestroy();
 	}

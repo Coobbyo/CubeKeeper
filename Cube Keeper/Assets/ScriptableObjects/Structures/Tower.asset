@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fdbdacd6dcc28b74094c7ca24728cd41, type: 3}
-  m_Name: Clan_Hall
+  m_Name: Tower
   m_EditorClassIdentifier: 
-  id: 2
-  displayName: Clan Hall
+  id: 5
+  displayName: Tower
   resourceList:
   - data: {fileID: 11400000, guid: a4fbd45a74282964780373dfa5100512, type: 2}
-    stackSize: 30
-  - data: {fileID: 11400000, guid: d3c19d04693e36144baa484f6f4e7daa, type: 2}
-    stackSize: 20
-  prefab: {fileID: 1074166693357988758, guid: ea20c07a34120544bb4b361dca404aa8, type: 3}
+    stackSize: 5
+  - data: {fileID: 11400000, guid: a4fbd45a74282964780373dfa5100512, type: 2}
+    stackSize: 4
+  prefab: {fileID: 3437851701749378162, guid: b8b680be492c87c4495cc9b0e0e38694, type: 3}

@@ -10,13 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fdbdacd6dcc28b74094c7ca24728cd41, type: 3}
-  m_Name: Clan_Hall
+  m_Name: House
   m_EditorClassIdentifier: 
-  id: 2
-  displayName: Clan Hall
+  id: 4
+  displayName: House
   resourceList:
-  - data: {fileID: 11400000, guid: a4fbd45a74282964780373dfa5100512, type: 2}
-    stackSize: 30
   - data: {fileID: 11400000, guid: d3c19d04693e36144baa484f6f4e7daa, type: 2}
-    stackSize: 20
-  prefab: {fileID: 1074166693357988758, guid: ea20c07a34120544bb4b361dca404aa8, type: 3}
+    stackSize: 5
+  - data: {fileID: 11400000, guid: a4fbd45a74282964780373dfa5100512, type: 2}
+    stackSize: 3
+  - data: {fileID: 11400000, guid: 55f7e5441b76e6045ba8927216bccf0b, type: 2}
+    stackSize: 5
+  prefab: {fileID: 829325417995728269, guid: 7c7802f5b96b42041bdf5cbfcfc53679, type: 3}

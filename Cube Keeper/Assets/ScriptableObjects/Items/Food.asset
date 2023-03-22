@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 665ca3f64ad63c24ab16db8731956575, type: 3}
-  m_Name: Stone
+  m_Name: Food
   m_EditorClassIdentifier: 
-  id: 0
-  displayName: Stone
-  prefab: {fileID: 3936872363557669725, guid: 2d345b1925bd21646991379f36a6ed55, type: 3}
+  id: 2
+  displayName: Food
+  prefab: {fileID: 8303905137823075110, guid: 0c84b60016f03864dbf1aa4c66a571e4, type: 3}
