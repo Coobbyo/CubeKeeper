@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCCombat : CharacterCombat
+public class NPCCombat : Combat
 {
 	private NPC npc;
 
-	private NPC target;
-	public NPC Target
+	public Transform Target
 	{
-		get { return target; }
-		set { target = value; npc.SetTarget(value.transform); }
+		get { return target == null ? null : target.transform; }
+		set { target = value.GetComponent<Damageable>(); npc.SetTarget(value.transform); }
 	}
 
 	[SerializeField] private GameObject bulletPrefab;
@@ -36,18 +35,19 @@ public class NPCCombat : CharacterCombat
 		if(Target == null)
 			FindTarget();
 		else
-			Attack(Target.stats);
+			Attack(target);
 	}
 
 	private void FindTarget()
 	{
 		List<NPC> otherNPCs = npc.FindNearbyNPCs();
+		var targets = new List<Damageable>();
 
 		foreach(NPC otherNPC in otherNPCs)
 		{
 			if(IsTarget(otherNPC)) //Check if less than max health
 			{
-				Target = otherNPC;
+				targets.Add(otherNPC.stats);
 				return;
 			}
 			else
@@ -65,10 +65,10 @@ public class NPCCombat : CharacterCombat
 		GameObject bulletGO = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 		bulletGO.GetComponentInChildren<MeshRenderer>().material.color = npc.colorDisplay.material.color;
 		Bullet bullet = bulletGO.GetComponent<Bullet>();
-		bullet.SetDamage(npc.stats.Damage.GetValue());
+		bullet.SetDamage(myStats.Damage.GetValue());
 
 		if(bullet != null)
-			bullet.Seek(enemyStats.transform);
+			bullet.Seek(target.HitPoint);
 	}
 
 	private bool IsTarget(NPC otherNPC)

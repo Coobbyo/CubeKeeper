@@ -42,6 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4382000985667016239}
   - component: {fileID: 3705442113221643596}
+  - component: {fileID: 4276795178093631552}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -80,6 +81,19 @@ MonoBehaviour:
   speed: 5
   damage: 0
   explosionRadius: 0
+--- !u!135 &4276795178093631552
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5440701019929630167}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.05
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8757932167529812107
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,7 +105,6 @@ GameObject:
   - component: {fileID: 8633769587485662539}
   - component: {fileID: 2044882909943462307}
   - component: {fileID: 7143563333560589610}
-  - component: {fileID: 8361129969505170219}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -164,16 +177,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &8361129969505170219
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8757932167529812107}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}

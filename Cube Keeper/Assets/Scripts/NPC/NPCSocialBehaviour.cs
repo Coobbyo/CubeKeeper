@@ -88,19 +88,7 @@ public class NPCSocialBehaviour : MonoBehaviour
 			{
 				if(clan != otherClan) //Checking if we should notify our clan about theirs
 				{
-					//I should probably build a seperate function for this
-					if(Mathf.Abs(friendliness.GetValue() - otherNPC.friendliness.GetValue()) < 2 ||
-						Mathf.Abs(loyalty.GetValue() - otherNPC.loyalty.GetValue()) < 2 ||
-						Mathf.Abs(aggression.GetValue() - otherNPC.aggression.GetValue()) < 2)
-					{
-						clan.Notify(otherClan, 1);
-					}
-					else if(Mathf.Abs(friendliness.GetValue() - otherNPC.friendliness.GetValue()) > 5 ||
-						Mathf.Abs(loyalty.GetValue() - otherNPC.loyalty.GetValue()) > 5 ||
-						Mathf.Abs(aggression.GetValue() - otherNPC.aggression.GetValue()) > 5)
-					{
-						clan.Notify(otherClan, -1);
-					}
+					clan.Notify(otherClan, ClaculateDifferences(otherNPC));
 				}
 
 				if(clan.IsEnemy(otherClan))
@@ -111,12 +99,7 @@ public class NPCSocialBehaviour : MonoBehaviour
 			}
 		}
 
-		friendliness.AddModifier(Random.Range(-1, 2));
-		if(clan != null)
-			loyalty.AddModifier(Random.Range(-1, 2));
-		aggression.AddModifier(Random.Range(-1, 2));
-
-		npc.stats.ClampStats();
+		ModifyStats();
 	}
 
 	private void Socialize()
@@ -151,5 +134,34 @@ public class NPCSocialBehaviour : MonoBehaviour
 			loyalty.AddModifier(1);
 			return false;
 		}
+	}
+
+	private void ModifyStats()
+	{
+		friendliness.AddModifier(Random.Range(-1, 2));
+		if(clan != null)
+			loyalty.AddModifier(Random.Range(-1, 2));
+		aggression.AddModifier(Random.Range(-1, 2));
+
+		npc.stats.ClampStats();
+	}
+
+	private int ClaculateDifferences(NPCSocialBehaviour otherNPC)
+	{
+		int differrences = 0;
+		differrences += Mathf.Abs(friendliness.GetValue() - otherNPC.friendliness.GetValue());
+		differrences += Mathf.Abs(loyalty.GetValue() - otherNPC.loyalty.GetValue());
+		differrences += Mathf.Abs(aggression.GetValue() - otherNPC.aggression.GetValue());
+
+		if(differrences <= 5)
+			return 1;
+		else if(differrences >= 10)
+			return -1;
+
+		return 0;
+	}
+
+	private void Breed()
+	{
 	}
 }

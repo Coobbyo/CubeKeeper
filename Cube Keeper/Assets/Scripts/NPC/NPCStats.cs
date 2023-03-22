@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCStats : CharacterStats
+public class NPCStats : Damageable
 {
 	//Social Stats
     public Stat Friendliness;// { get; private set; }
@@ -18,7 +18,10 @@ public class NPCStats : CharacterStats
 		Loyalty.baseValue = Random.Range(-10, 10);
 		Aggression.baseValue = Random.Range(-2, 2);
 
+		MaxHealth.baseValue = 10;
+		CurrentHealth = MaxHealth.GetValue();
 		Damage.baseValue = Aggression.baseValue;
+		Armor.baseValue = 0;
     }
 
     public void ClampStats()

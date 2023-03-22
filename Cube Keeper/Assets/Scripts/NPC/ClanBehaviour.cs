@@ -91,6 +91,8 @@ public class ClanBehaviour : MonoBehaviour
 			resourceDeficit.Remove(item);
 		}
 
+		//If there is a deficit we should send cubes to search
+
 		return resourceDeficit.items;
 	}
 }

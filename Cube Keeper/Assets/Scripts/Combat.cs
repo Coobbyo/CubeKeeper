@@ -4,32 +4,33 @@ using UnityEngine;
 
 /* From Brackeys */
 
-[RequireComponent(typeof(CharacterStats))]
-public class CharacterCombat : MonoBehaviour
+[RequireComponent(typeof(Damageable))]
+public class Combat : MonoBehaviour
 {
 	public float attackRate = 1f;
 	private float attackCountdown = 0f;
 
-	private CharacterStats myStats;
-	protected CharacterStats enemyStats;
+	protected Damageable myStats;
+	public Damageable target;
 
 	public event System.Action DoAttack;
 
 	private void Awake()
 	{
-		myStats = GetComponent<CharacterStats>();
+		myStats = GetComponent<Damageable>();
 	}
 
 	private void Update()
 	{
-		attackCountdown -= Time.deltaTime;
+		if(attackCountdown > 0)
+			attackCountdown -= Time.deltaTime;
 	}
 
-	public void Attack(CharacterStats enemyStats)
+	public void Attack(Damageable enemyStats)
 	{
 		if(attackCountdown <= 0f)
 		{
-			this.enemyStats = enemyStats;
+			this.target = enemyStats;
 
 			DoAttack();
 
@@ -40,12 +41,12 @@ public class CharacterCombat : MonoBehaviour
 	}
 
 	//This will be the meelee damage if that gets implemented
-	IEnumerator DoDamage(CharacterStats stats, float delay)
+	IEnumerator DoDamage(Damageable stats, float delay)
     {
 		print ("Start");
 		yield return new WaitForSeconds (delay);
 
 		Debug.Log (transform.name + " swings for " + myStats.Damage.GetValue () + " damage");
-		enemyStats.TakeDamage (myStats.Damage.GetValue ());
+		target.TakeDamage (myStats.Damage.GetValue ());
 	}
 }

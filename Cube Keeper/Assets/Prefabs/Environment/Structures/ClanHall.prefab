@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1680359756790418651}
   - component: {fileID: 8965607076358554536}
   - component: {fileID: 1469265889088690780}
+  - component: {fileID: -8489389213945214497}
   m_Layer: 6
   m_Name: ClanHall
   m_TagString: Untagged
@@ -30,6 +31,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4676068454647031420}
   - {fileID: 2181938552150985712}
   - {fileID: 1777935411645873939}
   - {fileID: 7009408860375957964}
@@ -71,6 +73,25 @@ MonoBehaviour:
   - {fileID: 8923869465226381918}
   - {fileID: 5718937496884830489}
   - {fileID: 5852386567931791566}
+--- !u!114 &-8489389213945214497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074166693357988758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 167759fbdb836c94f8c709fe2a64491d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HitPoint: {fileID: 4676068454647031420}
+  MaxHealth:
+    baseValue: 50
+  Damage:
+    baseValue: 0
+  Armor:
+    baseValue: 2
 --- !u!1 &2729613232477483875
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,7 +153,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 4223d82b8f5ceeb448938ba81491bd45, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -154,6 +175,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2921105590356157103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4676068454647031420}
+  m_Layer: 6
+  m_Name: HitPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4676068454647031420
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2921105590356157103}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1680359756790418651}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6505269257919203489
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +236,7 @@ Transform:
   m_Children:
   - {fileID: 8752491199450481606}
   m_Father: {fileID: 1680359756790418651}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &665039657253143645
 PrefabInstance:
@@ -196,7 +248,7 @@ PrefabInstance:
     - target: {fileID: 1267425595527166798, guid: b8b680be492c87c4495cc9b0e0e38694,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1267425595527166798, guid: b8b680be492c87c4495cc9b0e0e38694,
         type: 3}
@@ -283,7 +335,7 @@ PrefabInstance:
     - target: {fileID: 1267425595527166798, guid: b8b680be492c87c4495cc9b0e0e38694,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1267425595527166798, guid: b8b680be492c87c4495cc9b0e0e38694,
         type: 3}
@@ -370,7 +422,7 @@ PrefabInstance:
     - target: {fileID: 1267425595527166798, guid: b8b680be492c87c4495cc9b0e0e38694,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1267425595527166798, guid: b8b680be492c87c4495cc9b0e0e38694,
         type: 3}
@@ -457,7 +509,7 @@ PrefabInstance:
     - target: {fileID: 1267425595527166798, guid: b8b680be492c87c4495cc9b0e0e38694,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1267425595527166798, guid: b8b680be492c87c4495cc9b0e0e38694,
         type: 3}

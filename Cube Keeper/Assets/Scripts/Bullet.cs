@@ -62,20 +62,15 @@ public class Bullet : MonoBehaviour
 		Collider[] hitStuff = Physics.OverlapSphere(transform.position, explosionRadius);
 		foreach(Collider hitThing in hitStuff)
 		{
-			if(hitThing.tag == "Enemy")
-			{
-				Damage(hitThing.transform);
-			}
+			Damage(hitThing.transform);
 		}
 	}
 
 	private void Damage(Transform hit)
 	{
-		NPC npc = hit.GetComponent<NPC>();
-
-		if(npc != null)
+		if(hit.parent.TryGetComponent(out Damageable damageable))
 		{
-		   npc.stats.TakeDamage(damage);
+			damageable.TakeDamage(damage);
 		}
 	}
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Damageable))]
 public class Structure : MonoBehaviour
 {
 	private NPCClan clan;
@@ -11,6 +12,7 @@ public class Structure : MonoBehaviour
 		set
 		{
 			clan = value;
+			stats.Clan = Clan;
 			foreach (MeshRenderer mesh in displayMeshes)
 			{
 				if(clan == null)
@@ -23,10 +25,19 @@ public class Structure : MonoBehaviour
 
 	[SerializeField] private MeshRenderer[] displayMeshes;
 	[SerializeField] protected StructureData data;
+	protected Damageable stats;
+
+	virtual public void Awake()
+	{
+		stats = GetComponent<Damageable>();
+		//stats.OnHealthReachedZero += Crumble;
+	}
 
 	virtual public void OnDestroy()
 	{
-		//Debug.Log(name + " Destroied from: " + Clan.ToString());
+		//if(Clan != null) Debug.Log(name + " Destroied from: " + Clan.ToString());
+		//else Debug.Log(name + " Destroied");
+
 		if(Clan != null)
 			Clan.builder.RemoveStructure(this);
 	}
@@ -34,5 +45,11 @@ public class Structure : MonoBehaviour
 	public StructureData GetData()
 	{
 		return data;
+	}
+
+	virtual public void Crumble()
+	{
+		if(gameObject != null)
+			Destroy(gameObject);
 	}
 }

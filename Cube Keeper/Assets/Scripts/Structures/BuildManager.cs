@@ -51,7 +51,7 @@ public class BuildManager : MonoBehaviour
 					break;
 			}
 
-			if(colliders.Length > 0)
+			if(colliders.Length > 0) //Here we should send out cubes to search
 				return;
 		}
 

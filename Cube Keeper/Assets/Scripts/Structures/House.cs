@@ -4,10 +4,23 @@ using UnityEngine;
 
 public class House : Structure
 {
-    public int Population { get; private set; }
+	public int Population { get; private set; }
 
-    private void Start()
+	override public void Awake()
+	{
+		base.Awake();
+		stats.OnHealthReachedZero += Crumble;
+	}
+
+	private void Start()
+	{
+		Population = 5;
+		Clan.PopulationCap.AddModifier(Population);
+	}
+
+    public override void Crumble()
     {
-        Population = 5;
+		Clan.PopulationCap.RemoveModifier(Population);
+        base.Crumble();
     }
 }

@@ -13,8 +13,10 @@ public class BuildSite : Structure, IInventory
 	private Inventory inventory;
 	private Storage[] storages;
 
-	private void Awake()
+	override public void Awake()
 	{
+		base.Awake();
+		stats.OnHealthReachedZero += Crumble;
 		inventory = new Inventory();
 	}
 
@@ -24,7 +26,7 @@ public class BuildSite : Structure, IInventory
 		if(structureToBuild == null)
 		{
 			Debug.Log("There is nothing to build here");
-			Destroy(gameObject);
+			Crumble();
 		}
 
 		int length = structureToBuild.resourceList.Length;
@@ -46,18 +48,6 @@ public class BuildSite : Structure, IInventory
 		}
 
 		CheckResources();
-	}
-
-	override public void OnDestroy()
-	{
-		//Debug.Log("Destroy BuildSite");
-		for(int i = 0; i < storages.Length; i++)
-		{
-			Destroy(storages[i].gameObject);
-			storages[i] = null;
-		}
-
-		base.OnDestroy();
 	}
 
 	public void Add(ItemData data)
@@ -104,7 +94,7 @@ public class BuildSite : Structure, IInventory
 		if(IsFull())
 		{
 			BuildManager.Instance.BuildStructure(structureToBuild, transform.position, Clan);
-			Destroy(gameObject);
+			Crumble();
 		}
 	}
 
@@ -147,5 +137,17 @@ public class BuildSite : Structure, IInventory
 			items.Add(storage.StorageType);
 		}
 		return items;
+    }
+
+    public override void Crumble()
+    {
+		for(int i = 0; i < storages.Length; i++)
+		{
+			if(storages[i] == null) continue;
+			storages[i].Crumble();
+			storages[i] = null;
+		}
+
+        base.Crumble();
     }
 }

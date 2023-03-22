@@ -43,8 +43,10 @@ public class Storage : Structure, IInventory
 	}
 	private Inventory inventory;
 
-	private void Awake()
+	override public void Awake()
 	{
+		base.Awake();
+		stats.OnHealthReachedZero += Crumble;
 		inventory = new Inventory();
 		MaxStorage = maxStorage;
 		//SetMaxStorage(); in order to square? the storage		
@@ -78,7 +80,7 @@ public class Storage : Structure, IInventory
 		UpdateStorageSpots();
 
 		//if(inventory.items.Count == 0)
-			//Destroy(gameObject);
+			//Crumble();
 	}
 
 	public int Total()
@@ -194,4 +196,9 @@ public class Storage : Structure, IInventory
 	{
 		return inventory.items;
 	}
+
+    public override void Crumble()
+    {
+        base.Crumble();
+    }
 }

@@ -19,4 +19,9 @@ public class ClanHall : Structure
 		Clan.builder.hall = null;
 		base.OnDestroy();
 	}
+
+    public override void Crumble()
+    {
+        base.Crumble();
+    }
 }

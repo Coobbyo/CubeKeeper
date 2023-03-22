@@ -7,6 +7,14 @@ public class NPCClan
 	public ClanBehaviour behaviour;
 	public string ClanName {get; private set; }
 	public Color Color { get; private set; }
+	public Stat PopulationCap { get; private set; }
+	public int Size
+	{
+		get
+		{
+			return Members.Count;
+		}
+	}
 	public Vector3 CenterPoint
 	{
 		get
@@ -23,13 +31,6 @@ public class NPCClan
 			return Totalposition / Size;
 		}
 	}
-	public int Size
-	{
-		get
-		{
-			return Members.Count;
-		}
-	}
 	
 	public List<NPC> Members { get; private set; }
 	public List<NPCClan> Friends { get; private set; }
@@ -43,7 +44,6 @@ public class NPCClan
 	public NPCClan()
 	{
 		Assignments();
-		
 	}
 	public NPCClan(Color color)
 	{
@@ -81,6 +81,9 @@ public class NPCClan
 		Enemies = new List<NPCClan>();
 		socialIndex = new Dictionary<NPCClan, int>();
 		builder = new ClanBuilder(this);
+
+		PopulationCap = new Stat();
+		PopulationCap.baseValue = 10;
 	}
 
 	public void VerifyMembers()
@@ -96,10 +99,13 @@ public class NPCClan
 		}
 	}
 
-	public void AddMember(NPC npc)
+	public bool AddMember(NPC npc)
 	{
+		if(Size >= PopulationCap.GetValue())
+			return false;
 		//Debug.Log(ToString() + " Adding Memeber");
 		Members.Add(npc);
+		return true;
 	}
 
 	public void RemoveMember(NPC npc)

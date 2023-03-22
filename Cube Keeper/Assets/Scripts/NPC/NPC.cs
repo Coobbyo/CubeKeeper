@@ -8,7 +8,8 @@ public class NPC : MonoBehaviour
 	{
 		Roam,
 		Combat,
-		Work
+		Work,
+		Search
 	}
 	public State state;
 
@@ -47,9 +48,12 @@ public class NPC : MonoBehaviour
 
 	public void JoinClan(NPCClan clan)
 	{
+		if(!clan.AddMember(this))
+			return;
 		this.clan = clan;
+		stats.Clan = clan;
 		colorDisplay.material.color = clan.Color;
-		clan.AddMember(this);
+		
 		//if(NPCManager.Instance.GetClan(clan) == null)
 			//Debug.Log("it's clanGO");
 		transform.SetParent(clan.behaviour.memebersParent, true);
@@ -62,6 +66,7 @@ public class NPC : MonoBehaviour
 		{
 			//Debug.Log("Leaving " + clan.ToString());
 			clan.RemoveMember(this);
+			stats.Clan = null;
 			clan = null;
 		}
 		transform.SetParent(NPCManager.Instance.transform, true);
@@ -102,10 +107,16 @@ public class NPC : MonoBehaviour
 		return clan == otherNPC.clan || clan.IsFriend(otherNPC.clan);
 	}
 
+	public bool IsEnemy(NPC otherNPC)
+	{
+		return clan.IsEnemy(otherNPC.clan);
+	}
+
 	private void Die()
 	{
+		//Debug.Log("Fly you fools!");
 		LeaveClan();
-		Destroy(this.gameObject);
+		Destroy(gameObject);
 	}
 
 	override public string ToString()

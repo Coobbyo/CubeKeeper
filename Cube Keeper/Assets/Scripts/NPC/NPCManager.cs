@@ -97,7 +97,7 @@ public class NPCManager : MonoBehaviour
 	public void RemoveClan(NPCClan clan)
 	{
 		clans.Remove(clan);
-		ClanBehaviour clanB = clan.behaviour;
+		ClanBehaviour behaviour = clan.behaviour;
 
 		foreach (NPC npc in clan.Members)
 		{
@@ -107,10 +107,10 @@ public class NPCManager : MonoBehaviour
 		foreach(Structure structure in clan.builder.GetStructures())
 		{
 			structure.Clan = null;
-			Destroy(structure.gameObject);
+			structure.Crumble();
 		}
 
-		Destroy(clanB.gameObject);
+		Destroy(behaviour.gameObject);
 		clan = null;
 	}
 
