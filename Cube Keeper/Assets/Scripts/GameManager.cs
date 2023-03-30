@@ -10,7 +10,9 @@ public class GameManager : MonoBehaviour
 
 	private void Start()
 	{
-		//TimeTickSystem.Create();
+		TimeTickSystem.Create();
+		//TimeTickSystem.OnTick += ShowTick;
+		//TimeTickSystem.OnTick_5 += ShowMegaTick;
 
 		input.SpeedUpEvent += HandleSpeedUp;
 		input.SlowDownEvent += HandleSlowDown;
@@ -44,5 +46,16 @@ public class GameManager : MonoBehaviour
 		if(doPause)
 			Time.timeScale = 1f;
 		pauseMenu.SetActive(false);
+	}
+
+	private void ShowTick(int tick)
+	{
+		//tick = TimeTickSystem.GetTick();
+		Debug.Log("tick: " + tick);
+	}
+
+	private void ShowMegaTick(int tick)
+	{
+		Debug.Log("MEGA TICK");
 	}
 }

@@ -327,7 +327,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 86931706}
-  m_LocalRotation: {x: -0.0181178, y: -0.000000059604645, z: 0.000000037252903, w: 0.9998359}
+  m_LocalRotation: {x: -0.018117813, y: -0.000000029802319, z: 0.00000002235174, w: 0.99983585}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2493,6 +2493,7 @@ MonoBehaviour:
   proximity: 0.5
   spawnRate: 0.1
   maxSpawns: 50
+  chanceToSpawn: 1
 --- !u!4 &583894088
 Transform:
   m_ObjectHideFlags: 0
@@ -3995,6 +3996,7 @@ MonoBehaviour:
   proximity: 0.25
   spawnRate: 0.1
   maxSpawns: 100
+  chanceToSpawn: 1
 --- !u!4 &1087043921
 Transform:
   m_ObjectHideFlags: 0
@@ -5625,6 +5627,7 @@ MonoBehaviour:
   proximity: 0.5
   spawnRate: 7.5
   maxSpawns: 100
+  chanceToSpawn: 1
 --- !u!1 &1379029224
 GameObject:
   m_ObjectHideFlags: 0
@@ -7809,6 +7812,7 @@ MonoBehaviour:
   proximity: 0.25
   spawnRate: 5
   maxSpawns: 100
+  chanceToSpawn: 1
 --- !u!1 &1987621526
 GameObject:
   m_ObjectHideFlags: 0
@@ -8618,6 +8622,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7011959068671416858, guid: 6fdc721b38f527345b077093f1147267,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fdc721b38f527345b077093f1147267, type: 3}

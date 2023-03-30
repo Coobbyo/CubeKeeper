@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 696248984171564709}
   - component: {fileID: 1122912038504156212}
   - component: {fileID: 8392017400786593681}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fruit (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 3756345259963894653}
   - component: {fileID: 1353703312115744735}
   - component: {fileID: 4913859465208080382}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fruit (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 596527059036328595}
   - component: {fileID: 2164250130252087704}
   - component: {fileID: 7557073305342712292}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fruit (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 8545054627142036178}
   - component: {fileID: 4113961087305815496}
   - component: {fileID: 3132940553353515538}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fruit (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 585837396838218310}
   - component: {fileID: 3785981748282822290}
   - component: {fileID: 4754992787531172057}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FoodResource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -405,7 +405,7 @@ GameObject:
   - component: {fileID: 3965395965335535656}
   - component: {fileID: 6300523793025205246}
   - component: {fileID: 2193614480052067737}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fruit (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -488,7 +488,7 @@ GameObject:
   - component: {fileID: 230289077355714861}
   - component: {fileID: 2512042557689481861}
   - component: {fileID: 372507352299806991}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fruit (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -569,7 +569,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 991348327348802842}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -604,7 +604,7 @@ GameObject:
   - component: {fileID: 360454165831119827}
   - component: {fileID: 2676362229385030044}
   - component: {fileID: 395313516918941211}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bush
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -685,7 +685,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2818762234823762686}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fruit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -725,7 +725,7 @@ GameObject:
   - component: {fileID: 4093391980339136651}
   - component: {fileID: 6833141652240051480}
   - component: {fileID: 6629436441525677578}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fruit (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

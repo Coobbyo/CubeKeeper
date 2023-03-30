@@ -41,6 +41,11 @@ public class Tower : Structure
 			{
 				if(Clan.IsEnemy(possibleTarget.Clan))
 					targets.Add(possibleTarget);
+				else if(possibleTarget.TryGetComponent(out Structure possibleStructure))
+				{
+					if(!Clan.IsFriend(possibleStructure.Clan))
+					targets.Add(possibleStructure.GetComponent<Damageable>());
+				}
 			}
 		}
 

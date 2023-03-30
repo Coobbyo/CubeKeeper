@@ -38,7 +38,7 @@ public class NPCSocialBehaviour : MonoBehaviour
 		set { npc.stats.Loyalty = value; }
 	}
 
-	private Timer socialDelay;
+	private TickTimer socialDelay;
 
 	private void Awake()
 	{
@@ -50,12 +50,7 @@ public class NPCSocialBehaviour : MonoBehaviour
 		friendliness = npc.stats.Friendliness;
 		loyalty = npc.stats.Loyalty;
 		aggression = npc.stats.Aggression;
-		socialDelay = new Timer(Socialize, Random.Range(0f, 10f - friendliness.GetValue()));
-	}
-
-	private void Update()
-	{
-		socialDelay.Decrement();
+		socialDelay = new TickTimer(Socialize, Random.Range(0, 10 - friendliness.GetValue()));
 	}
 
 	public void Interact(NPCSocialBehaviour otherNPC)
@@ -93,7 +88,8 @@ public class NPCSocialBehaviour : MonoBehaviour
 
 				if(clan.IsEnemy(otherClan))
 				{
-					npc.state = NPC.State.Combat;
+					if(!npc.stateManager.IsState(npc.stateManager.CombatState))
+						npc.stateManager.SwitchState(npc.stateManager.CombatState);
 					return;
 				}
 			}
@@ -104,10 +100,7 @@ public class NPCSocialBehaviour : MonoBehaviour
 
 	private void Socialize()
 	{
-		//if(npc.state == NPC.State.Combat)
-			//return;
-		
-		if(clan != null && loyalty.GetValue() > 10)
+		if(clan != null && loyalty.GetValue() > 10 || npc == null)
 			return;
 
 		NPC otherNPC = npc.FindNearbyNPC();
@@ -116,7 +109,7 @@ public class NPCSocialBehaviour : MonoBehaviour
 		else
 			otherNPC.social.Interact(this);
 
-		socialDelay.Restart(Random.Range(5f, 10f - friendliness.GetValue()));
+		socialDelay.Restart(Random.Range(5, 10 - friendliness.GetValue()));
 	}
 
 	private bool SwapClan(NPCClan newClan)
@@ -141,7 +134,7 @@ public class NPCSocialBehaviour : MonoBehaviour
 		friendliness.AddModifier(Random.Range(-1, 2));
 		if(clan != null)
 			loyalty.AddModifier(Random.Range(-1, 2));
-		aggression.AddModifier(Random.Range(-1, 2));
+		aggression.AddModifier(Random.Range(0, 2));
 
 		npc.stats.ClampStats();
 	}
@@ -159,9 +152,5 @@ public class NPCSocialBehaviour : MonoBehaviour
 			return -1;
 
 		return 0;
-	}
-
-	private void Breed()
-	{
 	}
 }

@@ -7,7 +7,7 @@ public class ClanBehaviour : MonoBehaviour
 {
 	public Transform memebersParent;
 	public Transform structuresParent;
-	private Timer buildTimer;
+	private TickTimer buildTimer;
 	private NPCClan clan;
 	public NPCClan Clan
 	{
@@ -18,12 +18,14 @@ public class ClanBehaviour : MonoBehaviour
 		}
 	}
 
+	private int failedBuilds;
+
 	private void Start()
 	{
 		//Debug.Log("Starting clan");
 		name = clan.ToString();
 
-		buildTimer = new Timer(CheckBuildNeeds, 5f);
+		buildTimer = new TickTimer(CheckBuildNeeds, 5);
 	}
 
 	private void Update()
@@ -31,14 +33,17 @@ public class ClanBehaviour : MonoBehaviour
 		//return;
 		if(Clan == null)
 			Debug.LogError("Clan is null");
-		buildTimer.Decrement();
 	}
 
 	private void CheckBuildNeeds()
 	{
 		StructureData nextBuild = Clan.builder.GetNextStructureToBuild();
 		if(nextBuild != null)
-			BuildManager.Instance.RequestBuild(nextBuild, Clan.GetRandomMemeber().transform.position, Clan);
+			if(!BuildManager.Instance.RequestBuild(nextBuild, Clan.GetRandomMemeber().transform.position, Clan)) failedBuilds++;
+
+		if(failedBuilds > 3)
+			Clan.Search();
+
 		buildTimer.Restart();
 	}
 

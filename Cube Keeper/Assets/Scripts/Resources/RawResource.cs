@@ -44,6 +44,7 @@ public class RawResource : MonoBehaviour, IInventory
 
 	private void OnResourcesDepleted()
 	{
+		//Debug.Log("Destroying");
 		Destroy(gameObject);
 	}
 

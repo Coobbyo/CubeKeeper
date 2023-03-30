@@ -15,9 +15,11 @@ public class Combat : MonoBehaviour
 
 	public event System.Action DoAttack;
 
-	private void Awake()
+	virtual public void Awake()
 	{
 		myStats = GetComponent<Damageable>();
+		if(myStats == null)
+			Debug.Log("NULL STATS!");
 	}
 
 	private void Update()
@@ -28,11 +30,12 @@ public class Combat : MonoBehaviour
 
 	public void Attack(Damageable enemyStats)
 	{
+		//Debug.Log("Attacking");
 		if(attackCountdown <= 0f)
 		{
 			this.target = enemyStats;
 
-			DoAttack();
+			DoAttack?.Invoke();
 
 			attackCountdown = 1f / attackRate;
 

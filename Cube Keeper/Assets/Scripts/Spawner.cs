@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-	public List<Transform> list = new List<Transform>();
+	public List<GameObject> list = new List<GameObject>();
 
 	[SerializeField] private GameObject prefab;
 	public GameObject Prefab
@@ -56,34 +56,33 @@ public class Spawner : MonoBehaviour
 		}
 	}
 
-	private float oddsToSpawn = 1f;
+	[SerializeField] private float chanceToSpawn = 1f;
 
-	private Timer spawnTimer;
+	private TickTimer spawnTimer;
 
 	private void Start()
 	{
-		spawnTimer = new Timer(Spawn, SpawnRate);
+		spawnTimer = new TickTimer(TrySpawn, (int)(SpawnRate * 5f));
 	}
 
-	private void Update()
+	private void TrySpawn()
 	{
 		if(list.Count < MaxSpawns)
-			spawnTimer.Decrement();
+			Spawn();
+		else
+			Purge();
+		
+		spawnTimer.Restart();
 	}
 
 	private void Spawn()
 	{	
-		//TODO: Eventually this needs to be coverted into object pooling
-
-		if(Random.value > 1 / oddsToSpawn)
+		if(Random.value <= 1 - chanceToSpawn)
 			return;
 		
-		//Add sphere overlap colider detection so that objects aren't placed too close together
 		Vector3 point = new Vector3(Random.insideUnitCircle.x, 0, Random.insideUnitCircle.y);
 		Vector3 spawnPoint = transform.position + point * Radius;
 
-
-		//Could also make an ISpawnable interface? maybe subscribe to an OnDestroy event?
 		LayerMask mask = new LayerMask();
 		mask |= (1 << LayerMask.NameToLayer("Spawnable"));
 		Collider[] colliders = Physics.OverlapSphere(spawnPoint, Proximity, mask);
@@ -97,8 +96,16 @@ public class Spawner : MonoBehaviour
 		Quaternion spawnRotation = Quaternion.identity;
 
 		GameObject spawnGO = Instantiate(Prefab, spawnPoint, spawnRotation, transform);
-		list.Add(spawnGO.transform);
+		list.Add(spawnGO);
+	}
 
-		spawnTimer.Restart();
+	private void Purge()
+	{
+		//Debug.Log("Purge");
+		for (int i = 0; i < list.Count; i++)
+		{
+			if(list[i] == null) list.Remove(list[i]);
+		}
+			
 	}
 }

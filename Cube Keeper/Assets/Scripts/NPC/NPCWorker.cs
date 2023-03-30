@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class NPCWorker : MonoBehaviour
 {
-	[SerializeField] private float workingRange = 5f;
-	[SerializeField] private Transform carryPoint;
+	public float workingRange = 5f;
+	public Transform carryPoint;
 
 	private NPC npc;
 
-	private Transform targetFrom;
-	private Transform targetTo;
+	public Transform targetFrom;
+	public Transform targetTo;
 	
-	private Transform currentTarget
+	public Transform currentTarget
 	{
 		get { return npc.target; }
 		set { npc.SetTarget(value); }
@@ -21,39 +21,23 @@ public class NPCWorker : MonoBehaviour
 	private int loadCapacity = 1;
 	private Inventory inventory { get { return npc.inventory; } }
 
-	private Timer findDelay;
-	private Timer workDelay;
 
 	private void Awake()
 	{
 		npc = GetComponent<NPC>();
 	}
 
-	private void Start()
+	public bool FindWork()
 	{
-		findDelay = new Timer(FindWork, Random.Range(0f, 1f));
-		//findDelay.ShowLogs = true;
-		workDelay = new Timer(DoWork, Random.Range(0f, 1f));
-
-	}
-
-	private void Update()
-	{
-		switch(npc.state)
+		//TODO: verify that npc's drop off excess resources they may be holding
+		
+		if(npc.stateManager.IsState(npc.stateManager.WorkState))
 		{
-			case NPC.State.Roam:
-				findDelay.Decrement();
-				break;
-			case NPC.State.Work:
-				workDelay.Decrement();
-				break;
+			//Debug.Log("already working");
+			return false;
 		}
-	}
-
-	private void FindWork()
-	{
-		if(npc.clan == null)
-			return;
+		if(npc.stateManager.npc.clan == null)
+			return false;
 
 		if(targetFrom == null)
 			FindFromTarget();
@@ -64,12 +48,11 @@ public class NPCWorker : MonoBehaviour
 		{
 			VerifyTargets();
 			currentTarget = targetFrom;
-			npc.state = NPC.State.Work;
-			workDelay.Restart(Random.Range(0, 1f));
-			//Debug.Log("State Changed to work");
+			npc.stateManager.SwitchState(npc.stateManager.WorkState);
+			return true;
 		}
 
-		findDelay.Restart(Random.Range(0f, 5f));
+		return false;
 	}
 
 	public void FindFromTarget()
@@ -178,27 +161,8 @@ public class NPCWorker : MonoBehaviour
 		}
 	}
 
-	private void DoWork()
+	public void DoWork()
 	{
-		if(targetFrom == null)
-		{
-			if(carryPoint.childCount > 0)
-				currentTarget = targetTo;
-			else
-			{
-				//Debug.Log("Roaming From"); //This one keeps happening
-				npc.state = NPC.State.Roam;
-				return;
-			}
-		}
-		
-		if(targetTo == null)
-		{
-			//Debug.Log("Roaming To");
-			npc.state = NPC.State.Roam;
-			return;
-		}
-
 		//Debug.Log("Working!");
 		if(Vector3.Distance(transform.position, currentTarget.position) <= npc.interactRange)
 		{
@@ -208,8 +172,6 @@ public class NPCWorker : MonoBehaviour
 			else if(currentTarget == targetTo)
 				Deposit();
 		}
-
-		workDelay.Restart(Random.Range(0, 1f));
 	}
 
 	public void Withdraw()
@@ -286,7 +248,7 @@ public class NPCWorker : MonoBehaviour
 		return inventorySize >= loadCapacity ? true : false;
 	}
 
-	private void VerifyTargets()
+	public void VerifyTargets()
 	{
 		if(targetFrom == null || targetTo == null)
 			return;

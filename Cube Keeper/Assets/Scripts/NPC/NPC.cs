@@ -2,17 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(NPCStateManager))]
 public class NPC : MonoBehaviour
 {
-	public enum State
-	{
-		Roam,
-		Combat,
-		Work,
-		Search
-	}
-	public State state;
-
+	public NPCStateManager stateManager;
 
 	public float interactRange { get; private set; }
 	public NPCClan clan { get; private set; }
@@ -31,6 +24,8 @@ public class NPC : MonoBehaviour
 
 	private void Awake()
 	{
+		stateManager = GetComponent<NPCStateManager>();
+
 		movement = GetComponent<NPCMovement>();
 		social = GetComponent<NPCSocialBehaviour>();
 		combat = GetComponent<NPCCombat>();
@@ -112,11 +107,23 @@ public class NPC : MonoBehaviour
 		return clan.IsEnemy(otherNPC.clan);
 	}
 
+	public void Search()
+	{
+		if(stateManager.IsState(stateManager.RoamState))
+			stateManager.SwitchState(stateManager.SearchState);
+	}
+
 	private void Die()
 	{
 		//Debug.Log("Fly you fools!");
 		LeaveClan();
 		Destroy(gameObject);
+	}
+
+	private void OnDrawGizmosSelected()
+	{
+		Gizmos.color = Color.white;
+		Gizmos.DrawWireSphere(transform.position, interactRange);
 	}
 
 	override public string ToString()

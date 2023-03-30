@@ -118,6 +118,9 @@ public class NPCClan
 
 	public bool IsFriend(NPCClan otherClan)
 	{
+		if(otherClan == this)
+			return true;
+		
 		foreach(NPCClan clan in Friends)
 		{
 			if(clan == otherClan)
@@ -146,6 +149,14 @@ public class NPCClan
 			return null;
 		}
 		return Members[Random.Range(0, Members.Count)];
+	}
+
+	public void Search()
+	{
+		foreach (NPC member in Members)
+		{
+			member.Search();
+		}
 	}
 
 	public void Notify(NPCClan clan, int socialPoints)

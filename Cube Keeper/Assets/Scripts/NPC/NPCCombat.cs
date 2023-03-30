@@ -15,8 +15,9 @@ public class NPCCombat : Combat
 	[SerializeField] private GameObject bulletPrefab;
 	[SerializeField] private Transform firePoint;
 
-	private void Awake()
+	override public void Awake()
 	{
+		base.Awake();
 		npc = GetComponent<NPC>();
 	}
 
@@ -27,64 +28,19 @@ public class NPCCombat : Combat
 		attackRate += Mathf.Abs(npc.stats.Aggression.GetValue());
 	}
 
-	private void Update()
-	{
-		if(npc.state != NPC.State.Combat)
-			return;
-
-		if(Target == null)
-			FindTarget();
-		else
-			Attack(target);
-	}
-
-	private void FindTarget()
-	{
-		List<NPC> otherNPCs = npc.FindNearbyNPCs();
-		var targets = new List<Damageable>();
-
-		foreach(NPC otherNPC in otherNPCs)
-		{
-			if(IsTarget(otherNPC)) //Check if less than max health
-			{
-				targets.Add(otherNPC.stats);
-				return;
-			}
-			else
-			{
-				npc.state = NPC.State.Roam;
-				return;
-			}
-		}
-
-		npc.state = NPC.State.Roam;
-	}
-
 	private void Shoot()
 	{
 		GameObject bulletGO = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 		bulletGO.GetComponentInChildren<MeshRenderer>().material.color = npc.colorDisplay.material.color;
 		Bullet bullet = bulletGO.GetComponent<Bullet>();
+
+		if(bullet == null) Debug.Log("Bullet null");
+		if(myStats == null) Debug.Log("stats null");
+		if(myStats.Damage ==  null) Debug.Log("stat (single) null");
+
 		bullet.SetDamage(myStats.Damage.GetValue());
 
 		if(bullet != null)
 			bullet.Seek(target.HitPoint);
-	}
-
-	private bool IsTarget(NPC otherNPC)
-	{
-		if(npc.stats.Aggression.GetValue() > 0f && npc.clan.IsEnemy(otherNPC.clan))
-			return true;
-		if(npc.stats.Aggression.GetValue() > 5f && otherNPC.clan == null)
-			return true;
-
-		if(npc.stats.Damage.GetValue() > 0f)
-			return false;
-
-		if(npc.IsFriend(otherNPC) &&
-			otherNPC.stats.CurrentHealth <= otherNPC.stats.MaxHealth.GetValue()) //Has less than full health
-			return true;
-
-		return false;
 	}
 }

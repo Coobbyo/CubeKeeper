@@ -8,9 +8,10 @@ using UnityEngine;
 
 public static class TimeTickSystem
 {
-	public static event Action<int> OnTick;
-	public static event Action<int> OnTick_5;
+	public static event Action<int> OnTick; 	
+	public static event Action<int> OnTick_Big; //Once per second
 
+	private const int TICKS_PER_SECOND = 5;
 	private const float TICK_TIMER_MAX = 0.2f; //Inverse ticks per second
 
 	private static GameObject timeTickSystemGameObject;
@@ -47,8 +48,8 @@ public static class TimeTickSystem
 				tickTimer -= TICK_TIMER_MAX;
 				tick++;
 				OnTick?.Invoke(tick);
-				if(tick % 5 == 0)
-					OnTick_5?.Invoke(tick);
+				if(tick % TICKS_PER_SECOND == 0)
+					OnTick_Big?.Invoke(tick);
 			}
 		}
 	}

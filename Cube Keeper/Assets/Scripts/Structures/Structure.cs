@@ -30,7 +30,7 @@ public class Structure : MonoBehaviour
 	virtual public void Awake()
 	{
 		stats = GetComponent<Damageable>();
-		//stats.OnHealthReachedZero += Crumble;
+		stats.OnHealthReachedZero += Crumble;
 	}
 
 	virtual public void OnDestroy()

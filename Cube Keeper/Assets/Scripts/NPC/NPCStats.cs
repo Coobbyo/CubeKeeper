@@ -16,7 +16,7 @@ public class NPCStats : Damageable
     {
         Friendliness.baseValue = Random.Range(0, 5);
 		Loyalty.baseValue = Random.Range(-10, 10);
-		Aggression.baseValue = Random.Range(-2, 2);
+		Aggression.baseValue = Random.Range(0, 2);
 
 		MaxHealth.baseValue = 10;
 		CurrentHealth = MaxHealth.GetValue();

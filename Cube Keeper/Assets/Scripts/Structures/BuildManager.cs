@@ -26,12 +26,12 @@ public class BuildManager : MonoBehaviour
 			instance = this;
 	}
 
-	public void RequestBuild(Build build, Vector3 position, NPCClan clan)
+	public bool RequestBuild(Build build, Vector3 position, NPCClan clan)
 	{
-		RequestBuild(GetStructure(build), position, clan);
+		return RequestBuild(GetStructure(build), position, clan);
 	}
 
-	public void RequestBuild(StructureData data, Vector3 position, NPCClan clan)
+	public bool RequestBuild(StructureData data, Vector3 position, NPCClan clan)
 	{
 		float radius = 3f;
 		LayerMask mask = new LayerMask();
@@ -51,8 +51,8 @@ public class BuildManager : MonoBehaviour
 					break;
 			}
 
-			if(colliders.Length > 0) //Here we should send out cubes to search
-				return;
+			if(colliders.Length > 0) //Still not able to build
+				return false;
 		}
 
 		GameObject buildSiteGO = Instantiate(GetStructure(0).prefab, position, Quaternion.identity, clan.behaviour.structuresParent);
@@ -62,11 +62,13 @@ public class BuildManager : MonoBehaviour
 		newBuildSite.Clan = clan;
 
 		clan.builder.AddStructure(newBuildSite);
+
+		return true;
 	}
 
 	public void BuildStructure(StructureData data, Vector3 position, NPCClan clan)
 	{
-		GameObject structureGO = Instantiate(data.prefab, position, Quaternion.identity, this.transform);
+		GameObject structureGO = Instantiate(data.prefab, position, Quaternion.identity, clan.behaviour.structuresParent);
 		Structure newStructure = structureGO.GetComponent<Structure>();
 
 		newStructure.Clan = clan;
