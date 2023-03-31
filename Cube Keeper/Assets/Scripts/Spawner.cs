@@ -106,6 +106,10 @@ public class Spawner : MonoBehaviour
 		{
 			if(list[i] == null) list.Remove(list[i]);
 		}
-			
+	}
+
+	private void OnDestroy()
+	{
+		spawnTimer.Stop();
 	}
 }

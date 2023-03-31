@@ -10,6 +10,7 @@ public class NPCRoamState : NPCBaseState
 
 	private TickTimer moveDelay;
 	private TickTimer findDelay;
+	private TickTimer breedDelay;
 
 	public NPCRoamState(NPCStateManager manager)
 	{
@@ -26,6 +27,8 @@ public class NPCRoamState : NPCBaseState
 		moveDelay.Stop();
 		findDelay = new TickTimer(FindWork);
 		findDelay.Stop();
+		breedDelay = new TickTimer(BreedCheck);
+		breedDelay.Stop();
 			
 		manager.npc.SetTarget(null);
 	}
@@ -44,7 +47,7 @@ public class NPCRoamState : NPCBaseState
 		findDelay.Restart();
 
 		if(manager.npc.clan != null && !manager.npc.clan.IsFull())
-			TimeTickSystem.OnTick_Big += BreedCheck;
+			breedDelay.Restart();
 
 		manager.npc.SetTarget(null);
 	}
@@ -53,7 +56,7 @@ public class NPCRoamState : NPCBaseState
 	{
 		findDelay.Stop();
 		moveDelay.Stop();
-		TimeTickSystem.OnTick_Big -= BreedCheck;
+		breedDelay.Stop();
 	}
 
 	override public void UpdateState() {}
@@ -84,7 +87,7 @@ public class NPCRoamState : NPCBaseState
 			findDelay.Restart(Random.Range(5, 50));
 	}
 
-	private void BreedCheck(int tick)
+	private void BreedCheck()
 	{
 		if(Random.value > 0.99)
 			manager.SwitchState(manager.BreedState);

@@ -53,6 +53,11 @@ public class NPCSocialBehaviour : MonoBehaviour
 		socialDelay = new TickTimer(Socialize, Random.Range(0, 10 - friendliness.GetValue()));
 	}
 
+	private void OnDestroy()
+	{
+		socialDelay.Stop();
+	}
+
 	public void Interact(NPCSocialBehaviour otherNPC)
 	{
 		NPCClan otherClan = otherNPC.clan;

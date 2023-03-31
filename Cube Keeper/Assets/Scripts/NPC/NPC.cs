@@ -115,6 +115,8 @@ public class NPC : MonoBehaviour
 
 	public void Search()
 	{
+		if(Random.value < (stats.Idleness.GetValue() * 5f))
+			return;
 		if(stateManager.IsState(stateManager.RoamState))
 			stateManager.SwitchState(stateManager.SearchState);
 	}

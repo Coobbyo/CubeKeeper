@@ -44,7 +44,7 @@ public class ClanBehaviour : MonoBehaviour
 				failedBuilds++;
 		}
 
-		if(failedBuilds > 3)
+		if(failedBuilds > 10)
 		{
 			failedBuilds = 0;
 			Clan.Search();
@@ -105,5 +105,11 @@ public class ClanBehaviour : MonoBehaviour
 		//If there is a deficit we should send cubes to search
 
 		return resourceDeficit.items;
+	}
+
+	private void OnDestroy()
+	{
+		if(buildTimer != null)
+			buildTimer.Stop();
 	}
 }

@@ -232,8 +232,9 @@ MonoBehaviour:
   prefab: {fileID: 3870777048452601987, guid: 2d1b88048e80bab4097c6c21e826c4c2, type: 3}
   radius: 0.75
   proximity: 0.25
-  spawnRate: 10
+  spawnRate: 20
   maxSpawns: 3
+  chanceToSpawn: 1
 --- !u!114 &1043419720283091267
 MonoBehaviour:
   m_ObjectHideFlags: 0

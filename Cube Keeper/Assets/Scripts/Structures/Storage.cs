@@ -27,6 +27,7 @@ public class Storage : Structure, IInventory
 		}
 	}
 
+	public BuildSite parentSite;
 	public event System.Action OnFull;
 	[SerializeField] private Transform storageSpotParent;
 	private List<Transform> storageSpots = new List<Transform>();
@@ -199,6 +200,8 @@ public class Storage : Structure, IInventory
 
     public override void Crumble()
     {
+		if(parentSite != null)
+			parentSite.Crumble();
         base.Crumble();
     }
 }

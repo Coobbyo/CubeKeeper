@@ -167,7 +167,7 @@ public class NPCWorker : MonoBehaviour
 
 	public void DoWork()
 	{
-		Debug.Log("Working!");
+		//Debug.Log("Working!");
 		if(Vector3.Distance(transform.position, currentTarget.position) <= npc.interactRange)
 		{
 			//Debug.Log("close enough");

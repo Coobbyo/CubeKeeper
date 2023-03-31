@@ -26,6 +26,7 @@ public class Structure : MonoBehaviour
 	[SerializeField] private MeshRenderer[] displayMeshes;
 	[SerializeField] protected StructureData data;
 	protected Damageable stats;
+	protected bool IsCrumbling;
 
 	virtual public void Awake()
 	{
@@ -49,6 +50,7 @@ public class Structure : MonoBehaviour
 
 	virtual public void Crumble()
 	{
+		IsCrumbling = true;
 		if(gameObject != null)
 			Destroy(gameObject);
 	}

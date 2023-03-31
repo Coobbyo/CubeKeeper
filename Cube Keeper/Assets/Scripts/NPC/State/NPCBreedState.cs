@@ -47,7 +47,7 @@ public class NPCBreedState : NPCBaseState
 
 	override public void EnterState()
 	{
-		//Debug.Log("Breeding");
+		Debug.Log("Breeding");
 		foreach(GameObject effect in manager.stateEffects)
 		{
 			effect.SetActive(false);

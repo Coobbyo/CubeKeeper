@@ -10,13 +10,14 @@ public class NPCStats : Damageable
 	public Stat Aggression;// { get; private set; }
 
 	//Work Stats
-	//Idleness
+	public Stat Idleness;// { get; private set; }
 
     private void Start()
     {
         Friendliness.baseValue = Random.Range(0, 5);
 		Loyalty.baseValue = Random.Range(-10, 10);
 		Aggression.baseValue = Random.Range(0, 2);
+		Idleness.baseValue = Random.Range(-5, 5);
 
 		MaxHealth.baseValue = 10;
 		CurrentHealth = MaxHealth.GetValue();
@@ -29,6 +30,7 @@ public class NPCStats : Damageable
 		int friendlinessCap = 10;
 		int loyaltyCap = 15;
 		int agressionCap = 10;
+		int idlenessCap = 10;
 
 		if(Friendliness.GetValue() > friendlinessCap ||
 			Friendliness.GetValue() < -friendlinessCap)
@@ -46,6 +48,12 @@ public class NPCStats : Damageable
 			Aggression.GetValue() < -agressionCap)
 		{
 			Aggression.ClearModifiers();
+		}
+
+		if(Idleness.GetValue() > idlenessCap ||
+			Idleness.GetValue() < -idlenessCap)
+		{
+			Idleness.ClearModifiers();
 		}
 	}
 }

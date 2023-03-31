@@ -43,6 +43,7 @@ public class BuildSite : Structure, IInventory
 			newStorage.MaxStorage = structureToBuild.resourceList[i].StackSize;
 			newStorage.OnFull += CheckResources;
 			newStorage.Clan = Clan;
+			newStorage.parentSite = this;
 
 			storages[i] = newStorage;
 		}
@@ -141,6 +142,10 @@ public class BuildSite : Structure, IInventory
 
     public override void Crumble()
     {
+		if(IsCrumbling == true)
+			return;
+
+		IsCrumbling = true;
 		for(int i = 0; i < storages.Length; i++)
 		{
 			if(storages[i] == null) continue;

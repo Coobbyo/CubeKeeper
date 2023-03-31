@@ -119,11 +119,19 @@ public class ClanBuilder
 	private bool NeedFarm()
 	{
 		bool needFood = false;
+		ItemData foodData = ResourceManager.Instance.GetResource(ResourceManager.Resource.Food);
 		List<Item> needs = clan.behaviour.ResourceDeficit();
 		foreach(Item need in needs)
 		{
-			if(need.Data.displayName == "Food")
+			if(need.Data == foodData)
 				needFood = true;
+		}
+
+		if(needFood)
+		{
+			List<Structure> farms = GetStructures(BuildManager.Build.Farm);
+			if(farms.Count >= clan.Size / 2 && farms.Count > 0)
+				needFood = false;
 		}
 
 		return needFood;
