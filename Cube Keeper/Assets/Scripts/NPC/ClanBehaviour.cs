@@ -25,7 +25,7 @@ public class ClanBehaviour : MonoBehaviour
 		//Debug.Log("Starting clan");
 		name = clan.ToString();
 
-		buildTimer = new TickTimer(CheckBuildNeeds, 5);
+		buildTimer = new TickTimer(CheckBuildNeeds, 25);
 	}
 
 	private void Update()
@@ -39,10 +39,16 @@ public class ClanBehaviour : MonoBehaviour
 	{
 		StructureData nextBuild = Clan.builder.GetNextStructureToBuild();
 		if(nextBuild != null)
-			if(!BuildManager.Instance.RequestBuild(nextBuild, Clan.GetRandomMemeber().transform.position, Clan)) failedBuilds++;
+		{
+			if(!BuildManager.Instance.RequestBuild(nextBuild, Clan.GetRandomMemeber().transform.position, Clan))
+				failedBuilds++;
+		}
 
 		if(failedBuilds > 3)
+		{
+			failedBuilds = 0;
 			Clan.Search();
+		}
 
 		buildTimer.Restart();
 	}

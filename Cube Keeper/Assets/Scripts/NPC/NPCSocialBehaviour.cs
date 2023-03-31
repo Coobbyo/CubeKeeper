@@ -89,7 +89,7 @@ public class NPCSocialBehaviour : MonoBehaviour
 				if(clan.IsEnemy(otherClan))
 				{
 					if(!npc.stateManager.IsState(npc.stateManager.CombatState))
-						npc.stateManager.SwitchState(npc.stateManager.CombatState);
+						//npc.stateManager.SwitchState(npc.stateManager.CombatState);
 					return;
 				}
 			}

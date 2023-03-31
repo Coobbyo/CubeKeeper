@@ -141,6 +141,11 @@ public class NPCClan
 		return false;
 	}
 
+	public bool IsFull()
+	{
+		return Members.Count >= PopulationCap.GetValue();
+	}
+
 	public NPC GetRandomMemeber()
 	{
 		if(Members.Count <= 0)

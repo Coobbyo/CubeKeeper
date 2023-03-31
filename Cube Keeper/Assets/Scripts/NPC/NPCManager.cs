@@ -53,7 +53,7 @@ public class NPCManager : MonoBehaviour
 		return newNPC;
 	}
 
-	private void CreateNPC(NPCClan clan)
+	public void CreateNPC(NPCClan clan)
 	{
 		NPC npc = CreateNPC();
 		unclaimedNPCs.Remove(npc);

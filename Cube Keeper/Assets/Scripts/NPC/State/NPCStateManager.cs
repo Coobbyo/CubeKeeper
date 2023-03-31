@@ -30,7 +30,8 @@ public class NPCStateManager : MonoBehaviour
 
 	private void Start()
 	{
-		SwitchState(RoamState);
+		currentState = RoamState;
+		currentState.EnterState();
 	}
 
 	private void Update()
@@ -40,8 +41,9 @@ public class NPCStateManager : MonoBehaviour
 
 	public void SwitchState(NPCBaseState state)
 	{
+		currentState.LeaveState();
+		state.EnterState();
 		currentState = state;
-		state.EnterState(this);
 	}
 
 	public Vector3 GetTarget()
@@ -51,7 +53,11 @@ public class NPCStateManager : MonoBehaviour
 
 	public bool IsState(NPCBaseState state)
 	{
-		return state == currentState;
+		if(currentState == null)
+		{
+			return false;
+		}
+		return state.stateID == currentState.stateID;
 	}
 
 	private void OnDrawGizmosSelected()

@@ -14,9 +14,9 @@ public class BuildManager : MonoBehaviour
 		Tower
 	}
 	public StructureData[] Structures;
-    //maybe have some effects like when built or destroied?
+	//maybe have some effects like when built or destroied?
 
-    private static BuildManager instance;
+	private static BuildManager instance;
 	public static BuildManager Instance { get {return instance; } private set{} }
 	private void Awake()
 	{

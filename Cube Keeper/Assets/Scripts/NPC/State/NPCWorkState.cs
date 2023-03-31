@@ -10,31 +10,48 @@ public class NPCWorkState : NPCBaseState
 	{
 		this.manager = manager;
 		stats = manager.npc.stats;
+		stateID = 4;
 		work = manager.npc.work;
 
 		workDelay = new TickTimer(DoWork);
+		workDelay.Stop();
 	}
 
-	public override void EnterState(NPCStateManager manager)
+	public override void EnterState()
 	{
 		//Debug.Log("Working");
 		foreach(GameObject effect in manager.stateEffects)
 		{
 			effect.SetActive(false);
 		}
-		manager.stateEffects[4].SetActive(true);
+		manager.stateEffects[stateID].SetActive(true);
 
 		workDelay.Restart();
 	}
 
-	public override void UpdateState() {}
+	public override void LeaveState()
+	{
+		workDelay.Stop();
+	}
+
+	public override void UpdateState()
+	{
+		/*if(work.currentTarget != null)
+		{
+			Debug.Log("Work might be broken ABORT");
+			manager.SwitchState(manager.RoamState);
+		}*/
+	}
 
 	private void DoWork()
 	{
 		if(work == null) return;//bandaid!
 		//TODO: Maybe have an if statement that randomizes frequency based on lazyness
-		if(Random.value > 0.25f)
+		if(Random.value > 0.99f)
+		{
+			workDelay.Restart(5);
 			return;
+		}
 		
 		if(work.targetFrom == null)
 		{
@@ -70,8 +87,8 @@ public class NPCWorkState : NPCBaseState
 	}
 
 	public override void OnDrawGizmosSelected()
-    {
+	{
 		Gizmos.color = Color.yellow;
 		Gizmos.DrawWireSphere(manager.transform.position, work.workingRange);
-    }
+	}
 }

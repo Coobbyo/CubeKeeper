@@ -15,6 +15,7 @@ public class NPCSearchState : NPCBaseState
 	{
 		this.manager = manager;
 		movement = manager.npc.movement;
+		stateID = 3;
 		stats = manager.npc.stats;
 		work = manager.npc.work;
 		
@@ -22,25 +23,33 @@ public class NPCSearchState : NPCBaseState
 		moveRange = 25f;
 
 		moveDelay = new TickTimer(FindNewDestination);
+		moveDelay.Stop();
 		findDelay = new TickTimer(FindWork);
+		findDelay.Stop();
 			
 		manager.npc.SetTarget(null);
 	}
 
-	override public void EnterState(NPCStateManager manager)
+	override public void EnterState()
 	{
 		//Debug.Log("Searching");
 		foreach(GameObject effect in manager.stateEffects)
 		{
 			effect.SetActive(false);
 		}
-		manager.stateEffects[3].SetActive(true);
+		manager.stateEffects[stateID].SetActive(true);
 
 		moveDelay.Restart();
 		findDelay.Restart();
 
 		manager.npc.SetTarget(null);
 	}
+
+	public override void LeaveState()
+    {
+        findDelay.Stop();
+		moveDelay.Stop();
+    }
 
 	override public void UpdateState() {}
 
@@ -61,14 +70,16 @@ public class NPCSearchState : NPCBaseState
 		Roam();
 		
 		//I want to eventually change this to be affected by lazyness
-		moveDelay.Restart(Random.Range(5, 10));
+		moveDelay.Restart(Random.Range(25, 50));
 	}
 	
 	private void FindWork()
 	{
 		if(work == null) return;//bandaid!
 		if(!work.FindWork())
-			findDelay.Restart(Random.Range(5, 50));
+			findDelay.Restart(Random.Range(5, 10));
+		//else
+			//Debug.Log("Finding work");
 	}
 
 	override public Vector3 GetTarget()
@@ -81,4 +92,6 @@ public class NPCSearchState : NPCBaseState
 		Gizmos.color = Color.blue;
 		Gizmos.DrawWireSphere(manager.transform.position, moveRange);
     }
+
+    
 }

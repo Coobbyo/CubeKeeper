@@ -6,6 +6,7 @@ public class NPCWorker : MonoBehaviour
 {
 	public float workingRange = 5f;
 	public Transform carryPoint;
+	public ItemData ItemCarried;
 
 	private NPC npc;
 
@@ -36,7 +37,7 @@ public class NPCWorker : MonoBehaviour
 			//Debug.Log("already working");
 			return false;
 		}
-		if(npc.stateManager.npc.clan == null)
+		if(npc.clan == null)
 			return false;
 
 		if(targetFrom == null)
@@ -48,8 +49,11 @@ public class NPCWorker : MonoBehaviour
 		{
 			VerifyTargets();
 			currentTarget = targetFrom;
-			npc.stateManager.SwitchState(npc.stateManager.WorkState);
-			return true;
+			if(currentTarget != null)
+			{
+				npc.stateManager.SwitchState(npc.stateManager.WorkState);
+				return true;
+			}
 		}
 
 		return false;
@@ -163,7 +167,7 @@ public class NPCWorker : MonoBehaviour
 
 	public void DoWork()
 	{
-		//Debug.Log("Working!");
+		Debug.Log("Working!");
 		if(Vector3.Distance(transform.position, currentTarget.position) <= npc.interactRange)
 		{
 			//Debug.Log("close enough");
@@ -187,6 +191,7 @@ public class NPCWorker : MonoBehaviour
 		inv.Remove(resource);
 		inventory.Add(resource);
 
+		ItemCarried = resource;
 		Instantiate(resource.prefab, carryPoint);
 	}
 
@@ -228,10 +233,25 @@ public class NPCWorker : MonoBehaviour
 		}
 
 		inventory.Remove(inv.GetResource());
+		ItemCarried = null;
 
 		foreach (Transform child in carryPoint)
 		{
 			Destroy(child.gameObject);
+		}
+	}
+
+	public void DropItem() //TODO if item dropping is added to the game, this will need to be looked at
+	{
+		if(IsItemCarried())
+		{
+			inventory.Remove(ItemCarried);
+			ItemCarried = null;
+
+			foreach (Transform child in carryPoint)
+			{
+				Destroy(child.gameObject);
+			}
 		}
 	}
 
@@ -246,6 +266,11 @@ public class NPCWorker : MonoBehaviour
 			}
 		}
 		return inventorySize >= loadCapacity ? true : false;
+	}
+
+	public bool IsItemCarried()
+	{
+		return carryPoint.childCount > 0;
 	}
 
 	public void VerifyTargets()
@@ -266,12 +291,12 @@ public class NPCWorker : MonoBehaviour
 		if(invTo.GetResource() == null)
 			return;
 
-		if(carryPoint.childCount > 0) //This is checking the item we are carying
+		if(IsItemCarried()) //This is checking the item we are carying
 		{
 			if(inventory.items.Count == 0)
-				//Debug.LogError("Are we carrying something with an empty inventory?");
+				Debug.LogError("Are we carrying something with an empty inventory?");
 			
-			//Is the item we have the same as where we are withdrawing?
+			//Do we have the item we are withdrawing?
 			if(inventory.Get(invFrom.GetResource()) == null)
 			{
 				//Debug.Log("Nulling From");

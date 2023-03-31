@@ -67,6 +67,12 @@ public class NPC : MonoBehaviour
 		transform.SetParent(NPCManager.Instance.transform, true);
 	}
 
+	public void SetPartner(NPC partner)
+	{
+		stateManager.BreedState.partner = partner;
+		//SetTarget(partner.transform);
+	}
+
 	public void SetTarget(Transform t)
 	{
 		target = t;
@@ -116,6 +122,7 @@ public class NPC : MonoBehaviour
 	private void Die()
 	{
 		//Debug.Log("Fly you fools!");
+		work.DropItem();
 		LeaveClan();
 		Destroy(gameObject);
 	}

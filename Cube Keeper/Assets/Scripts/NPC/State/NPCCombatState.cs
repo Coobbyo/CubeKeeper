@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,18 +9,21 @@ public class NPCCombatState : NPCBaseState
 	{
 		this.manager = manager;
 		stats = manager.npc.stats;
+		stateID = 1;
 		combat = manager.npc.combat;
 	}
 
-	override public void EnterState(NPCStateManager manager)
+	override public void EnterState()
 	{
 		//Debug.Log("Fighting");
 		foreach(GameObject effect in manager.stateEffects)
 		{
 			effect.SetActive(false);
 		}
-		manager.stateEffects[1].SetActive(true);
+		manager.stateEffects[stateID].SetActive(true);
 	}
+
+	public override void LeaveState() {}
 
 	override public void UpdateState()
 	{
