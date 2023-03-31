@@ -89,8 +89,10 @@ public class NPCRoamState : NPCBaseState
 
 	private void BreedCheck()
 	{
-		if(Random.value > 0.99)
+		if(Random.value > 0.9)
 			manager.SwitchState(manager.BreedState);
+		else if(manager.npc.clan != null && !manager.npc.clan.IsFull())
+			breedDelay.Restart(5);
 	}	
 
 	override public Vector3 GetTarget()

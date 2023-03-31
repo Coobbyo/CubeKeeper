@@ -112,4 +112,10 @@ public class Spawner : MonoBehaviour
 	{
 		spawnTimer.Stop();
 	}
+
+	private void OnDrawGizmosSelected()
+	{
+		Gizmos.color = Color.magenta;
+		Gizmos.DrawWireSphere(transform.position, radius);
+	}
 }

@@ -78,10 +78,12 @@ public class NPCBreedState : NPCBaseState
 
 		if(Vector3.Distance(manager.transform.position, partner.transform.position) <= manager.npc.interactRange)
 		{
-			if(partner.stateManager.BreedState.state == State.BreedReady)
+			//Debug.Log("Close enough to breed");
+			if(partner.stateManager.BreedState.state == NPCBreedState.State.BreedReady)
 			{
 				Breed();
 			}
+			//Debug.Log("Partner can't breed");
 		}
 	}
 
@@ -101,7 +103,7 @@ public class NPCBreedState : NPCBaseState
 
 	private void Roam()
 	{
-		if(Random.value > 0.99)
+		if(Random.value > 0.99 || manager.npc.clan == null || manager.npc.clan.IsFull())
 		{
 			manager.SwitchState(manager.RoamState);
 		}
@@ -189,6 +191,7 @@ public class NPCBreedState : NPCBaseState
 
 	private void Breed()
 	{
+		Debug.Log("making a baby");
 		NPCManager.Instance.CreateNPC(manager.npc.clan); //This probably creates two babies..but WHO CARES! MOAR BABYZ!
 		manager.SwitchState(manager.RoamState);
 	}
