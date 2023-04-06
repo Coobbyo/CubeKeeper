@@ -49,6 +49,7 @@ public class NPCRoamState : NPCBaseState
 		if(manager.npc.clan != null && !manager.npc.clan.IsFull())
 			breedDelay.Restart();
 
+		target = manager.transform.position;
 		manager.npc.SetTarget(null);
 	}
 
@@ -89,7 +90,7 @@ public class NPCRoamState : NPCBaseState
 
 	private void BreedCheck()
 	{
-		if(Random.value > 0.9)
+		if(Random.value > 0.99)
 			manager.SwitchState(manager.BreedState);
 		else if(manager.npc.clan != null && !manager.npc.clan.IsFull())
 			breedDelay.Restart(5);

@@ -140,6 +140,28 @@ public class BuildSite : Structure, IInventory
 		return items;
     }
 
+	public Storage GetStorage()
+	{
+		return storages[Random.Range(0, storages.Length)];
+	}
+
+	public Storage GetEmptyStorage()
+	{
+		if(IsFull() || IsCrumbling) return null;
+
+		Storage returnStorage = GetStorage();
+		if(returnStorage.IsFull())
+		{
+			foreach (Storage storage in storages)
+			{
+				if(!storage.IsFull())
+					returnStorage = storage;
+			}
+		}
+
+		return returnStorage;
+	}
+
     public override void Crumble()
     {
 		if(IsCrumbling == true)

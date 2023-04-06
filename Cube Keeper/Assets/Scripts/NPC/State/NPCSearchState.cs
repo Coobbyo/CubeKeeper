@@ -78,8 +78,8 @@ public class NPCSearchState : NPCBaseState
 		if(work == null) return;//bandaid!
 		if(!work.FindWork())
 			findDelay.Restart(Random.Range(5, 10));
-		//else
-			//Debug.Log("Finding work");
+		else
+			Debug.Log("Finding work");
 	}
 
 	override public Vector3 GetTarget()

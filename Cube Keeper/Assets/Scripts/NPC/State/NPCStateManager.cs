@@ -39,6 +39,13 @@ public class NPCStateManager : MonoBehaviour
 		currentState.UpdateState();
 	}
 
+	private void OnDestroy()
+	{
+		Debug.Log("State Manager Destroied");
+		currentState.LeaveState();
+		currentState = null;
+	}
+
 	public void SwitchState(NPCBaseState state)
 	{
 		currentState.LeaveState();
