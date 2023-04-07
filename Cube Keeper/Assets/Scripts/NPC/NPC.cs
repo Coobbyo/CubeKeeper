@@ -115,10 +115,22 @@ public class NPC : MonoBehaviour
 
 	public void Search()
 	{
-		if(Random.value < (stats.Idleness.GetValue() * 5f))
+		if(Random.value < (stats.Idleness.GetValue() * 0.05f))
 			return;
 		if(stateManager.IsState(stateManager.RoamState))
 			stateManager.SwitchState(stateManager.SearchState);
+	}
+
+	public bool ConsumeFood()
+	{
+		if(work.Consume())
+		{
+			stats.Heal(10);
+			return true;
+		} else
+		{
+			return false;
+		}
 	}
 
 	private void Die()

@@ -185,6 +185,7 @@ MonoBehaviour:
   - {fileID: 5071195382026886917}
   - {fileID: 3119896453524113241}
   - {fileID: 3580077272858644251}
+  - {fileID: 7398590696306679626, guid: 6d0167b382923034eb00310bd17df6d2, type: 3}
 --- !u!114 &7019833092766921508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,6 +224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   workingRange: 5
   carryPoint: {fileID: 4439965607711768044}
+  ItemCarried: {fileID: 0}
   targetFrom: {fileID: 0}
   targetTo: {fileID: 0}
 --- !u!114 &1413255008460258471
@@ -266,6 +268,8 @@ MonoBehaviour:
   Loyalty:
     baseValue: 0
   Aggression:
+    baseValue: 0
+  Idleness:
     baseValue: 0
 --- !u!1 &5585640780058522597
 GameObject:

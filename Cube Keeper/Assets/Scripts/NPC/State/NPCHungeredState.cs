@@ -1,22 +1,13 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCBreedState : NPCBaseState
+public class NPCHungeredState : NPCBaseState
 {
-	public enum State
-	{
-		NeedPartner,
-		NeedFood,
-		BreedReady,
-		PostPartum
-	}
-	public State state;
-
-	public NPC partner;
-
 	private NPCMovement movement;
 	private NPCWorker work;
 
+	private int hungered;
 	private Vector3 target;
 	private float moveRange;
 	private ItemData foodData;
@@ -25,119 +16,61 @@ public class NPCBreedState : NPCBaseState
 	private TickTimer moveDelay;
 	private TickTimer findDelay;
 
-	public NPCBreedState(NPCStateManager manager)
+	public NPCHungeredState(NPCStateManager manager)
 	{
 		this.manager = manager;
 		stats = manager.npc.stats;
-		stateID = 0;
+		stateID = 5;
 		movement = manager.npc.movement;
 		work = manager.npc.work;
 
+		hungered = 0;
 		target = manager.transform.position;
-		moveRange = 10f;
+		moveRange = 5f;
 		foodData = ResourceManager.Instance.GetResource(ResourceManager.Resource.Food);
 
 		moveDelay = new TickTimer(FindNewDestination);
 		moveDelay.Stop();
-		findDelay = new TickTimer(Find, 5);
+		findDelay = new TickTimer(FindFood);
 		findDelay.Stop();
 			
 		manager.npc.SetTarget(null);
 	}
 
-	override public void EnterState()
+	public override void EnterState()
 	{
-		//Debug.Log("Breeding");
 		foreach(GameObject effect in manager.stateEffects)
 		{
 			effect.SetActive(false);
 		}
 		manager.stateEffects[stateID].SetActive(true);
 
-		state = State.NeedPartner;
-
 		moveDelay.Restart();
 		findDelay.Restart();
 
+		target = manager.transform.position;
 		manager.npc.SetTarget(null);
 	}
 
 	public override void LeaveState()
 	{
-		partner = null;
-		foodSource = null;
-
+		stats.TakeDamage(hungered++);
 		findDelay.Stop();
 		moveDelay.Stop();
 	}
 
-	override public void UpdateState()
+	public override void UpdateState()
 	{
-		if(state != State.BreedReady)
-			return;
-
-		if(Vector3.Distance(manager.transform.position, partner.transform.position) <= manager.npc.interactRange)
-		{
-			//Debug.Log("Close enough to breed");
-			if(partner.stateManager.BreedState.state == NPCBreedState.State.BreedReady)
-			{
-				Breed();
-			}
-			//Debug.Log("Partner can't breed");
-		}
 	}
 
 	private void FindNewDestination()
 	{
 		if(movement == null) return;//bandaid!
-
-		if(partner != null)
-			return;
 		
+		int idleValue = manager.npc.stats.Idleness.GetValue();
 		target = movement.FindNewDestination(moveRange);
-		Roam();
 		
-		//I want to eventually change this to be affected by lazyness
-		moveDelay.Restart(Random.Range(5, 50));
-	}
-
-	private void Roam()
-	{
-		if(Random.value > 0.99 || manager.npc.clan == null || manager.npc.clan.IsFull())
-		{
-			manager.SwitchState(manager.RoamState);
-		}
-	}
-
-	private void Find()
-	{
-		if(partner == null)
-			FindPartner();
-		else if(manager.npc.work.ItemCarried != foodData)
-			FindFood();
-	}
-
-	private void FindPartner()
-	{
-		List<NPC> otherNPCs = manager.npc.FindNearbyNPCs();
-		var partners = new List<NPC>();
-
-		foreach(NPC otherNPC in otherNPCs)
-		{
-			if(otherNPC.stateManager.IsState(this))
-			{
-				partners.Add(otherNPC);
-			}
-		}
-
-		if(partners.Count > 0)
-		{
-			partner = partners[Random.Range(0, partners.Count)];
-			partner.SetPartner(manager.npc);
-			moveDelay.Stop();
-		}
-
-		findDelay.Restart();
+		moveDelay.Restart(Random.Range(25 + idleValue, 50 + idleValue));
 	}
 
 	private void FindFood()
@@ -156,8 +89,10 @@ public class NPCBreedState : NPCBaseState
 
 			if(manager.npc.work.IsItemCarried() && manager.npc.work.ItemCarried == foodData)
 			{
-				state = State.BreedReady;
-				manager.npc.SetTarget(partner.transform);
+				manager.npc.ConsumeFood();
+				manager.SwitchState(manager.RoamState);
+				hungered = 0;
+				Debug.Log("Hunger reset");
 				return;
 			}
 			else
@@ -185,21 +120,17 @@ public class NPCBreedState : NPCBaseState
 		else
 		{
 			manager.SwitchState(manager.RoamState);
-			//findDelay.Stop();
 		}
 	}
 
-	private void Breed()
-	{
-		Debug.Log("making a baby");
-		NPCManager.Instance.CreateNPC(manager.npc.clan); //This probably creates two babies..but WHO CARES! MOAR BABYZ!
-		manager.SwitchState(manager.RoamState);
-	}
-
-	override public Vector3 GetTarget()
+	public override Vector3 GetTarget()
 	{
 		return target;
 	}
 
-	public override void OnDrawGizmosSelected() {}
+	public override void OnDrawGizmosSelected()
+	{
+		Gizmos.color = Color.blue;
+		Gizmos.DrawWireSphere(manager.transform.position, moveRange);
+	}
 }

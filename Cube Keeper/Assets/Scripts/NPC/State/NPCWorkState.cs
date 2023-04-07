@@ -46,10 +46,11 @@ public class NPCWorkState : NPCBaseState
 	private void DoWork()
 	{
 		if(work == null) return;//bandaid!
-		//TODO: Maybe have an if statement that randomizes frequency based on lazyness
-		if(Random.value > 0.99f)
+
+		int idleValue = manager.npc.stats.Idleness.GetValue();
+		if(Random.value > 0.99f - (float)idleValue * 0.01f)
 		{
-			workDelay.Restart(5);
+			workDelay.Restart(10 + idleValue);
 			return;
 		}
 		
@@ -68,14 +69,13 @@ public class NPCWorkState : NPCBaseState
 		if(work.targetTo == null || work.currentTarget == null)
 		{
 			//Debug.Log("Roaming To");
-			manager.SwitchState(manager.RoamState);
+			manager.SwitchState(manager.HungeredState);
 			return;
 		}
 
 		work.DoWork();
 
-		//TODO: have lazyness effect this
-		workDelay.Restart(5);
+		workDelay.Restart(10 + idleValue);
 	}
 
 	override public Vector3 GetTarget()

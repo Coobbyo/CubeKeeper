@@ -55,7 +55,8 @@ public class NPCSearchState : NPCBaseState
 
 	private void Roam()
 	{
-		if(Random.value > 0.99)
+		int idleValue = manager.npc.stats.Idleness.GetValue();
+		if(Random.value > 0.9 - (float)idleValue * 0.01f)
 		{
 			manager.SwitchState(manager.RoamState);
 		}
@@ -65,12 +66,11 @@ public class NPCSearchState : NPCBaseState
 	{
 		if(movement == null) return;//bandaid!
 			
-		
-		target = movement.FindNewDestination(moveRange);
+		int idleValue = manager.npc.stats.Idleness.GetValue();
+		target = movement.FindNewDestination(moveRange - (float)idleValue * 0.5f);
 		Roam();
 		
-		//I want to eventually change this to be affected by lazyness
-		moveDelay.Restart(Random.Range(25, 50));
+		moveDelay.Restart(Random.Range(25 + idleValue, 50 + idleValue));
 	}
 	
 	private void FindWork()

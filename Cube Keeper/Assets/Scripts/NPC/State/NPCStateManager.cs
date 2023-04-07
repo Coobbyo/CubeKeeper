@@ -15,6 +15,7 @@ public class NPCStateManager : MonoBehaviour
 	public NPCWorkState WorkState;
 	public NPCCombatState CombatState;
 	public NPCBreedState BreedState;
+	public NPCHungeredState HungeredState;
 
 
 	private void Awake()

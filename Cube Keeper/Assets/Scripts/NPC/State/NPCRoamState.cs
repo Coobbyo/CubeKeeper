@@ -64,7 +64,8 @@ public class NPCRoamState : NPCBaseState
 
 	private void Search()
 	{
-		if(Random.value > 0.99)
+		int idleValue = manager.npc.stats.Idleness.GetValue();
+		if(Random.value > 0.9 + (float)idleValue * 0.01f)
 		{
 			manager.SwitchState(manager.SearchState);
 		}
@@ -74,26 +75,29 @@ public class NPCRoamState : NPCBaseState
 	{
 		if(movement == null) return;//bandaid!
 		
-		target = movement.FindNewDestination(moveRange);
+		int idleValue = manager.npc.stats.Idleness.GetValue();
+		target = movement.FindNewDestination(moveRange - (float)idleValue * 0.25f);
 		Search();
 		
-		//I want to eventually change this to be affected by lazyness
-		moveDelay.Restart(Random.Range(5, 50));
+		moveDelay.Restart(Random.Range(10 + idleValue, 50 + idleValue));
 	}
 
 	private void FindWork()
 	{
 		if(work == null) return;//bandaid!
+
+		int idleValue = manager.npc.stats.Idleness.GetValue();
 		if(!work.FindWork())
-			findDelay.Restart(Random.Range(5, 50));
+			findDelay.Restart(Random.Range(5, 25 + idleValue));
 	}
 
 	private void BreedCheck()
 	{
+		int idleValue = manager.npc.stats.Idleness.GetValue();
 		if(Random.value > 0.99)
 			manager.SwitchState(manager.BreedState);
 		else if(manager.npc.clan != null && !manager.npc.clan.IsFull())
-			breedDelay.Restart(5);
+			breedDelay.Restart(10 - idleValue);
 	}	
 
 	override public Vector3 GetTarget()

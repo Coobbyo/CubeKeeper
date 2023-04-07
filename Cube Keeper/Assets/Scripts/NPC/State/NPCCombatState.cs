@@ -55,7 +55,7 @@ public class NPCCombatState : NPCBaseState
 			combat.Target = targets[Random.Range(0, targets.Count)].transform;
 		}
 		else
-			manager.SwitchState(manager.RoamState);
+			manager.SwitchState(manager.HungeredState);
 	}
 
 	public bool IsTarget(NPC otherNPC)
