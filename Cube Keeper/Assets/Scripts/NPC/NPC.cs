@@ -41,10 +41,10 @@ public class NPC : MonoBehaviour
 		stats.OnHealthReachedZero += Die;
 	}
 
-	public void JoinClan(NPCClan clan)
+	public bool JoinClan(NPCClan clan)
 	{
 		if(!clan.AddMember(this))
-			return;
+			return false;
 		this.clan = clan;
 		stats.Clan = clan;
 		colorDisplay.material.color = clan.Color;
@@ -52,6 +52,8 @@ public class NPC : MonoBehaviour
 		//if(NPCManager.Instance.GetClan(clan) == null)
 			//Debug.Log("it's clanGO");
 		transform.SetParent(clan.behaviour.memebersParent, true);
+
+		return true;
 	}
 
 	public void LeaveClan()

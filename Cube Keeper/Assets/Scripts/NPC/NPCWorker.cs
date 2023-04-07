@@ -166,7 +166,7 @@ public class NPCWorker : MonoBehaviour
 				return foundStorage;
 			}
 
-			Debug.Log("Clan has no storage");
+			//Debug.Log("Clan has no storage");
 			return null;
 		}
 	}

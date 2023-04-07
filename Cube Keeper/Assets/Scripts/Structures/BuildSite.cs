@@ -72,6 +72,7 @@ public class BuildSite : Structure, IInventory
 
 	public bool IsFull()
 	{
+		//Debug.Log("Checking if BuildSite is full");
 		int fullStorages = 0;
 		int numStorages = 0;
 		foreach(Storage storage in storages)
@@ -142,11 +143,13 @@ public class BuildSite : Structure, IInventory
 
 	public Storage GetStorage()
 	{
+		if(storages == null) return null;
 		return storages[Random.Range(0, storages.Length)];
 	}
 
 	public Storage GetEmptyStorage()
 	{
+		if(storages == null) return null;
 		if(IsFull() || IsCrumbling) return null;
 
 		Storage returnStorage = GetStorage();

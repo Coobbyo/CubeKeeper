@@ -17,6 +17,7 @@ public class NPCRoamState : NPCBaseState
 		this.manager = manager;
 		stats = manager.npc.stats;
 		stateID = 2;
+
 		movement = manager.npc.movement;
 		work = manager.npc.work;
 
@@ -65,7 +66,7 @@ public class NPCRoamState : NPCBaseState
 	private void Search()
 	{
 		int idleValue = manager.npc.stats.Idleness.GetValue();
-		if(Random.value > 0.9 + (float)idleValue * 0.01f)
+		if(Random.value > 0.9f + (float)idleValue * 0.01f)
 		{
 			manager.SwitchState(manager.SearchState);
 		}
@@ -89,12 +90,14 @@ public class NPCRoamState : NPCBaseState
 		int idleValue = manager.npc.stats.Idleness.GetValue();
 		if(!work.FindWork())
 			findDelay.Restart(Random.Range(5, 25 + idleValue));
+		//else
+			//Debug.Log("Finding work from roam");
 	}
 
 	private void BreedCheck()
 	{
 		int idleValue = manager.npc.stats.Idleness.GetValue();
-		if(Random.value > 0.99)
+		if(Random.value > 0.90f - (float)idleValue * 0.01f)
 			manager.SwitchState(manager.BreedState);
 		else if(manager.npc.clan != null && !manager.npc.clan.IsFull())
 			breedDelay.Restart(10 - idleValue);

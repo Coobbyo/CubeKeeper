@@ -42,12 +42,10 @@ public class NPCMovement : MonoBehaviour
 		else
 			target = npc.target.position;
 
-		//Debug.Log("From movement" + target);
-
 		if(Vector3.Distance(transform.position, target) >= stopDistance)
 			agent.SetDestination(target);
 
-		moveDelay.Restart(Random.Range(2, 7));
+		moveDelay.Restart(Random.Range(2, 7 + npc.stats.Idleness.GetValue()));
 	}
 
 	public Vector3 FindNewDestination(float moveRange)
@@ -58,12 +56,11 @@ public class NPCMovement : MonoBehaviour
 		if(clan != null)
 		{
 			newTarget = clan.CenterPoint;
-			moveRange = (clan.Size / moveRange) + (moveRange * 0.5f);
+			moveRange = (clan.Size + moveRange) * 0.5f;
 		}
 		
 		newTarget += new Vector3(Random.Range(-moveRange, moveRange), 0f, Random.Range(-moveRange, moveRange));
 
-		//Debug.Log("being set" + target);
 		return newTarget;
 	}
 

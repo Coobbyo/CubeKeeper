@@ -101,7 +101,7 @@ public class NPCClan
 
 	public bool AddMember(NPC npc)
 	{
-		if(Size >= PopulationCap.GetValue())
+		if(IsFull())
 			return false;
 		//Debug.Log(ToString() + " Adding Memeber");
 		Members.Add(npc);
@@ -143,7 +143,7 @@ public class NPCClan
 
 	public bool IsFull()
 	{
-		return Members.Count >= PopulationCap.GetValue();
+		return Size >= PopulationCap.GetValue();
 	}
 
 	public NPC GetRandomMemeber()

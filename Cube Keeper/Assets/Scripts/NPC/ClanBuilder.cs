@@ -32,8 +32,9 @@ public class ClanBuilder
 		if(NeedTower()) //This should stay at the bottom as the last thing to be built
 			return BuildManager.Instance.GetStructure(BuildManager.Build.Tower);
 		
-		if(NeedStorage()) //This should stay at the bottom as the last thing to be built
-			return BuildManager.Instance.GetStructure(BuildManager.Build.Storage);
+		//Just gonna get rid of storage for now
+		//if(NeedStorage()) //This should stay at the bottom as the last thing to be built
+			//return BuildManager.Instance.GetStructure(BuildManager.Build.Storage);
 
 		return null;
 	}
@@ -79,10 +80,23 @@ public class ClanBuilder
 
 	private bool NeedStorage()
 	{
+		//if no deficit, gives us storage
 		List<Item> resourceDeficit = clan.behaviour.ResourceDeficit();
 		if(resourceDeficit == null || resourceDeficit.Count <= 0)
 			return true;
 
+		//Don't build storage if we have buildsites
+		List<Structure> buildSites = GetStructures(BuildManager.Build.BuildSite);
+		foreach (Structure site in buildSites)
+		{
+			BuildSite buildSite = site.gameObject.GetComponent<BuildSite>();
+			if(buildSite != null)
+			{
+				return false;
+			}
+		}
+
+		//If we have a build site or unfilled storage, we don't want one
 		List<Structure> storages = GetStructures(BuildManager.Build.Storage);
 		foreach (Structure storageStruct in storages)
 		{
@@ -139,13 +153,7 @@ public class ClanBuilder
 
 	private bool NeedHouse()
 	{
-		List<Structure> houses = GetStructures(BuildManager.Build.House);
-		foreach(Structure house in houses)
-		{
-			return false;
-		}
-
-		return true;
+		return clan.IsFull();
 	}
 
 	private bool NeedTower()

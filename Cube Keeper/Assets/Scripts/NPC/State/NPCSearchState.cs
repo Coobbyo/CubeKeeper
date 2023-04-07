@@ -14,9 +14,10 @@ public class NPCSearchState : NPCBaseState
 	public NPCSearchState(NPCStateManager manager)
 	{
 		this.manager = manager;
-		movement = manager.npc.movement;
-		stateID = 3;
 		stats = manager.npc.stats;
+		stateID = 3;
+
+		movement = manager.npc.movement;
 		work = manager.npc.work;
 		
 		target = manager.transform.position;
@@ -55,8 +56,14 @@ public class NPCSearchState : NPCBaseState
 
 	private void Roam()
 	{
+		float baseChangeChance = 0.9f;
+		NPCClan clan = manager.npc.clan;
+
+		if(clan != null && !clan.IsFull() && clan.behaviour.ResourceDeficit().Count <= 0)
+			baseChangeChance *= 0.5f;
+
 		int idleValue = manager.npc.stats.Idleness.GetValue();
-		if(Random.value > 0.9 - (float)idleValue * 0.01f)
+		if(Random.value > baseChangeChance - (float)idleValue * 0.01f)
 		{
 			manager.SwitchState(manager.RoamState);
 		}
@@ -76,10 +83,11 @@ public class NPCSearchState : NPCBaseState
 	private void FindWork()
 	{
 		if(work == null) return;//bandaid!
+
 		if(!work.FindWork())
 			findDelay.Restart(Random.Range(5, 10));
-		else
-			Debug.Log("Finding work");
+		//else
+			//Debug.Log("Finding work from search");
 	}
 
 	override public Vector3 GetTarget()
@@ -92,6 +100,4 @@ public class NPCSearchState : NPCBaseState
 		Gizmos.color = Color.blue;
 		Gizmos.DrawWireSphere(manager.transform.position, moveRange);
     }
-
-    
 }

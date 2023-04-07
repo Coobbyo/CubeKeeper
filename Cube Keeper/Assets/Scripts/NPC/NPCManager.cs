@@ -35,7 +35,9 @@ public class NPCManager : MonoBehaviour
 
 	private void HandleCreate()
 	{
-		CreateNPC();
+		NPCClan newClan = CreateClan(premadeClans[Random.Range(0, premadeClans.Length)]);
+		CreateNPC(newClan);
+		//CreateNPC();
 	}
 
 	private NPC CreateNPC()
@@ -44,20 +46,18 @@ public class NPCManager : MonoBehaviour
 		Vector3 spawnPoint = player.position +
 			new Vector3(Random.Range(-spawnRadius, spawnRadius), 0, Random.Range(-spawnRadius, spawnRadius));
 		Transform npcGO = Instantiate(npcPrefab, spawnPoint, Quaternion.identity, this.transform);
-		
-		NPC newNPC = npcGO.GetComponent<NPC>();
-		NPCClan newClan = CreateClan(premadeClans[Random.Range(0, premadeClans.Length)]);
-		newNPC.JoinClan(newClan);
 
+		NPC newNPC = npcGO.GetComponent<NPC>();
 		unclaimedNPCs.Add(newNPC);
+
 		return newNPC;
 	}
 
 	public void CreateNPC(NPCClan clan)
 	{
 		NPC npc = CreateNPC();
-		unclaimedNPCs.Remove(npc);
-		npc.JoinClan(clan);
+		if(npc.JoinClan(clan))
+			unclaimedNPCs.Remove(npc);
 	}
 
 	public NPCClan CreateClan()

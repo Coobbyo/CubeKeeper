@@ -27,6 +27,7 @@ public class NPCStateManager : MonoBehaviour
 		WorkState = new NPCWorkState(this);
 		CombatState = new NPCCombatState(this);
 		BreedState = new NPCBreedState(this);
+		HungeredState = new NPCHungeredState(this);
 	}
 
 	private void Start()
