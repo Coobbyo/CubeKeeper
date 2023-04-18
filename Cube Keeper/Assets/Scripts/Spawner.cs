@@ -6,6 +6,8 @@ public class Spawner : MonoBehaviour
 {
 	public List<GameObject> list = new List<GameObject>();
 
+	[SerializeField] private LayerMask layerMask;
+
 	[SerializeField] private GameObject prefab;
 	public GameObject Prefab
 	{
@@ -83,9 +85,9 @@ public class Spawner : MonoBehaviour
 		Vector3 point = new Vector3(Random.insideUnitCircle.x, 0, Random.insideUnitCircle.y);
 		Vector3 spawnPoint = transform.position + point * Radius;
 
-		LayerMask mask = new LayerMask();
-		mask |= (1 << LayerMask.NameToLayer("Spawnable"));
-		Collider[] colliders = Physics.OverlapSphere(spawnPoint, Proximity, mask);
+		//layerMask = new LayerMask();
+		//layerMask |= (1 << LayerMask.NameToLayer("Spawnable"));
+		Collider[] colliders = Physics.OverlapSphere(spawnPoint, Proximity, layerMask);
 		if(colliders.Length > 0)
 		{
 			//Debug.Log("No spawning");

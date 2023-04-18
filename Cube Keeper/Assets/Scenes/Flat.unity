@@ -327,7 +327,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 86931706}
-  m_LocalRotation: {x: -0.018117875, y: 0.0000000074073956, z: -0.000000004375525,
+  m_LocalRotation: {x: -0.018117875, y: -0.0000000074074062, z: 0.0000000043755337,
     w: 0.9998359}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -1114,6 +1114,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   list: []
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
   prefab: {fileID: 7122413884721471324, guid: 2b1f7d7e65fd08844a30705651a4b978, type: 3}
   radius: 25
   proximity: 0.5
@@ -2546,6 +2549,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   list: []
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
   prefab: {fileID: 7122413884721471324, guid: 2b1f7d7e65fd08844a30705651a4b978, type: 3}
   radius: 3
   proximity: 0.5
@@ -2699,6 +2705,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   list: []
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
   prefab: {fileID: 6878813452987993785, guid: 01ff939eeda492e409bb05d43d44b0f4, type: 3}
   radius: 20
   proximity: 0.25
@@ -4115,6 +4124,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   list: []
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
   prefab: {fileID: 6878813452987993785, guid: 01ff939eeda492e409bb05d43d44b0f4, type: 3}
   radius: 25
   proximity: 0.25
@@ -4151,6 +4163,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   list: []
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
   prefab: {fileID: 6878813452987993785, guid: 01ff939eeda492e409bb05d43d44b0f4, type: 3}
   radius: 5
   proximity: 0.25
@@ -4754,6 +4769,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   list: []
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
   prefab: {fileID: 6878813452987993785, guid: 01ff939eeda492e409bb05d43d44b0f4, type: 3}
   radius: 15
   proximity: 0.25
@@ -5849,6 +5867,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   list: []
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
   prefab: {fileID: 7122413884721471324, guid: 2b1f7d7e65fd08844a30705651a4b978, type: 3}
   radius: 15
   proximity: 0.5
@@ -5956,6 +5977,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   list: []
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
   prefab: {fileID: 7122413884721471324, guid: 2b1f7d7e65fd08844a30705651a4b978, type: 3}
   radius: 25
   proximity: 0.5
@@ -6404,6 +6428,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   list: []
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
   prefab: {fileID: 7122413884721471324, guid: 2b1f7d7e65fd08844a30705651a4b978, type: 3}
   radius: 15
   proximity: 0.5
@@ -8136,6 +8163,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   list: []
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
   prefab: {fileID: 6878813452987993785, guid: 01ff939eeda492e409bb05d43d44b0f4, type: 3}
   radius: 15
   proximity: 0.25
@@ -8887,6 +8917,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 153331360872709482, guid: 6fdc721b38f527345b077093f1147267,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225341781507524407, guid: 6fdc721b38f527345b077093f1147267,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2910564575202668645, guid: 6fdc721b38f527345b077093f1147267,
         type: 3}
       propertyPath: playerCam
@@ -8951,11 +8991,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7011959068671416858, guid: 6fdc721b38f527345b077093f1147267,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fdc721b38f527345b077093f1147267, type: 3}
