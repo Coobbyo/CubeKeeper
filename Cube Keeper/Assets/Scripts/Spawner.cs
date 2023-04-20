@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//TODO: Check in there is ground underneath
+
 public class Spawner : MonoBehaviour
 {
 	public List<GameObject> list = new List<GameObject>();

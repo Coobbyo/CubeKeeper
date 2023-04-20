@@ -92,7 +92,7 @@ public class NPCHungeredState : NPCBaseState
 				manager.npc.ConsumeFood();
 				manager.SwitchState(manager.RoamState);
 				hungered = 0;
-				Debug.Log("Hunger reset");
+				//Debug.Log("Hunger reset");
 				return;
 			}
 			else

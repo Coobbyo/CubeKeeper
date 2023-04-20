@@ -43,7 +43,7 @@ public class NPCStateManager : MonoBehaviour
 
 	private void OnDestroy()
 	{
-		Debug.Log("State Manager Destroied");
+		//Debug.Log("State Manager Destroied");
 		currentState.LeaveState();
 		currentState = null;
 	}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6791690848796881727}
   - component: {fileID: 1327297696891443239}
   - component: {fileID: 5694795595143343743}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Banner (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 2063264485144653311}
   - component: {fileID: 1691968532542290758}
   - component: {fileID: 8394030974446230487}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 1955057112176459405}
   - component: {fileID: 6359177121051616174}
   - component: {fileID: 2429408683200571518}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Banner (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 3550467337450150892}
   - component: {fileID: 3670997824471928565}
   - component: {fileID: 7563730137435463288}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -365,7 +365,7 @@ GameObject:
   - component: {fileID: 8463417550827422125}
   - component: {fileID: 6654046301052338649}
   - component: {fileID: 8669704522016448922}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Banner (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -446,7 +446,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6410428596899392273}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: HitPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -479,7 +479,7 @@ GameObject:
   - component: {fileID: 4379424892501059976}
   - component: {fileID: 4085784170081550694}
   - component: {fileID: 3193414120375270930}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Banner (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -560,7 +560,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7579000818537658083}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -591,7 +591,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8322086543932690423}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Banners
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -626,7 +626,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 338844329267015495}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}

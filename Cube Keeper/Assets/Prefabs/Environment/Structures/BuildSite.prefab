@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2130289147452445282}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Position (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8878739567223270747}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Position (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 1232056497029477765}
   - component: {fileID: 3317660434368142538}
   - component: {fileID: 253983410749309497}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 682234242111793795}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Position (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +187,7 @@ GameObject:
   - component: {fileID: 104377573538402580}
   - component: {fileID: 7518778670523527302}
   - component: {fileID: 5667012052917039902}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 4751726856843760623}
   - component: {fileID: 2022300141825149773}
   - component: {fileID: 7150214600459131304}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Left Middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -353,7 +353,7 @@ GameObject:
   - component: {fileID: 1875380007430847825}
   - component: {fileID: 6405844246323889146}
   - component: {fileID: 3113610802929178309}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Bottom Middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -436,7 +436,7 @@ GameObject:
   - component: {fileID: 2458973996722335679}
   - component: {fileID: 6540330665231193099}
   - component: {fileID: 6669710755956997601}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -517,7 +517,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3030722192281982706}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -556,7 +556,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2489175080387878390}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Position (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -587,7 +587,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5012609109509723687}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Position (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -618,7 +618,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9170765823431812614}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Position (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -651,7 +651,7 @@ GameObject:
   - component: {fileID: 506585303395118009}
   - component: {fileID: 6759441171898247967}
   - component: {fileID: 8259250067604225188}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Top Middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -734,7 +734,7 @@ GameObject:
   - component: {fileID: 2283287921730557373}
   - component: {fileID: 4406288052386182069}
   - component: {fileID: 4447897955174022376}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Right Middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -818,7 +818,7 @@ GameObject:
   - component: {fileID: 9219334429632196859}
   - component: {fileID: 1165418253807244750}
   - component: {fileID: 7418813941130797148}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: BuildSite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -916,7 +916,7 @@ GameObject:
   - component: {fileID: 777814598233762084}
   - component: {fileID: 231638124767702468}
   - component: {fileID: 9186836578698050291}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -997,7 +997,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8789910629657318534}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: HitPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1028,7 +1028,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8805358069117167561}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Position (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1059,7 +1059,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8011589302232682235}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Position (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1090,7 +1090,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6607785991149887056}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: StoragePositions
   m_TagString: Untagged
   m_Icon: {fileID: 0}

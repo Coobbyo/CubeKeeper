@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8965607076358554536}
   - component: {fileID: 1469265889088690780}
   - component: {fileID: -8489389213945214497}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: ClanHall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 8752491199450481606}
   - component: {fileID: 2554831799499143002}
   - component: {fileID: 1148676450489646510}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4676068454647031420}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: HitPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2181938552150985712}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}

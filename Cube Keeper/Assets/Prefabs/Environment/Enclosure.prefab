@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7356493849806354679}
   - component: {fileID: 7356493849806354676}
   - component: {fileID: 7356493849806354677}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 7356493850074958014}
   - component: {fileID: 7356493850074958015}
   - component: {fileID: 7356493850074958012}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +203,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7356493850240197142}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enclosure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 7356493851198604406}
   - component: {fileID: 7356493851198604407}
   - component: {fileID: 7356493851198604404}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -338,7 +338,7 @@ GameObject:
   - component: {fileID: 7356493851510809323}
   - component: {fileID: 7356493851510809320}
   - component: {fileID: 7356493851510809321}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

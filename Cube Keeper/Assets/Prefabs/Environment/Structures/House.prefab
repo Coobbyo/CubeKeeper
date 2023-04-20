@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8015684171706084097}
   - component: {fileID: 4748512380652862527}
   - component: {fileID: 8687666724882152939}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 2719267183651929478}
   - component: {fileID: 8889529637218584050}
   - component: {fileID: 1441012422270280189}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: House
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3336521611104204772}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: 6556835783000704927}
   - component: {fileID: 8680200625548336890}
   - component: {fileID: 2181354342869956959}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -299,7 +299,7 @@ GameObject:
   - component: {fileID: 324772068920541965}
   - component: {fileID: 8009070975990353933}
   - component: {fileID: 7121270144629411851}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: RaftersL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -382,7 +382,7 @@ GameObject:
   - component: {fileID: 8117873116441951598}
   - component: {fileID: 5931734215574850138}
   - component: {fileID: 6201791682035952460}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: RaftersR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -463,7 +463,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8314252175021493658}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: HitPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -496,7 +496,7 @@ GameObject:
   - component: {fileID: 3097857634560178283}
   - component: {fileID: 5932004115132888290}
   - component: {fileID: 898254788385566653}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: RoofR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -579,7 +579,7 @@ GameObject:
   - component: {fileID: 6531750886858273999}
   - component: {fileID: 5740717001343011964}
   - component: {fileID: 345169567564870782}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: RoofL
   m_TagString: Untagged
   m_Icon: {fileID: 0}

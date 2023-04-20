@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//TODO: It seems as if there might be an instancer where NPC's get stuck in this state
+
 public class NPCBreedState : NPCBaseState
 {
 	public enum State
@@ -191,7 +193,7 @@ public class NPCBreedState : NPCBaseState
 
 	private void Breed()
 	{
-		Debug.Log("making a baby");
+		//Debug.Log("making a baby");
 		NPCManager.Instance.CreateNPC(manager.npc.clan); //This probably creates two babies..but WHO CARES! MOAR BABYZ!
 		manager.SwitchState(manager.RoamState);
 	}

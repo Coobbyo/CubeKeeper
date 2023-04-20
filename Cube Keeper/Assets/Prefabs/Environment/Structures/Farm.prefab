@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1368303880803054462}
   - component: {fileID: 4139985455908453576}
   - component: {fileID: 1241793409044855772}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Post
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4110336477467084413}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HitPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7328662972079029322}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 7628708756907951111}
   - component: {fileID: 5175007288420896087}
   - component: {fileID: 1043419720283091267}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Farm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -229,6 +229,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   list: []
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
   prefab: {fileID: 3870777048452601987, guid: 2d1b88048e80bab4097c6c21e826c4c2, type: 3}
   radius: 0.75
   proximity: 0.25
@@ -265,7 +268,7 @@ GameObject:
   - component: {fileID: 211874046458211493}
   - component: {fileID: 453810314747990802}
   - component: {fileID: 3049868047646944831}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -348,7 +351,7 @@ GameObject:
   - component: {fileID: 7948359557033922384}
   - component: {fileID: 3067025955661789678}
   - component: {fileID: 4843917772906395316}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Land
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -16,6 +16,8 @@ public class BuildManager : MonoBehaviour
 	public StructureData[] Structures;
 	//maybe have some effects like when built or destroied?
 
+	[SerializeField] private LayerMask mask;
+
 	private static BuildManager instance;
 	public static BuildManager Instance { get {return instance; } private set{} }
 	private void Awake()
@@ -34,8 +36,6 @@ public class BuildManager : MonoBehaviour
 	public bool RequestBuild(StructureData data, Vector3 position, NPCClan clan)
 	{
 		float radius = 3f;
-		LayerMask mask = new LayerMask();
-		mask |= (1 << LayerMask.NameToLayer("Spawnable"));
 		Collider[] colliders = Physics.OverlapSphere(position, radius, mask);
 
 		if(colliders.Length > 0)
