@@ -75,6 +75,11 @@ public class NPC : MonoBehaviour
 		//SetTarget(partner.transform);
 	}
 
+	public NPC GetPartner()
+	{
+		return stateManager.BreedState.partner;
+	}
+
 	public void SetTarget(Transform t)
 	{
 		target = t;

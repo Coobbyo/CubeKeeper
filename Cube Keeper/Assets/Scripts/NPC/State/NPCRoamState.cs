@@ -36,7 +36,7 @@ public class NPCRoamState : NPCBaseState
 
 	override public void EnterState()
 	{
-		//Debug.Log("Roaming");
+		Debug.Log("Roaming");
 
 		foreach(GameObject effect in manager.stateEffects)
 		{
@@ -97,10 +97,11 @@ public class NPCRoamState : NPCBaseState
 	private void BreedCheck()
 	{
 		int idleValue = manager.npc.stats.Idleness.GetValue();
+		//Debug.Log(idleValue);
 		if(Random.value > 0.90f - (float)idleValue * 0.01f)
 			manager.SwitchState(manager.BreedState);
 		else if(manager.npc.clan != null && !manager.npc.clan.IsFull())
-			breedDelay.Restart(10 - idleValue);
+			breedDelay.Restart(25 - idleValue);
 	}	
 
 	override public Vector3 GetTarget()

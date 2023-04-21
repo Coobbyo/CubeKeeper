@@ -1,14 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//TODO: It seems as if there might be an instancer where NPC's get stuck in this state
-
 public class NPCBreedState : NPCBaseState
 {
 	public enum State
 	{
-		NeedPartner,
-		NeedFood,
+		Needy,
 		BreedReady,
 		PostPartum
 	}
@@ -41,7 +38,7 @@ public class NPCBreedState : NPCBaseState
 
 		moveDelay = new TickTimer(FindNewDestination);
 		moveDelay.Stop();
-		findDelay = new TickTimer(Find, 5);
+		findDelay = new TickTimer(Find, 10);
 		findDelay.Stop();
 			
 		manager.npc.SetTarget(null);
@@ -49,14 +46,14 @@ public class NPCBreedState : NPCBaseState
 
 	override public void EnterState()
 	{
-		//Debug.Log("Breeding");
+		Debug.Log("Breeding");
 		foreach(GameObject effect in manager.stateEffects)
 		{
 			effect.SetActive(false);
 		}
 		manager.stateEffects[stateID].SetActive(true);
 
-		state = State.NeedPartner;
+		state = State.Needy;
 
 		moveDelay.Restart();
 		findDelay.Restart();
@@ -66,6 +63,7 @@ public class NPCBreedState : NPCBaseState
 
 	public override void LeaveState()
 	{
+		Debug.Log("Leaving Breeding");
 		partner = null;
 		foodSource = null;
 
@@ -77,6 +75,12 @@ public class NPCBreedState : NPCBaseState
 	{
 		if(state != State.BreedReady)
 			return;
+
+		if(partner.GetPartner() != manager.npc || !partner.stateManager.IsState(this))
+		{
+			state = State.Needy;
+			findDelay.Restart();
+		}
 
 		if(Vector3.Distance(manager.transform.position, partner.transform.position) <= manager.npc.interactRange)
 		{
@@ -99,8 +103,8 @@ public class NPCBreedState : NPCBaseState
 		target = movement.FindNewDestination(moveRange);
 		Roam();
 		
-		//I want to eventually change this to be affected by lazyness
-		moveDelay.Restart(Random.Range(5, 50));
+		int maxValue = Mathf.Clamp(stats.Idleness.GetValue() * 5, 0, 100);
+		moveDelay.Restart(Random.Range(5, maxValue +1));
 	}
 
 	private void Roam()
@@ -117,11 +121,18 @@ public class NPCBreedState : NPCBaseState
 			FindPartner();
 		else if(manager.npc.work.ItemCarried != foodData)
 			FindFood();
+
+		if(state == State.Needy)
+			findDelay.Restart();
 	}
 
 	private void FindPartner()
 	{
-		List<NPC> otherNPCs = manager.npc.FindNearbyNPCs();
+		List<NPC> otherNPCs;
+		if(manager.npc.clan == null)
+			otherNPCs = manager.npc.FindNearbyNPCs();
+		else
+			otherNPCs = manager.npc.clan.Members;
 		var partners = new List<NPC>();
 
 		foreach(NPC otherNPC in otherNPCs)
@@ -138,8 +149,6 @@ public class NPCBreedState : NPCBaseState
 			partner.SetPartner(manager.npc);
 			moveDelay.Stop();
 		}
-
-		findDelay.Restart();
 	}
 
 	private void FindFood()
@@ -162,8 +171,6 @@ public class NPCBreedState : NPCBaseState
 				manager.npc.SetTarget(partner.transform);
 				return;
 			}
-			else
-				findDelay.Restart();
 		}
 
 		StructureData farmData = BuildManager.Instance.GetStructure(BuildManager.Build.Farm);
@@ -182,12 +189,10 @@ public class NPCBreedState : NPCBaseState
 		{
 			foodSource = farms[Random.Range(0, farms.Count)].transform;
 			manager.npc.SetTarget(foodSource.transform);
-			findDelay.Restart();
 		}
 		else
 		{
 			manager.SwitchState(manager.RoamState);
-			//findDelay.Stop();
 		}
 	}
 
@@ -195,6 +200,7 @@ public class NPCBreedState : NPCBaseState
 	{
 		//Debug.Log("making a baby");
 		NPCManager.Instance.CreateNPC(manager.npc.clan); //This probably creates two babies..but WHO CARES! MOAR BABYZ!
+		state = State.PostPartum;
 		manager.SwitchState(manager.RoamState);
 	}
 

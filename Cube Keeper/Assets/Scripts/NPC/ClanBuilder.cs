@@ -122,12 +122,7 @@ public class ClanBuilder
 			return false;
 		
 		List<Structure> halls = GetStructures(BuildManager.Build.ClanHall);
-		foreach(Structure clanHall in halls)
-		{
-			return false;
-		}
-
-		return true;
+		return halls.Count <= 0;
 	}
 
 	private bool NeedFarm()
@@ -144,7 +139,7 @@ public class ClanBuilder
 		if(needFood)
 		{
 			List<Structure> farms = GetStructures(BuildManager.Build.Farm);
-			if(farms.Count >= clan.Size / 2 && farms.Count > 0)
+			if(farms.Count >= clan.Size / 3 && farms.Count > 0)
 				needFood = false;
 		}
 
@@ -153,6 +148,16 @@ public class ClanBuilder
 
 	private bool NeedHouse()
 	{
+		List<Structure> sites = GetStructures(BuildManager.Build.BuildSite);
+		foreach (Structure siteStructure in sites)
+		{
+			BuildSite site = siteStructure.gameObject.GetComponent<BuildSite>();
+			if(site != null && site.structureToBuild == BuildManager.Instance.GetStructure(BuildManager.Build.House))
+			{
+				return false;
+			}
+		}
+		
 		return clan.IsFull();
 	}
 
