@@ -5,6 +5,7 @@ using UnityEngine;
 public class NPCManager : MonoBehaviour
 {
 	public Material Clanless;
+	public Material Metalic;
 	
 	[SerializeField] private InputReader input;
 	[SerializeField] private Transform player;
@@ -49,6 +50,11 @@ public class NPCManager : MonoBehaviour
 
 		NPC newNPC = npcGO.GetComponent<NPC>();
 		unclaimedNPCs.Add(newNPC);
+
+		if(Random.value > 0.999f)
+		{
+			npcGO.GetComponentInChildren<MeshRenderer>().material = Metalic;
+		}
 
 		return newNPC;
 	}

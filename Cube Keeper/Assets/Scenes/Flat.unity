@@ -7225,6 +7225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Clanless: {fileID: 2100000, guid: b9a471b9830027d48a7f96b07119a328, type: 2}
+  Metalic: {fileID: 2100000, guid: 23ec2dcd874b8704f8acb117ab8672a5, type: 2}
   input: {fileID: 11400000, guid: ac0081276e24bf1448e6ed26487e0fcb, type: 2}
   player: {fileID: 505082675}
   npcPrefab: {fileID: 5585640779920925515, guid: a4a696aa5f84fe64dbbc868e109c3a47,
