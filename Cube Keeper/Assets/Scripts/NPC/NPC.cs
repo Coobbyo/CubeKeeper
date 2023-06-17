@@ -36,7 +36,7 @@ public class NPC : MonoBehaviour
 	private void Start()
 	{
 		id = "NPC " + Random.Range(0, 10000);
-		interactRange = 3f;
+		interactRange = 1f;
 		inventory = new Inventory();
 		stats.OnHealthReachedZero += Die;
 	}

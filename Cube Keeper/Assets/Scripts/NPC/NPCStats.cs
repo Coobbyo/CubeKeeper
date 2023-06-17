@@ -5,16 +5,16 @@ using UnityEngine;
 public class NPCStats : Damageable
 {
 	//Social Stats
-    public Stat Friendliness;// { get; private set; }
+	public Stat Friendliness;// { get; private set; }
 	public Stat Loyalty;// { get; private set; }
 	public Stat Aggression;// { get; private set; }
 
 	//Work Stats
 	public Stat Idleness;// { get; private set; }
 
-    private void Start()
-    {
-        Friendliness.baseValue = Random.Range(0, 5);
+	private void Start()
+	{
+		Friendliness.baseValue = Random.Range(0, 5);
 		Loyalty.baseValue = Random.Range(-10, 10);
 		Aggression.baseValue = Random.Range(0, 2);
 		Idleness.baseValue = Random.Range(-5, 5);
@@ -23,9 +23,9 @@ public class NPCStats : Damageable
 		CurrentHealth = MaxHealth.GetValue();
 		Damage.baseValue = Aggression.baseValue;
 		Armor.baseValue = 0;
-    }
+	}
 
-    public void ClampStats()
+	public void ClampStats()
 	{
 		int friendlinessCap = 10;
 		int loyaltyCap = 15;
